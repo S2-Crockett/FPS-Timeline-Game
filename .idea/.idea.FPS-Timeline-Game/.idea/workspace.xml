@@ -5,7 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Developers/Sam S/Test_Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Developers/Sam S/Test_Scene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Materials/M_Material.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/M_Material.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Camera.prefab" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Camera.prefab.meta" beforeDir="false" />
@@ -80,7 +79,7 @@
       <option name="presentableId" value="Default" />
       <updated>1637257790426</updated>
       <workItem from="1637257808453" duration="90000" />
-      <workItem from="1637328958726" duration="21375000" />
+      <workItem from="1637328958726" duration="21974000" />
     </task>
     <servers />
   </component>
