@@ -190,7 +190,7 @@ public class @DefaultInput : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""32166a9d-c65c-4f67-8853-75356623bb2f"",
                     ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": ""Hold"",
+                    ""interactions"": ""Press(behavior=2)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Shoot"",
