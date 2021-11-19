@@ -6,11 +6,16 @@
     <e p="D:\University Files\3rd Year\CGD\FPS-Timeline-Game" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="Input" t="Include">
+          <e p="DefaultInput.cs" t="Include" />
+        </e>
         <e p="Scripts" t="Include">
           <e p="Player" t="Include">
             <e p="PlayerController.cs" t="Include" />
           </e>
-          <e p="Weapon.cs" t="Include" />
+          <e p="Weapons" t="Include">
+            <e p="WeaponController.cs" t="Include" />
+          </e>
         </e>
       </e>
       <e p="FPS-Timeline-Game.sln" t="IncludeFlat" />
