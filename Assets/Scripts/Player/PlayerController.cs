@@ -63,6 +63,8 @@ public class PlayerController : MonoBehaviour
         defaultInput.Player.View.performed += e => inputView = e.ReadValue<Vector2>();
         defaultInput.Player.Jump.performed += e => Jump();
         defaultInput.Player.Crouch.performed += e => Crouch();
+        //defaultInput.Player.Shoot.performed += e => Shoot();
+        defaultInput.Player.Shoot.started += e => Shoot();
 
         defaultInput.Player.Sprint.started += e => StartSprint();
         defaultInput.Player.Sprint.canceled += e => StopSprint();
@@ -252,6 +254,13 @@ public class PlayerController : MonoBehaviour
                 return standingSettings;
         }
         return null;
+    }
+
+    private void Shoot()
+    {
+        //fire the current weapon equipped? might need to check so you can do it whilst doing certain things?
+        //apply offset of the camera based on the equipped weapons recoil amounts
+        currentWeapon.Shoot(Camera.main);
     }
 }
 

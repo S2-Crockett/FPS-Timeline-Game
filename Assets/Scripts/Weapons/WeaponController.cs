@@ -10,6 +10,19 @@ public class WeaponController : MonoBehaviour
     [Header("Settings")] 
     public WeaponSettings settings;
 
+    [Header("Weapon")] 
+    public float fireRate;
+    public float damage;
+    public float range;
+    public int ammoClip;
+    public int startingAmmo;
+    
+    private float nextTimeToFire = 0f;
+
+    [Header("Effects")] 
+    public ParticleSystem muzzleParticle;
+    public GameObject hitParticle;
+
     private bool isInitialised;
     private Vector3 newWeaponRotation;
     private Vector3 newWeaponRotationVelocity;
@@ -64,6 +77,27 @@ public class WeaponController : MonoBehaviour
             settings.movementSwaySmoothing);
         
         transform.localRotation = Quaternion.Euler(newWeaponRotation + newWeaponMovementRotation);
+    }
+
+    public void Shoot(Camera cam)
+    {
+        if (Time.time >= nextTimeToFire)
+        {
+            nextTimeToFire = Time.deltaTime + 1f / fireRate;
+            muzzleParticle.Play();
+            RaycastHit hit;
+            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))
+            {
+                ShootingTarget target = hit.transform.GetComponent<ShootingTarget>();
+                if (target != null)
+                {
+                    target.TakeDamage(damage);
+                }
+
+                GameObject ImpactObject = Instantiate(hitParticle, hit.point, Quaternion.LookRotation(hit.normal));
+                Destroy(ImpactObject, 0.4f);
+            }
+        }
     }
 }
 

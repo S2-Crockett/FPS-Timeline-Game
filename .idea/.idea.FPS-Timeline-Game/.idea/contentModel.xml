@@ -13,6 +13,9 @@
           <e p="Player" t="Include">
             <e p="PlayerController.cs" t="Include" />
           </e>
+          <e p="Testing" t="Include">
+            <e p="ShootingTarget.cs" t="Include" />
+          </e>
           <e p="Weapons" t="Include">
             <e p="WeaponController.cs" t="Include" />
           </e>
