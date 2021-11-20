@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
     public bool onWater = false;
     public bool onConcrete = false;
     
+    private bool shouldShoot;
     private void Awake()
     {
         Cursor.visible = false;
@@ -72,6 +73,9 @@ public class PlayerController : MonoBehaviour
 
         defaultInput.Player.Sprint.started += e => StartSprint();
         defaultInput.Player.Sprint.canceled += e => StopSprint();
+
+        defaultInput.Player.Shoot.started += e => ToggleShoot();
+        defaultInput.Player.Shoot.canceled += e => ToggleShoot();
 
         defaultInput.Enable();
 
@@ -93,6 +97,14 @@ public class PlayerController : MonoBehaviour
         CalculateMovement();
         CalculateJump();
         CalculateCameraHeight();
+
+        if (shouldShoot)
+        {
+            if (currentWeapon)
+            {
+                currentWeapon.Shoot(Camera.main);
+            }
+        }
     }
 
     private void CalculateView()
@@ -300,6 +312,13 @@ public class PlayerController : MonoBehaviour
                 return standingSettings;
         }
         return null;
+    }
+
+    private void ToggleShoot()
+    {
+        //fire the current weapon equipped? might need to check so you can do it whilst doing certain things?
+        //apply offset of the camera based on the equipped weapons recoil amounts
+        shouldShoot = !shouldShoot;
     }
 }
 
