@@ -148,11 +148,11 @@ public class PlayerController : MonoBehaviour
             }
             if(onWater)
             {
-
+                //insert water steps here
             }
             if(onConcrete)
             {
-
+                //insert concrete steps here
             }
             
         }
@@ -181,22 +181,7 @@ public class PlayerController : MonoBehaviour
             onConcrete = true;
         }
     }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == "FloorDirt")
-        {
-            onDirt = false;
-            
-        }
-        if (other.gameObject.tag == "FloorWater")
-        {
-            onWater = false;
-        }
-        if (other.gameObject.tag == "FloorConcrete")
-        {
-            onWater = false;
-        }
-    }
+    
     private void CalculateJump()
     {
         jumpingForce = Vector3.SmoothDamp(jumpingForce, Vector3.zero, ref jumpingForceVelocity,
