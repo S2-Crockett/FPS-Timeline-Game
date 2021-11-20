@@ -7,6 +7,8 @@ using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private AudioClip footsteps;
+
     private CharacterController characterController;
     private DefaultInput defaultInput;
     
@@ -53,6 +55,11 @@ public class PlayerController : MonoBehaviour
     private float cameraHeight;
     private float cameraHeightVelocity;
     private bool isSprinting;
+
+    public bool onDirt = false;
+    public bool onWater = false;
+    public bool onConcrete = false;
+    
     private bool shouldShoot;
     private void Awake()
     {
@@ -77,12 +84,11 @@ public class PlayerController : MonoBehaviour
 
         characterController = GetComponent<CharacterController>();
         cameraHeight = cameraHolder.localPosition.y;
-
+        
         if (currentWeapon)
         {
             currentWeapon.Initialise(this);
         }
-        
     }
 
     private void Update()
@@ -110,7 +116,7 @@ public class PlayerController : MonoBehaviour
         newCameraRotation.x = Mathf.Clamp(newCameraRotation.x, playerSettings.viewClampYMin, playerSettings.viewClampYMax);
         cameraHolder.localRotation = Quaternion.Euler(newCameraRotation);
     }
-    
+
     private void CalculateMovement()
     {
         if (inputMovement.y <= 0.2f)
@@ -120,7 +126,7 @@ public class PlayerController : MonoBehaviour
 
         var verticalSpeed = GetStanceSettings().stanceForwardMovementSpeed;
         var horizontalSpeed = GetStanceSettings().stanceStrafeMovementSpeed;
-        
+
         var vertSpeed = verticalSpeed * inputMovement.y * Time.deltaTime;
         var horSpeed = horizontalSpeed * inputMovement.x * Time.deltaTime;
 
@@ -132,19 +138,62 @@ public class PlayerController : MonoBehaviour
         {
             playerGravity -= gravityAmount * Time.deltaTime;
         }
-        
+
         if (playerGravity < -0.1f && characterController.isGrounded)
         {
             playerGravity = -0.1f;
         }
-        
+
         movementSpeed.y += playerGravity;
         movementSpeed += jumpingForce * Time.deltaTime;
-        
+
         characterController.Move(movementSpeed);
+
+        if( movementSpeed.x > 0.01f ||
+            movementSpeed.x < -0.01f || 
+            movementSpeed.z > 0.01f || 
+            movementSpeed.z < -0.01f)
+        {
+            if(onDirt)
+            {
+                SoundManager.Instance.PlaySound(footsteps);
+            }
+            if(onWater)
+            {
+                //insert water steps here
+            }
+            if(onConcrete)
+            {
+                //insert concrete steps here
+            }
+            
+        }
         
+
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "FloorDirt")
+        {
+            onDirt = true;
+            onWater = false;
+            onConcrete = false;
+        }
+        if (other.gameObject.tag == "FloorWater")
+        {
+            onDirt = false;
+            onWater = true;
+            onConcrete = false;
+        }
+        if (other.gameObject.tag == "FloorConcrete")
+        {
+            onDirt = false;
+            onWater = false;
+            onConcrete = true;
+        }
+    }
+    
     private void CalculateJump()
     {
         jumpingForce = Vector3.SmoothDamp(jumpingForce, Vector3.zero, ref jumpingForceVelocity,

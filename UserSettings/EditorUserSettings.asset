@@ -12,7 +12,11 @@ EditorUserSettings:
       value: 224247031146467f0818092e1f335a0205582b2b2168157f192c0e27ddd3373dece278fce9332b25
       flags: 0
     RecentlyUsedScenePath-2:
+<<<<<<< HEAD
       value: 224247031146467f0818092e1f335a0205583b2b2024333d6d0b5207e7f32007d1e433e7e2742a323016f6
+=======
+      value: 224247031146467f0818092e1f335a020558342f3b21357019662936f1f40b0be1e238eca92f31352d1b
+>>>>>>> Lewis
       flags: 0
     vcSharedLogLevel:
       value: 0d5e400f0650
