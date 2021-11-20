@@ -55,6 +55,10 @@ public class PlayerController : MonoBehaviour
     private float cameraHeight;
     private float cameraHeightVelocity;
     private bool isSprinting;
+
+    public bool onDirt = false;
+    public bool onWater = false;
+    public bool onConcrete = false;
     
     private void Awake()
     {
@@ -77,7 +81,6 @@ public class PlayerController : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         cameraHeight = cameraHolder.localPosition.y;
         
-
         if (currentWeapon)
         {
             currentWeapon.Initialise(this);
@@ -139,12 +142,61 @@ public class PlayerController : MonoBehaviour
             movementSpeed.z > 0.01f || 
             movementSpeed.z < -0.01f)
         {
-            SoundManager.Instance.PlaySound(footsteps);
+            if(onDirt)
+            {
+                SoundManager.Instance.PlaySound(footsteps);
+            }
+            if(onWater)
+            {
+
+            }
+            if(onConcrete)
+            {
+
+            }
+            
         }
         
 
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "FloorDirt")
+        {
+            onDirt = true;
+            onWater = false;
+            onConcrete = false;
+        }
+        if (other.gameObject.tag == "FloorWater")
+        {
+            onDirt = false;
+            onWater = true;
+            onConcrete = false;
+        }
+        if (other.gameObject.tag == "FloorConcrete")
+        {
+            onDirt = false;
+            onWater = false;
+            onConcrete = true;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "FloorDirt")
+        {
+            onDirt = false;
+            
+        }
+        if (other.gameObject.tag == "FloorWater")
+        {
+            onWater = false;
+        }
+        if (other.gameObject.tag == "FloorConcrete")
+        {
+            onWater = false;
+        }
+    }
     private void CalculateJump()
     {
         jumpingForce = Vector3.SmoothDamp(jumpingForce, Vector3.zero, ref jumpingForceVelocity,
