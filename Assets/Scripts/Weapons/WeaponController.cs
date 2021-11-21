@@ -104,9 +104,15 @@ public class WeaponController : MonoBehaviour
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))
             {
                 ShootingTarget target = hit.transform.GetComponent<ShootingTarget>();
+                EnemyDead enemy = hit.transform.GetComponent<EnemyDead>();
                 if (target != null)
                 {
                     target.TakeDamage(damage);
+                }
+
+                if (enemy != null)
+                {
+                    enemy.TakeDamage(damage);
                 }
 
                 GameObject ImpactObject = Instantiate(hitParticle, hit.point, Quaternion.LookRotation(hit.normal));

@@ -50,7 +50,8 @@ public class PlayerController : MonoBehaviour
     public StanceSettings standingSettings;
     public StanceSettings sprintingSettings;
     public StanceSettings crouchingSettings;
-    
+    private PlayerController fpsc;
+
     private float stanceCheckMargin = 0.05f;
     private float cameraHeight;
     private float cameraHeightVelocity;
@@ -63,6 +64,7 @@ public class PlayerController : MonoBehaviour
     private bool shouldShoot;
     private void Awake()
     {
+        fpsc = GetComponent<PlayerController>();
         Cursor.visible = false;
         defaultInput = new DefaultInput();
 
@@ -191,6 +193,11 @@ public class PlayerController : MonoBehaviour
             onDirt = false;
             onWater = false;
             onConcrete = true;
+        }
+
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            other.GetComponent<Enemy>().OnAware();
         }
     }
     
