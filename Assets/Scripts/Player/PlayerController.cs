@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     [Header("References")] 
     public Transform cameraHolder;
     public Transform feetTransform;
+    public Table table;
 
     [Header("Gravity")] 
     public float gravityAmount;
@@ -104,6 +105,14 @@ public class PlayerController : MonoBehaviour
             {
                 currentWeapon.Shoot(Camera.main);
             }
+        }
+        if(table.inScreen)
+        {
+            defaultInput.Disable();
+        }
+        else
+        {
+            defaultInput.Enable();
         }
     }
 

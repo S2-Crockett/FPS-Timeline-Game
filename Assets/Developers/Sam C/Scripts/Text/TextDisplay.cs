@@ -22,6 +22,7 @@ public class TextDisplay : MonoBehaviour
 
     public bool show = false;
     public bool finished = true;
+    public bool selectable = false;
 
     public Select input;
 
@@ -54,7 +55,7 @@ public class TextDisplay : MonoBehaviour
 
     private void CheckLeftInput()
     {
-        if(finished && level != 1)
+        if(finished && level != 1 && selectable)
         {
             level -= 1;
             show = true;
@@ -62,7 +63,7 @@ public class TextDisplay : MonoBehaviour
     }
     private void CheckRightInput()
     {
-        if (finished && level < levels.levels.Length)
+        if (finished && level < levels.levels.Length && selectable)
         {
             level += 1;
             show = true;
@@ -76,9 +77,7 @@ public class TextDisplay : MonoBehaviour
         descriptionText = levels.levels[level - 1].levelDescription;
         if (show)
         {
-            TextLevel.text = "";
-            TextDifficulty.text = "";
-            TextDescription.text = "";
+            ClearText();
             StartCoroutine(ShowText());
             show = false;
         }
@@ -108,5 +107,10 @@ public class TextDisplay : MonoBehaviour
         finished = true;
     }
 
-
+    public void ClearText()
+    {
+        TextLevel.text = "";
+        TextDifficulty.text = "";
+        TextDescription.text = "";
+    }
 }

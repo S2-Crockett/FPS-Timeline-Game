@@ -17,14 +17,12 @@ public class Portal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (levelManager.active)
         {
-            print("Active");
             for (int i = 0; i < levelManager.levels.Length; i++)
             {
                 if (levelManager.levelSelected == levelManager.levels[i].level)

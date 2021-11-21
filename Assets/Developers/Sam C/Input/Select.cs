@@ -41,6 +41,14 @@ public class @Select : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Leave"",
+                    ""type"": ""Button"",
+                    ""id"": ""cb75a3b1-980d-486d-b151-429ae8967d85"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -76,6 +84,17 @@ public class @Select : IInputActionCollection, IDisposable
                     ""action"": ""Select"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""798bd468-3914-440d-bf12-a6d27ed1c845"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": ""Tap"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Leave"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -87,6 +106,7 @@ public class @Select : IInputActionCollection, IDisposable
         m_Move_MoveLeft = m_Move.FindAction("MoveLeft", throwIfNotFound: true);
         m_Move_MoveRight = m_Move.FindAction("MoveRight", throwIfNotFound: true);
         m_Move_Select = m_Move.FindAction("Select", throwIfNotFound: true);
+        m_Move_Leave = m_Move.FindAction("Leave", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -139,6 +159,7 @@ public class @Select : IInputActionCollection, IDisposable
     private readonly InputAction m_Move_MoveLeft;
     private readonly InputAction m_Move_MoveRight;
     private readonly InputAction m_Move_Select;
+    private readonly InputAction m_Move_Leave;
     public struct MoveActions
     {
         private @Select m_Wrapper;
@@ -146,6 +167,7 @@ public class @Select : IInputActionCollection, IDisposable
         public InputAction @MoveLeft => m_Wrapper.m_Move_MoveLeft;
         public InputAction @MoveRight => m_Wrapper.m_Move_MoveRight;
         public InputAction @Select => m_Wrapper.m_Move_Select;
+        public InputAction @Leave => m_Wrapper.m_Move_Leave;
         public InputActionMap Get() { return m_Wrapper.m_Move; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -164,6 +186,9 @@ public class @Select : IInputActionCollection, IDisposable
                 @Select.started -= m_Wrapper.m_MoveActionsCallbackInterface.OnSelect;
                 @Select.performed -= m_Wrapper.m_MoveActionsCallbackInterface.OnSelect;
                 @Select.canceled -= m_Wrapper.m_MoveActionsCallbackInterface.OnSelect;
+                @Leave.started -= m_Wrapper.m_MoveActionsCallbackInterface.OnLeave;
+                @Leave.performed -= m_Wrapper.m_MoveActionsCallbackInterface.OnLeave;
+                @Leave.canceled -= m_Wrapper.m_MoveActionsCallbackInterface.OnLeave;
             }
             m_Wrapper.m_MoveActionsCallbackInterface = instance;
             if (instance != null)
@@ -177,6 +202,9 @@ public class @Select : IInputActionCollection, IDisposable
                 @Select.started += instance.OnSelect;
                 @Select.performed += instance.OnSelect;
                 @Select.canceled += instance.OnSelect;
+                @Leave.started += instance.OnLeave;
+                @Leave.performed += instance.OnLeave;
+                @Leave.canceled += instance.OnLeave;
             }
         }
     }
@@ -186,5 +214,6 @@ public class @Select : IInputActionCollection, IDisposable
         void OnMoveLeft(InputAction.CallbackContext context);
         void OnMoveRight(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
+        void OnLeave(InputAction.CallbackContext context);
     }
 }
