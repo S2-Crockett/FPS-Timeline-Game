@@ -7,6 +7,9 @@ TagManager:
   - FloorDirt
   - FloorWater
   - FloorConcrete
+  - LevelText
+  - LevelDifficulty
+  - LevelDescription
   layers:
   - Default
   - TransparentFX
