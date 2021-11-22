@@ -63,7 +63,9 @@ public class PlayerController : MonoBehaviour
     private float cameraHeightVelocity;
     private bool isSprinting;
     private bool shouldShoot;
-    private Camera camera;
+    
+    [HideInInspector]
+    public Camera camera;
     
     #region - Awake -
     private void Awake()
@@ -267,12 +269,23 @@ public class PlayerController : MonoBehaviour
     private void StartAiming()
     {
         previousPlayerStance = playerStance;
+        
+        // if we are crouching and aiming we need to update our capsule
+        // and height to match just crouching
+        if (previousPlayerStance == PlayerStance.PSCrouching)
+        {
+            aimingSettings.cameraHeight = crouchingSettings.cameraHeight;
+            aimingSettings.capsuleHeight = crouchingSettings.capsuleHeight;
+        }
         playerStance = PlayerStance.PSAiming;
     }
 
     private void StopAiming()
     {
         playerStance = previousPlayerStance;
+        // reset our aim settings back to default
+        aimingSettings.cameraHeight = standingSettings.cameraHeight;
+        aimingSettings.capsuleHeight = standingSettings.capsuleHeight;
     }
 
     private bool StanceCheck(float stanceCheckHeight)

@@ -1,13 +1,12 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+// ReSharper disable All
 
 public class WeaponHandler : MonoBehaviour
 {
     private DefaultInput defaultInput;
     private bool shouldShoot;
-    public bool isAiming;
+    private bool isAiming;
     
     [Header("Weapon")] 
     private WeaponController currentWeapon;
@@ -17,6 +16,7 @@ public class WeaponHandler : MonoBehaviour
 
     [Header("References")] 
     private PlayerController player;
+    private GameObject cameraHolder;
     public Transform weaponHolder;
 
     private void Awake()

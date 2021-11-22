@@ -4819,14 +4819,18 @@ MonoBehaviour:
     movementSwayZInverted: 0
     movementSwayYInverted: 0
     movementSwaySmoothing: 0.2
-  fireRate: 15
+  fireRate: 8
   damage: 25
   range: 100
   sprayRadius: 0.88
   magazineSize: 0
   startingAmmo: 0
   recoilSpread: 0
-  recoilKickAmount: 0
+  maxRecoilX: -10
+  maxRecoilY: 4
+  maxTransY: 0.05
+  maxTransZ: 0
+  recoilSpeed: 5
   swayObject: {fileID: 0}
   swayAmountA: 1
   swayAmountB: 2
