@@ -21,7 +21,13 @@ public class PlayerController : MonoBehaviour
     private Vector3 newPlayerRotation;
 
     [Header("Weapon")] 
-    public WeaponController currentWeapon;
+    private WeaponHandler weaponHandler;
+
+    [Header("Camera")] 
+    public float defaultFOV = 65.0f;
+    public float sprintFOV = 75.0f;
+    public float aimingFOV = 50.0f;
+    public float fieldOfViewChangeTime = 4.0f;
 
     [Header("References")] 
     public Transform cameraHolder;
@@ -54,9 +60,12 @@ public class PlayerController : MonoBehaviour
     private float cameraHeightVelocity;
     private bool isSprinting;
     private bool shouldShoot;
+    private Camera camera;
     private void Awake()
     {
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        
         defaultInput = new DefaultInput();
 
         defaultInput.Player.Movement.performed += e => inputMovement = e.ReadValue<Vector2>();
@@ -66,10 +75,7 @@ public class PlayerController : MonoBehaviour
 
         defaultInput.Player.Sprint.started += e => StartSprint();
         defaultInput.Player.Sprint.canceled += e => StopSprint();
-
-        defaultInput.Player.Shoot.started += e => ToggleShoot();
-        defaultInput.Player.Shoot.canceled += e => ToggleShoot();
-
+        
         defaultInput.Enable();
 
         newCameraRotation = cameraHolder.localRotation.eulerAngles;
@@ -77,12 +83,12 @@ public class PlayerController : MonoBehaviour
 
         characterController = GetComponent<CharacterController>();
         cameraHeight = cameraHolder.localPosition.y;
-
-        if (currentWeapon)
-        {
-            currentWeapon.Initialise(this);
-        }
         
+        camera = Camera.main;
+        camera.fieldOfView = defaultFOV;
+
+        weaponHandler = GetComponent<WeaponHandler>();
+        weaponHandler.Initialise(this);
     }
 
     private void Update()
@@ -92,13 +98,7 @@ public class PlayerController : MonoBehaviour
         CalculateJump();
         CalculateCameraHeight();
 
-        if (shouldShoot)
-        {
-            if (currentWeapon)
-            {
-                currentWeapon.Shoot(Camera.main);
-            }
-        }
+       
     }
 
     private void CalculateView()
@@ -153,21 +153,25 @@ public class PlayerController : MonoBehaviour
 
     private void CalculateCameraHeight()
     {
+        float stanceFOV = defaultFOV;
         float stanceHeight = standingSettings.cameraHeight;
         float capsuleHeight = standingSettings.capsuleHeight;
         
         if (playerStance == PlayerStance.PSCrouching)
         {
+            // set the crouch fov hear
             stanceHeight = GetStanceSettings().cameraHeight;
             capsuleHeight = GetStanceSettings().capsuleHeight;
         }
 
         if (playerStance == PlayerStance.PSSprinting)
         {
+            stanceFOV = sprintFOV;
             stanceHeight = GetStanceSettings().cameraHeight;
             capsuleHeight = GetStanceSettings().capsuleHeight;
         }
-        
+
+        camera.fieldOfView = Mathf.Lerp(camera.GetGateFittedFieldOfView(), stanceFOV, Time.deltaTime * fieldOfViewChangeTime);
         cameraHeight = Mathf.SmoothDamp(cameraHolder.localPosition.y, stanceHeight,
             ref cameraHeightVelocity, playerStanceSmoothing);
         
@@ -264,13 +268,8 @@ public class PlayerController : MonoBehaviour
         }
         return null;
     }
-
-    private void ToggleShoot()
-    {
-        //fire the current weapon equipped? might need to check so you can do it whilst doing certain things?
-        //apply offset of the camera based on the equipped weapons recoil amounts
-        shouldShoot = !shouldShoot;
-    }
+    
+    
 }
 
 public enum PlayerStance

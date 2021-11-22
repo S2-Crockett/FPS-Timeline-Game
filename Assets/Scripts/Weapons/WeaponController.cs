@@ -12,7 +12,8 @@ public class WeaponController : MonoBehaviour
     [Header("Weapon")] public float fireRate;
     public float damage;
     public float range;
-    public int ammoClip;
+    public float sprayRadius; //hip fire spray radius
+    public int magazineSize;
     public int startingAmmo;
     private float nextTimeToFire = 0f;
 
@@ -22,6 +23,7 @@ public class WeaponController : MonoBehaviour
     
     [Header("Effects")] public ParticleSystem muzzleParticle;
     public GameObject hitParticle;
+    public AudioClip hitmarkerClip;
     
     [Header("Animations")]
 
@@ -36,12 +38,15 @@ public class WeaponController : MonoBehaviour
     private Vector3 targetWeaponMovementRotation;
     private Vector3 targetWeaponMovementRotationVelocity;
 
+    private AudioSource audioSource;
+
     private void Awake()
     {
     }
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         newWeaponRotation = transform.localRotation.eulerAngles;
     }
 
@@ -106,6 +111,7 @@ public class WeaponController : MonoBehaviour
                 ShootingTarget target = hit.transform.GetComponent<ShootingTarget>();
                 if (target != null)
                 {
+                    audioSource.PlayOneShot(hitmarkerClip);
                     target.TakeDamage(damage);
                 }
 
