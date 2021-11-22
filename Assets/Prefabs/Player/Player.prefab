@@ -28,7 +28,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4963024755585250737}
-  - {fileID: 3152302368809756434}
+  - {fileID: 5037657759569019823}
   m_Father: {fileID: 4963024755645646185}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -191,6 +191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputMovement: {x: 0, y: 0}
   inputView: {x: 0, y: 0}
+  isAiming: 0
   defaultFOV: 65
   sprintFOV: 75
   aimingFOV: 50
@@ -212,14 +213,19 @@ MonoBehaviour:
   playerMask:
     serializedVersion: 2
     m_Bits: 55
-  movementSmoothing: 0.25
   playerStance: 0
   playerStanceSmoothing: 0.15
+  movementSmoothing: 0.25
   standingSettings:
     cameraHeight: 0.75
     capsuleHeight: 2
     stanceForwardMovementSpeed: 5
     stanceStrafeMovementSpeed: 4
+  aimingSettings:
+    cameraHeight: 0
+    capsuleHeight: 0
+    stanceForwardMovementSpeed: 0
+    stanceStrafeMovementSpeed: 0
   sprintingSettings:
     cameraHeight: 0.4
     capsuleHeight: 2
@@ -242,6 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c62f62e3aff6bc9499c065a02d2e1ed6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAiming: 0
   weaponSlots:
   - weaponIndex: 0
     weaponObject: {fileID: 8249656883338130075, guid: d15ad2123ad5dd94d8c8bed43143f8c2, type: 3}
@@ -301,10 +308,41 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6365072970440248633}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.14, y: -0.12, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
+  m_Father: {fileID: 5037657759569019823}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6580583208696753250
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5037657759569019823}
+  m_Layer: 6
+  m_Name: Weapons
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5037657759569019823
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6580583208696753250}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.1, y: -0.11, z: -0.05}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3152302368809756434}
   m_Father: {fileID: 4963024754864949922}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

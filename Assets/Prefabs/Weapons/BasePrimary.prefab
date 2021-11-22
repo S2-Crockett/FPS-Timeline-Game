@@ -4827,6 +4827,11 @@ MonoBehaviour:
   startingAmmo: 0
   recoilSpread: 0
   recoilKickAmount: 0
+  swayObject: {fileID: 0}
+  swayAmountA: 1
+  swayAmountB: 2
+  swayScale: 200
+  swayLerpSpeed: 14
   sightTarget: {fileID: 6407780540367815825}
   sightOffset: 0.3
   aimingTime: 0.08
@@ -5036,7 +5041,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9047646829863996281}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.77, z: -0.188}
+  m_LocalPosition: {x: 0, y: 0.68, z: -0.188}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8249656883735612359}

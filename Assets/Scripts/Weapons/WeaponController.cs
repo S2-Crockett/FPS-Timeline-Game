@@ -9,36 +9,38 @@ public class WeaponController : MonoBehaviour
 
     public bool isAiming;
 
-    [Header("Settings")] 
-    public WeaponSettings settings;
+    [Header("Settings")] public WeaponSettings settings;
 
-    [Header("Weapon")] 
-    public float fireRate;
+    [Header("Weapon")] public float fireRate;
     public float damage;
     public float range;
-    public float sprayRadius; //hip fire spray radius
+    public float sprayRadius;
     public int magazineSize;
     public int startingAmmo;
     private float nextTimeToFire = 0f;
 
-    [Header("Recoil")] 
-    public float recoilSpread;
+    [Header("Recoil")] public float recoilSpread;
     public float recoilKickAmount;
 
-    [Header("Sights")] 
-    public Transform sightTarget;
+    [Header("Idle Sway")] public Transform swayObject;
+    public float swayAmountA = 1f;
+    public float swayAmountB = 2f;
+    public float swayScale = 600f;
+    public float swayLerpSpeed = 14f;
+    private float swayTime;
+    private Vector3 swayPosition;
+
+    [Header("Sights")] public Transform sightTarget;
     public float sightOffset;
     public float aimingTime;
     private Vector3 weaponSwayPosition;
     private Vector3 weaponSwayPositionVelocity;
-    
+
     [Header("Effects")] public ParticleSystem muzzleParticle;
     public GameObject hitParticle;
     public AudioClip hitmarkerClip;
-    
-    [Header("Animations")]
 
-    private bool isInitialised;
+    [Header("Animations")] private bool isInitialised;
     private Vector3 newWeaponRotation;
     private Vector3 newWeaponRotationVelocity;
     private Vector3 targetWeaponRotation;
@@ -50,6 +52,7 @@ public class WeaponController : MonoBehaviour
     private Vector3 targetWeaponMovementRotationVelocity;
 
     private AudioSource audioSource;
+    float time = 0;
 
     private void Awake()
     {
@@ -59,6 +62,7 @@ public class WeaponController : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         newWeaponRotation = transform.localRotation.eulerAngles;
+        swayPosition = transform.parent.position;
     }
 
     public void Initialise(PlayerController controller)
@@ -69,12 +73,12 @@ public class WeaponController : MonoBehaviour
 
     private void Update()
     {
+        swayObject = transform.parent.transform;
+
         if (!isInitialised)
         {
             return;
         }
-        
-        
 
         targetWeaponRotation.y += settings.swayAmount *
                                   (settings.swayXInverted
@@ -109,6 +113,7 @@ public class WeaponController : MonoBehaviour
             settings.movementSwaySmoothing);
 
         transform.localRotation = Quaternion.Euler(newWeaponRotation + newWeaponMovementRotation);
+        CalculateBreathing();
         CalculateAiming();
     }
 
@@ -135,13 +140,35 @@ public class WeaponController : MonoBehaviour
         }
     }
 
+    private void CalculateBreathing()
+    {
+        if (!isAiming)
+        {
+            var targetPosition = LissajousCurve(swayTime, swayAmountA, swayAmountB) / swayScale;
+            swayPosition = Vector3.Lerp(swayPosition, targetPosition, Time.smoothDeltaTime * swayLerpSpeed);
+            swayTime += Time.deltaTime;
+            if (swayTime > 6.3f)
+            {
+                swayTime = 0f;
+            }
+
+            swayObject.localPosition = swayPosition;
+        }
+    }
+
+    private Vector3 LissajousCurve(float time, float a, float b)
+    {
+        return new Vector3(Mathf.Sin(time), a * Mathf.Sin(b * time + Mathf.PI));
+    }
+
     private void CalculateAiming()
     {
-        var targetPosition = transform.parent.position;
+        var targetPosition = swayObject.position;
         if (isAiming)
         {
             targetPosition = playerController.cameraHolder.position +
-                             (transform.position - sightTarget.position) + (playerController.cameraHolder.transform.forward * sightOffset);
+                             (transform.position - sightTarget.position) +
+                             (playerController.cameraHolder.transform.forward * sightOffset);
         }
 
         weaponSwayPosition = transform.position;
@@ -154,7 +181,8 @@ public class WeaponController : MonoBehaviour
 [Serializable]
 public class WeaponSettings
 {
-    [Header("Weapon Sway")] public float swayAmount;
+    [Header("Weapon Sway")]
+    public float swayAmount;
     public bool swayYInverted;
     public bool swayXInverted;
     public float swaySmoothing;
