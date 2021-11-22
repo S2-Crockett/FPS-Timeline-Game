@@ -7,6 +7,7 @@ public class WeaponHandler : MonoBehaviour
 {
     private DefaultInput defaultInput;
     private bool shouldShoot;
+    public bool isAiming;
     
     [Header("Weapon")] 
     private WeaponController currentWeapon;
@@ -27,6 +28,9 @@ public class WeaponHandler : MonoBehaviour
 
         defaultInput.Weapon.WeaponSlot1.started += e => SwapWeapon(0); 
         defaultInput.Weapon.WeaponSlot2.started += e => SwapWeapon(1);
+        
+        defaultInput.Weapon.Aim.started += e => AimingPressed();
+        defaultInput.Weapon.Aim.canceled += e => AimingReleased();
         
         defaultInput.Enable();
     }
@@ -73,6 +77,8 @@ public class WeaponHandler : MonoBehaviour
 
     private void Update()
     {
+        CalculateAiming();
+        
         if (shouldShoot)
         {
             if (currentWeapon)
@@ -87,6 +93,26 @@ public class WeaponHandler : MonoBehaviour
         //fire the current weapon equipped? might need to check so you can do it whilst doing certain things?
         //apply offset of the camera based on the equipped weapons recoil amounts
         shouldShoot = !shouldShoot;
+    }
+
+    private void CalculateAiming()
+    {
+        if (!currentWeapon)
+        {
+            return;
+        }
+        
+        currentWeapon.isAiming = this.isAiming;
+    }
+
+    private void AimingPressed()
+    {
+        isAiming = true;
+    }
+
+    private void AimingReleased()
+    {
+        isAiming = false;
     }
 }
 

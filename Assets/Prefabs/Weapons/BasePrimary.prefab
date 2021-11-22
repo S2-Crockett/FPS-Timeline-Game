@@ -4805,6 +4805,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00a53554972eca74ba012d1be0789da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAiming: 0
   settings:
     swayAmount: 3
     swayYInverted: 0
@@ -4822,10 +4823,13 @@ MonoBehaviour:
   damage: 25
   range: 100
   sprayRadius: 0.88
-  ammoClip: 0
+  magazineSize: 0
   startingAmmo: 0
   recoilSpread: 0
   recoilKickAmount: 0
+  sightTarget: {fileID: 6407780540367815825}
+  sightOffset: 0.3
+  aimingTime: 0.08
   muzzleParticle: {fileID: 4548563306457368050}
   hitParticle: {fileID: 1000010355441670, guid: 02a509a7fa70ed740ba4197e20c5d32d, type: 3}
   hitmarkerClip: {fileID: 8300000, guid: 5783dbc0187545a43858428e3a983cbc, type: 3}
@@ -4953,7 +4957,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.216}
   m_LocalScale: {x: 0.075, y: 0.1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 6407780540367815825}
   m_Father: {fileID: 8249656883338130077}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5007,3 +5012,33 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &9047646829863996281
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6407780540367815825}
+  m_Layer: 6
+  m_Name: SightTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6407780540367815825
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9047646829863996281}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.77, z: -0.188}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8249656883735612359}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

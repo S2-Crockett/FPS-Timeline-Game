@@ -7,9 +7,13 @@ public class WeaponController : MonoBehaviour
 {
     private PlayerController playerController;
 
-    [Header("Settings")] public WeaponSettings settings;
+    public bool isAiming;
 
-    [Header("Weapon")] public float fireRate;
+    [Header("Settings")] 
+    public WeaponSettings settings;
+
+    [Header("Weapon")] 
+    public float fireRate;
     public float damage;
     public float range;
     public float sprayRadius; //hip fire spray radius
@@ -20,6 +24,13 @@ public class WeaponController : MonoBehaviour
     [Header("Recoil")] 
     public float recoilSpread;
     public float recoilKickAmount;
+
+    [Header("Sights")] 
+    public Transform sightTarget;
+    public float sightOffset;
+    public float aimingTime;
+    private Vector3 weaponSwayPosition;
+    private Vector3 weaponSwayPositionVelocity;
     
     [Header("Effects")] public ParticleSystem muzzleParticle;
     public GameObject hitParticle;
@@ -62,6 +73,8 @@ public class WeaponController : MonoBehaviour
         {
             return;
         }
+        
+        
 
         targetWeaponRotation.y += settings.swayAmount *
                                   (settings.swayXInverted
@@ -96,6 +109,7 @@ public class WeaponController : MonoBehaviour
             settings.movementSwaySmoothing);
 
         transform.localRotation = Quaternion.Euler(newWeaponRotation + newWeaponMovementRotation);
+        CalculateAiming();
     }
 
     public void Shoot(Camera cam)
@@ -119,6 +133,21 @@ public class WeaponController : MonoBehaviour
                 Destroy(ImpactObject, 0.4f);
             }
         }
+    }
+
+    private void CalculateAiming()
+    {
+        var targetPosition = transform.parent.position;
+        if (isAiming)
+        {
+            targetPosition = playerController.cameraHolder.position +
+                             (transform.position - sightTarget.position) + (playerController.cameraHolder.transform.forward * sightOffset);
+        }
+
+        weaponSwayPosition = transform.position;
+        weaponSwayPosition =
+            Vector3.SmoothDamp(weaponSwayPosition, targetPosition, ref weaponSwayPositionVelocity, aimingTime);
+        transform.position = weaponSwayPosition;
     }
 }
 

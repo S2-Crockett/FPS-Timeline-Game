@@ -2797,16 +2797,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!4 &2025678897 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2072897315901086185, guid: fb0314374a87dd2468847150afa5c603, type: 3}
-  m_PrefabInstance: {fileID: 4963024756182142043}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &2050325500 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5306856064469743347, guid: fb0314374a87dd2468847150afa5c603, type: 3}
-  m_PrefabInstance: {fileID: 4963024756182142043}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4963024756182142043
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2833,14 +2823,6 @@ PrefabInstance:
     - target: {fileID: 2427495929071174350, guid: fb0314374a87dd2468847150afa5c603, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.14
-      objectReference: {fileID: 0}
-    - target: {fileID: 3152302368809756434, guid: fb0314374a87dd2468847150afa5c603, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.156
-      objectReference: {fileID: 0}
-    - target: {fileID: 3152302368809756434, guid: fb0314374a87dd2468847150afa5c603, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.109
       objectReference: {fileID: 0}
     - target: {fileID: 3167553057358315791, guid: fb0314374a87dd2468847150afa5c603, type: 3}
       propertyPath: m_IsActive
@@ -2889,7 +2871,7 @@ PrefabInstance:
     - target: {fileID: 4963024755645646184, guid: fb0314374a87dd2468847150afa5c603, type: 3}
       propertyPath: primarySlot
       value: 
-      objectReference: {fileID: 2025678897}
+      objectReference: {fileID: 0}
     - target: {fileID: 4963024755645646184, guid: fb0314374a87dd2468847150afa5c603, type: 3}
       propertyPath: PrimaryWeapon
       value: 
@@ -2905,11 +2887,19 @@ PrefabInstance:
     - target: {fileID: 4963024755645646184, guid: fb0314374a87dd2468847150afa5c603, type: 3}
       propertyPath: secondarySlot
       value: 
-      objectReference: {fileID: 2050325500}
+      objectReference: {fileID: 0}
     - target: {fileID: 4963024755645646184, guid: fb0314374a87dd2468847150afa5c603, type: 3}
       propertyPath: secondaryWeapon
       value: 
       objectReference: {fileID: 8249656883338130075, guid: 6a717d9391f6dce429847a9e11ec0c94, type: 3}
+    - target: {fileID: 4963024755645646184, guid: fb0314374a87dd2468847150afa5c603, type: 3}
+      propertyPath: aimingSettings.cameraHeight
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4963024755645646184, guid: fb0314374a87dd2468847150afa5c603, type: 3}
+      propertyPath: aimingSettings.capsuleHeight
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4963024755645646184, guid: fb0314374a87dd2468847150afa5c603, type: 3}
       propertyPath: standingSettings.cameraHeight
       value: 0.5
@@ -2921,6 +2911,14 @@ PrefabInstance:
     - target: {fileID: 4963024755645646184, guid: fb0314374a87dd2468847150afa5c603, type: 3}
       propertyPath: sprintingSettings.cameraHeight
       value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4963024755645646184, guid: fb0314374a87dd2468847150afa5c603, type: 3}
+      propertyPath: aimingSettings.stanceStrafeMovementSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4963024755645646184, guid: fb0314374a87dd2468847150afa5c603, type: 3}
+      propertyPath: aimingSettings.stanceForwardMovementSpeed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4963024755645646185, guid: fb0314374a87dd2468847150afa5c603, type: 3}
       propertyPath: m_RootOrder

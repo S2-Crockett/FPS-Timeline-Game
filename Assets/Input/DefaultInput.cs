@@ -230,7 +230,7 @@ public class @DefaultInput : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""d36d6c8d-4792-46b7-98bf-032762bb3a85"",
                     ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Aim"",
