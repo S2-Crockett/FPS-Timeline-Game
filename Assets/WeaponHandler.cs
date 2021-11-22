@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 // ReSharper disable All
 
@@ -50,17 +52,19 @@ public class WeaponHandler : MonoBehaviour
             obj.transform.parent = weaponHolder;
             obj.GetComponent<WeaponController>().Initialise(player);
             obj.SetActive(false);
-
-            if (slot.weaponIndex == 0)
-            {
-                obj.SetActive(true);
-                currentActiveIndex = 0;
-                currentWeapon =  obj.GetComponent<WeaponController>();
-            }
-            
             weaponRefs[x] = obj;
             x++;
         }
+
+        StartCoroutine(SpawnPrimaryWeapon());
+    }
+
+    IEnumerator SpawnPrimaryWeapon()
+    {
+        yield return new WaitForSeconds(0.1f);
+        weaponRefs[0].SetActive(true);
+        currentActiveIndex = 0;
+        currentWeapon = weaponRefs[0].GetComponent<WeaponController>();
     }
 
     private void SwapWeapon(int newIndex)

@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using System.Collections;
+using Managers;
 using Random = UnityEngine.Random;
 // ReSharper disable All
 
@@ -7,8 +9,7 @@ public class WeaponController : MonoBehaviour
 {
     private PlayerController playerController;
     
-    [HideInInspector]
-    public bool isAiming;
+    [HideInInspector] public bool isAiming;
 
     [Header("Settings")] 
     public WeaponSettings settings;
@@ -17,9 +18,14 @@ public class WeaponController : MonoBehaviour
     public float damage;
     public float range;
     public float sprayRadius;
-    public int magazineSize;
-    public int startingAmmo;
+
+    [Header("Reload")] 
+    public int magazineSize = 30;
+    public int equippedAmmo = 120;
+    public float reloadTime = 1f;
+    private int currentAmmo;
     private float nextTimeToFire = 0f;
+    private bool isReloading = false;
 
     [Header("Recoil")] public float recoilSpread;
     public float maxRecoilX = -20.0f;
@@ -71,6 +77,14 @@ public class WeaponController : MonoBehaviour
 
     private void Awake()
     {
+        currentAmmo = magazineSize;
+    }
+
+    private void OnEnable()
+    {
+        isReloading = false;
+        UIManager.Instance.UpdateCurrentAmmo(currentAmmo);
+        UIManager.Instance.UpdateHeldAmmoText(equippedAmmo);
     }
 
     private void Start()
@@ -136,11 +150,52 @@ public class WeaponController : MonoBehaviour
       
     }
 
+    IEnumerator Reload()
+    {
+        isReloading = true;
+        if (currentAmmo == magazineSize)
+        {
+            // no need to reload instantly return
+            yield return new WaitForSeconds(0.01f);
+            isReloading = false;
+        }
+        if (equippedAmmo >= magazineSize - currentAmmo)
+        {
+            yield return new WaitForSeconds(reloadTime);
+            equippedAmmo -= (magazineSize - currentAmmo);
+            currentAmmo = magazineSize;
+            isReloading = false;
+        }
+        else
+        {
+            yield return new WaitForSeconds(reloadTime);
+            currentAmmo = equippedAmmo;
+            equippedAmmo = 0;
+            isReloading = false;
+        }
+        
+        UIManager.Instance.UpdateCurrentAmmo(currentAmmo);
+        UIManager.Instance.UpdateHeldAmmoText(equippedAmmo);
+    }
+
     public void Shoot(Camera cam)
     {
+        if (isReloading)
+        {
+            return;
+        }
+        
+        if (currentAmmo <= 0)
+        {
+            StartCoroutine(Reload());
+            return;
+        }
         if (Time.time >= nextTimeToFire)
         {
             nextTimeToFire = Time.time + 1f / fireRate;
+            
+            currentAmmo--;
+            UIManager.Instance.UpdateCurrentAmmo(currentAmmo);
             recoil += 0.1f;
             muzzleParticle.Play();
             
@@ -158,6 +213,7 @@ public class WeaponController : MonoBehaviour
                 Destroy(ImpactObject, 0.4f);
             }
         }
+        
     }
 
     private void CalculateBreathing()

@@ -4823,8 +4823,9 @@ MonoBehaviour:
   damage: 25
   range: 100
   sprayRadius: 0.88
-  magazineSize: 0
-  startingAmmo: 0
+  magazineSize: 30
+  equippedAmmo: 120
+  reloadTime: 1
   recoilSpread: 0
   maxRecoilX: -10
   maxRecoilY: 4

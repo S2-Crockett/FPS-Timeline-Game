@@ -4850,11 +4850,12 @@ MonoBehaviour:
     movementSwayYInverted: 0
     movementSwaySmoothing: 0.2
   fireRate: 3
-  damage: 10
+  damage: 25
   range: 100
   sprayRadius: 0.88
-  magazineSize: 0
-  startingAmmo: 0
+  magazineSize: 6
+  equippedAmmo: 24
+  reloadTime: 1
   recoilSpread: 0
   maxRecoilX: -20
   maxRecoilY: 2
