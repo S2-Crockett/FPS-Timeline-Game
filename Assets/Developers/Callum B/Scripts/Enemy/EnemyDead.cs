@@ -6,7 +6,8 @@ public class EnemyDead : MonoBehaviour
 {
    private Animator animator;
     public float health = 50.0f;
-    private bool isDead = false;
+   // private bool isDead = false;
+    public GameObject ragdoll;
 
     void Start()
     {
@@ -15,14 +16,14 @@ public class EnemyDead : MonoBehaviour
 
     public void Update()
     {
-        if (isDead)
+        /*if (isDead)
         {
             animator.SetBool("Dead", true);
         }
         else
         {
             animator.SetBool("Dead", false);
-        }
+        }*/
     }
 
     public void TakeDamage(float damage)
@@ -42,6 +43,7 @@ public class EnemyDead : MonoBehaviour
 
     public void OnDeath()
     {
-        isDead = true;
+        Instantiate(ragdoll, transform.position, transform.rotation);
+        Destroy(gameObject);
     }
 }
