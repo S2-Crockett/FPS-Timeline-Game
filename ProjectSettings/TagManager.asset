@@ -10,6 +10,7 @@ TagManager:
   - LevelText
   - LevelDifficulty
   - LevelDescription
+  - Enemy
   layers:
   - Default
   - TransparentFX
