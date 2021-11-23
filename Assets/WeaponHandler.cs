@@ -87,7 +87,7 @@ public class WeaponHandler : MonoBehaviour
         {
             if (currentWeapon)
             {
-                currentWeapon.Shoot(Camera.main);
+                currentWeapon.Shoot(player.camera);
             }
         }
     }

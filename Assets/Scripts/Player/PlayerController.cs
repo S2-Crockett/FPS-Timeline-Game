@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     [Header("References")] 
     public Transform cameraHolder;
     public Transform feetTransform;
-    public Table table;
+
 
     [Header("Gravity")] 
     public float gravityAmount;
@@ -119,14 +119,6 @@ public class PlayerController : MonoBehaviour
         CalculateMovement();
         CalculateJump();
         CalculateCameraHeight();
-        if(table.inScreen)
-        {
-            defaultInput.Disable();
-        }
-        else
-        {
-            defaultInput.Enable();
-        }
     }
     
     #endregion
