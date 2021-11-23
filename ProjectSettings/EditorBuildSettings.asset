@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Developers/Callum B/Scenes/WW2 Level 1.unity
+    guid: 9b5428d3d0ff5cb40bab59241f1d4794
+  - enabled: 1
+    path: Assets/Developers/Callum B/Scenes/WW2 Level 2.unity
+    guid: 47e1dc1e4876dfe4b9d3100fd57fa351
   m_configObjects: {}
