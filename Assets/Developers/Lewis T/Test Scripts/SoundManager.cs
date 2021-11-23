@@ -22,7 +22,6 @@ public class SoundManager : MonoBehaviour
     }
     public void PlaySound(AudioClip clip)
     {
-
         if (!_effectsSource.isPlaying)
         {
             _effectsSource.PlayOneShot(clip);

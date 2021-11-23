@@ -7,7 +7,12 @@ using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private AudioClip footsteps;
+    [SerializeField] private AudioClip[] dirtFootsteps;
+    [SerializeField] private AudioClip[] waterFootsteps;
+    [SerializeField] private AudioClip[] concreteFootsteps;
+    [SerializeField] private AudioClip[] woodFootsteps;
+    [SerializeField] private AudioClip[] metalFootsteps;
+    [SerializeField] private AudioClip[] grassFootsteps;
 
     private CharacterController characterController;
     private DefaultInput defaultInput;
@@ -59,6 +64,9 @@ public class PlayerController : MonoBehaviour
     public bool onDirt = false;
     public bool onWater = false;
     public bool onConcrete = false;
+    public bool onWood = false;
+    public bool onMetal = false;
+    public bool onGrass = false;
     
     private bool shouldShoot;
     private void Awake()
@@ -156,17 +164,28 @@ public class PlayerController : MonoBehaviour
         {
             if(onDirt)
             {
-                SoundManager.Instance.PlaySound(footsteps);
+                SoundManager.Instance.PlaySound(dirtFootsteps[UnityEngine.Random.Range(0, dirtFootsteps.Length)]);
             }
             if(onWater)
             {
-                //insert water steps here
+                SoundManager.Instance.PlaySound(waterFootsteps[UnityEngine.Random.Range(0, waterFootsteps.Length)]);
             }
             if(onConcrete)
             {
-                //insert concrete steps here
+                SoundManager.Instance.PlaySound(concreteFootsteps[UnityEngine.Random.Range(0, concreteFootsteps.Length)]);
             }
-            
+            if(onWood)
+            {
+                SoundManager.Instance.PlaySound(woodFootsteps[UnityEngine.Random.Range(0, woodFootsteps.Length)]);
+            }
+            if (onMetal)
+            {
+                SoundManager.Instance.PlaySound(metalFootsteps[UnityEngine.Random.Range(0, metalFootsteps.Length)]);
+            }
+            if (onGrass)
+            {
+                SoundManager.Instance.PlaySound(grassFootsteps[UnityEngine.Random.Range(0, grassFootsteps.Length)]);
+            }
         }
         
 
@@ -179,19 +198,56 @@ public class PlayerController : MonoBehaviour
             onDirt = true;
             onWater = false;
             onConcrete = false;
+            onWood = false;
+            onMetal = false;
+            onGrass = false;
         }
-        if (other.gameObject.tag == "FloorWater")
+        else if (other.gameObject.tag == "FloorWater")
         {
             onDirt = false;
             onWater = true;
             onConcrete = false;
+            onWood = false;
+            onMetal = false;
+            onGrass = false;
         }
-        if (other.gameObject.tag == "FloorConcrete")
+        else if (other.gameObject.tag == "FloorConcrete")
         {
             onDirt = false;
             onWater = false;
             onConcrete = true;
+            onWood = false;
+            onMetal = false;
+            onGrass = false;
         }
+        else if(other.gameObject.tag == "FloorWood")
+        {
+            onDirt = false;
+            onWater = false;
+            onConcrete = false;
+            onWood = true;
+            onMetal = false;
+            onGrass = false;
+        }
+        else if (other.gameObject.tag == "FloorMetal")
+        {
+            onDirt = false;
+            onWater = false;
+            onConcrete = false;
+            onWood = false;
+            onMetal = true;
+            onGrass = false;
+        }
+        else if (other.gameObject.tag == "FloorGrass")
+        {
+            onDirt = false;
+            onWater = false;
+            onConcrete = false;
+            onWood = false;
+            onMetal = false;
+            onGrass = true;
+        }
+
     }
     
     private void CalculateJump()
