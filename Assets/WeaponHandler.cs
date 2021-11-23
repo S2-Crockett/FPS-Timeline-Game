@@ -11,10 +11,11 @@ public class WeaponHandler : MonoBehaviour
     private bool isAiming;
     
     [Header("Weapon")] 
-    private WeaponController currentWeapon;
-    private int currentActiveIndex;
-    private GameObject[] weaponRefs = new GameObject[5];
+    public WeaponController currentWeapon;
+    public int currentActiveIndex;
+    public GameObject[] weaponRefs = new GameObject[5];
     public WeaponSlot[] weaponSlots;
+    public WeaponType[] weapontype;
 
     [Header("References")] 
     private PlayerController player;
@@ -122,6 +123,13 @@ public class WeaponHandler : MonoBehaviour
 
 [Serializable]
 public class WeaponSlot
+{
+    public int weaponIndex;
+    public GameObject weaponObject;
+}
+
+[Serializable]
+public class WeaponType
 {
     public int weaponIndex;
     public GameObject weaponObject;
