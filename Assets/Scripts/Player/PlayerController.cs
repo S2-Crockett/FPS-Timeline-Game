@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private AudioClip footsteps;
 
+    private PlayerStance previousPlayerStance;
     private CharacterController characterController;
     private DefaultInput defaultInput;
     
@@ -23,7 +24,16 @@ public class PlayerController : MonoBehaviour
     private Vector3 newPlayerRotation;
 
     [Header("Weapon")] 
-    public WeaponController currentWeapon;
+    private WeaponHandler weaponHandler;
+
+    [Header("Aiming")] 
+    public bool isAiming;
+
+    [Header("Camera")] 
+    public float defaultFOV = 65.0f;
+    public float sprintFOV = 75.0f;
+    public float aimingFOV = 45.0f;
+    public float fieldOfViewChangeTime = 4.0f;
 
     [Header("References")] 
     public Transform cameraHolder;
@@ -38,17 +48,16 @@ public class PlayerController : MonoBehaviour
     [Header("Settings")]
     public PlayerSettings playerSettings;
     public LayerMask playerMask;
-
-    [Header("Movement")] 
-    public float movementSmoothing;
-
+    
     private Vector3 newMovementSpeed;
     private Vector3 newMovementSpeedVelocity;
 
     [Header("Stance")]
     public PlayerStance playerStance;
     public float playerStanceSmoothing;
+    public float movementSmoothing;
     public StanceSettings standingSettings;
+    public StanceSettings aimingSettings;
     public StanceSettings sprintingSettings;
     public StanceSettings crouchingSettings;
     
@@ -62,50 +71,53 @@ public class PlayerController : MonoBehaviour
     public bool onConcrete = false;
     
     private bool shouldShoot;
+    
+    [HideInInspector]
+    public Camera camera;
+    
+    #region - Awake -
     private void Awake()
-    {
-        Cursor.visible = false;
-        defaultInput = new DefaultInput();
-
-        defaultInput.Player.Movement.performed += e => inputMovement = e.ReadValue<Vector2>();
-        defaultInput.Player.View.performed += e => inputView = e.ReadValue<Vector2>();
-        defaultInput.Player.Jump.performed += e => Jump();
-        defaultInput.Player.Crouch.performed += e => Crouch();
-
-        defaultInput.Player.Sprint.started += e => StartSprint();
-        defaultInput.Player.Sprint.canceled += e => StopSprint();
-
-        defaultInput.Player.Shoot.started += e => ToggleShoot();
-        defaultInput.Player.Shoot.canceled += e => ToggleShoot();
-
-        defaultInput.Enable();
-
-        newCameraRotation = cameraHolder.localRotation.eulerAngles;
-        newPlayerRotation = transform.localRotation.eulerAngles;
-
-        characterController = GetComponent<CharacterController>();
-        cameraHeight = cameraHolder.localPosition.y;
-        
-        if (currentWeapon)
         {
-            currentWeapon.Initialise(this);
-        }
-    }
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            
+            defaultInput = new DefaultInput();
+    
+            defaultInput.Player.Movement.performed += e => inputMovement = e.ReadValue<Vector2>();
+            defaultInput.Player.View.performed += e => inputView = e.ReadValue<Vector2>();
+            defaultInput.Player.Jump.performed += e => Jump();
+            defaultInput.Player.Crouch.performed += e => Crouch();
+    
+            defaultInput.Player.Sprint.started += e => StartSprint();
+            defaultInput.Player.Sprint.canceled += e => StopSprint();
+            defaultInput.Weapon.Aim.started += e => StartAiming();
+            defaultInput.Weapon.Aim.canceled += e => StopAiming();
 
+            
+            defaultInput.Enable();
+    
+            newCameraRotation = cameraHolder.localRotation.eulerAngles;
+            newPlayerRotation = transform.localRotation.eulerAngles;
+    
+            characterController = GetComponent<CharacterController>();
+            cameraHeight = cameraHolder.localPosition.y;
+            
+            camera = Camera.main;
+            camera.fieldOfView = defaultFOV;
+    
+            weaponHandler = GetComponent<WeaponHandler>();
+            weaponHandler.Initialise(this);
+        }
+    
+    #endregion
+    
+    #region - Update - 
     private void Update()
     {
         CalculateView();
         CalculateMovement();
         CalculateJump();
         CalculateCameraHeight();
-
-        if (shouldShoot)
-        {
-            if (currentWeapon)
-            {
-                currentWeapon.Shoot(Camera.main);
-            }
-        }
         if(table.inScreen)
         {
             defaultInput.Disable();
@@ -115,7 +127,9 @@ public class PlayerController : MonoBehaviour
             defaultInput.Enable();
         }
     }
-
+    
+    #endregion
+    
     private void CalculateView()
     {
         newPlayerRotation.y += playerSettings.viewXSensitivity * (playerSettings.viewXInverted ? inputView.x : -inputView.x) * Time.deltaTime;
@@ -211,21 +225,33 @@ public class PlayerController : MonoBehaviour
 
     private void CalculateCameraHeight()
     {
+        float stanceFOV = defaultFOV;
         float stanceHeight = standingSettings.cameraHeight;
         float capsuleHeight = standingSettings.capsuleHeight;
         
+        // this can be really condensed down into a better structure but it works 
         if (playerStance == PlayerStance.PSCrouching)
         {
+            // set the crouch fov hear
             stanceHeight = GetStanceSettings().cameraHeight;
             capsuleHeight = GetStanceSettings().capsuleHeight;
         }
 
         if (playerStance == PlayerStance.PSSprinting)
         {
+            stanceFOV = sprintFOV;
             stanceHeight = GetStanceSettings().cameraHeight;
             capsuleHeight = GetStanceSettings().capsuleHeight;
         }
-        
+
+        if (playerStance == PlayerStance.PSAiming)
+        {
+            stanceFOV = aimingFOV;
+            stanceHeight = GetStanceSettings().cameraHeight;
+            capsuleHeight = GetStanceSettings().capsuleHeight;
+        }
+
+        camera.fieldOfView = Mathf.Lerp(camera.GetGateFittedFieldOfView(), stanceFOV, Time.deltaTime * fieldOfViewChangeTime);
         cameraHeight = Mathf.SmoothDamp(cameraHolder.localPosition.y, stanceHeight,
             ref cameraHeightVelocity, playerStanceSmoothing);
         
@@ -255,7 +281,6 @@ public class PlayerController : MonoBehaviour
 
     private void Crouch()
     {
-        Debug.Log("c pressed");
         switch (playerStance)
         {
             case PlayerStance.PSCrouching:
@@ -290,7 +315,6 @@ public class PlayerController : MonoBehaviour
         playerStance = PlayerStance.PSSprinting;
     }
     
-
     private void StopSprint()
     {
         //stops players sprinting again after sprint crouching.. (sliding)
@@ -301,11 +325,32 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void StartAiming()
+    {
+        previousPlayerStance = playerStance;
+        
+        // if we are crouching and aiming we need to update our capsule
+        // and height to match just crouching
+        if (previousPlayerStance == PlayerStance.PSCrouching)
+        {
+            aimingSettings.cameraHeight = crouchingSettings.cameraHeight;
+            aimingSettings.capsuleHeight = crouchingSettings.capsuleHeight;
+        }
+        playerStance = PlayerStance.PSAiming;
+    }
+
+    private void StopAiming()
+    {
+        playerStance = previousPlayerStance;
+        // reset our aim settings back to default
+        aimingSettings.cameraHeight = standingSettings.cameraHeight;
+        aimingSettings.capsuleHeight = standingSettings.capsuleHeight;
+    }
+
     private bool StanceCheck(float stanceCheckHeight)
     {
         Vector3 startPos = new Vector3(feetTransform.position.x, feetTransform.position.y + characterController.radius + stanceCheckMargin, feetTransform.position.z);
         Vector3 endPos = new Vector3(feetTransform.position.x, feetTransform.position.y - characterController.radius - stanceCheckMargin + stanceCheckHeight, feetTransform.position.z);
-        
         return Physics.CheckCapsule(startPos, endPos, characterController.radius, playerMask);
     }
 
@@ -319,15 +364,10 @@ public class PlayerController : MonoBehaviour
                 return sprintingSettings;
             case PlayerStance.PSStanding:
                 return standingSettings;
+            case PlayerStance.PSAiming:
+                return aimingSettings;
         }
         return null;
-    }
-
-    private void ToggleShoot()
-    {
-        //fire the current weapon equipped? might need to check so you can do it whilst doing certain things?
-        //apply offset of the camera based on the equipped weapons recoil amounts
-        shouldShoot = !shouldShoot;
     }
 }
 
@@ -336,6 +376,7 @@ public enum PlayerStance
     PSStanding,
     PSCrouching,
     PSSprinting,
+    PSAiming,
 }
 
 [Serializable]

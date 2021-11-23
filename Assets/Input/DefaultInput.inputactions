@@ -44,22 +44,6 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
-                },
-                {
-                    "name": "Shoot",
-                    "type": "Button",
-                    "id": "91b4c4ab-0803-4277-afad-b517c01eac22",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Aim",
-                    "type": "Button",
-                    "id": "0b1715cd-7e56-4d0a-98a9-e244f743b385",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -172,10 +156,77 @@
                     "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Weapon",
+            "id": "f8d45c80-470d-48b2-8b58-d21087d8ec92",
+            "actions": [
+                {
+                    "name": "Shoot",
+                    "type": "Button",
+                    "id": "8e1f925c-b8db-4b22-b4fd-0229a29ca0ca",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Aim",
+                    "type": "Button",
+                    "id": "5db98e67-fea3-4137-a2ea-7a952c40431c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "WeaponSlot1",
+                    "type": "Button",
+                    "id": "0baa4d9b-4206-47e2-a9dc-065370ceb9af",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "WeaponSlot2",
+                    "type": "Button",
+                    "id": "03b80e2d-bf7e-42c9-b717-ce42b72972d5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "WeaponSlot3",
+                    "type": "Button",
+                    "id": "277ab48e-b96e-4a3c-975e-974acc3dae1a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "WeaponSlot4",
+                    "type": "Button",
+                    "id": "07736fe9-3068-40e0-bd23-cfe47330fda2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d36d6c8d-4792-46b7-98bf-032762bb3a85",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "32166a9d-c65c-4f67-8853-75356623bb2f",
+                    "id": "24e8b1e2-d3c9-4a38-886f-66bf8301fb4b",
                     "path": "<Mouse>/leftButton",
                     "interactions": "Press(behavior=2)",
                     "processors": "",
@@ -186,12 +237,45 @@
                 },
                 {
                     "name": "",
-                    "id": "2eb9c036-1c69-4bfc-a078-39b45e98048a",
-                    "path": "<Mouse>/rightButton",
+                    "id": "f2ef0d07-5a04-40cc-b105-47bb90372bb1",
+                    "path": "<Keyboard>/1",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Aim",
+                    "action": "WeaponSlot1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d5358d04-683f-4612-8947-5ed63cc77086",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WeaponSlot2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "68f40313-e2e9-47e2-9ad5-4522b347503e",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WeaponSlot3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c3624c67-3d73-426f-be28-d68dea8cb471",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WeaponSlot4",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
