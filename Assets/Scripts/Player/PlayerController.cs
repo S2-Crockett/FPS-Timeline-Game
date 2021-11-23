@@ -158,110 +158,48 @@ public class PlayerController : MonoBehaviour
         characterController.Move(movementSpeed);
 
 
+        CreateSounds(movementSpeed);
 
+    }
+    private void CreateSounds(Vector3 movementSpeed)
+    {
         RaycastHit tag;
 
-        if(Physics.Raycast(cameraHolder.transform.position, cameraHolder.transform.up * -1, out tag, 3))
+        if (Physics.Raycast(cameraHolder.transform.position, cameraHolder.transform.up * -1, out tag, 3))
         {
-            
-            if (tag.transform.tag == "FloorDirt")
-            {
-                onDirt = true;
-                onWater = false;
-                onConcrete = false;
-                onWood = false;
-                onMetal = false;
-                onGrass = false;
-            }
-            else if (tag.transform.tag == "FloorWater")
-            {
-                onDirt = false;
-                onWater = true;
-                onConcrete = false;
-                onWood = false;
-                onMetal = false;
-                onGrass = false;
-            }
-            else if (tag.transform.tag == "FloorConcrete")
-            {
-                onDirt = false;
-                onWater = false;
-                onConcrete = true;
-                onWood = false;
-                onMetal = false;
-                onGrass = false;
-            }
-            else if (tag.transform.tag == "FloorWood")
-            {
-                onDirt = false;
-                onWater = false;
-                onConcrete = false;
-                onWood = true;
-                onMetal = false;
-                onGrass = false;
-            }
-            else if (tag.transform.tag == "FloorMetal")
-            {
-                onDirt = false;
-                onWater = false;
-                onConcrete = false;
-                onWood = false;
-                onMetal = true;
-                onGrass = false;
-            }
-            else if (tag.transform.tag == "FloorGrass")
-            {
-                onDirt = false;
-                onWater = false;
-                onConcrete = false;
-                onWood = false;
-                onMetal = false;
-                onGrass = true;
-            }
-        }
-
-
-
-        if( movementSpeed.x > 0.01f ||
-            movementSpeed.x < -0.01f || 
-            movementSpeed.z > 0.01f || 
+            if (movementSpeed.x > 0.01f ||
+            movementSpeed.x < -0.01f ||
+            movementSpeed.z > 0.01f ||
             movementSpeed.z < -0.01f)
-        {
-            if(onDirt)
             {
-                SoundManager.Instance.PlaySound(dirtFootsteps[UnityEngine.Random.Range(0, dirtFootsteps.Length)]);
+                if (tag.transform.tag == "FloorDirt")
+                {
+                    SoundManager.Instance.PlaySound(dirtFootsteps[UnityEngine.Random.Range(0, dirtFootsteps.Length)]);
+                }
+                else if (tag.transform.tag == "FloorWater")
+                {
+                    SoundManager.Instance.PlaySound(waterFootsteps[UnityEngine.Random.Range(0, waterFootsteps.Length)]);
+                }
+                else if (tag.transform.tag == "FloorConcrete")
+                {
+                    SoundManager.Instance.PlaySound(concreteFootsteps[UnityEngine.Random.Range(0, concreteFootsteps.Length)]);
+                }
+                else if (tag.transform.tag == "FloorWood")
+                {
+                    SoundManager.Instance.PlaySound(woodFootsteps[UnityEngine.Random.Range(0, woodFootsteps.Length)]);
+                }
+                else if (tag.transform.tag == "FloorMetal")
+                {
+                    SoundManager.Instance.PlaySound(metalFootsteps[UnityEngine.Random.Range(0, metalFootsteps.Length)]);
+                }
+                else if (tag.transform.tag == "FloorGrass")
+                {
+                    SoundManager.Instance.PlaySound(grassFootsteps[UnityEngine.Random.Range(0, grassFootsteps.Length)]);
+                }
             }
-            if(onWater)
-            {
-                SoundManager.Instance.PlaySound(waterFootsteps[UnityEngine.Random.Range(0, waterFootsteps.Length)]);
-            }
-            if(onConcrete)
-            {
-                SoundManager.Instance.PlaySound(concreteFootsteps[UnityEngine.Random.Range(0, concreteFootsteps.Length)]);
-            }
-            if(onWood)
-            {
-                SoundManager.Instance.PlaySound(woodFootsteps[UnityEngine.Random.Range(0, woodFootsteps.Length)]);
-            }
-            if (onMetal)
-            {
-                SoundManager.Instance.PlaySound(metalFootsteps[UnityEngine.Random.Range(0, metalFootsteps.Length)]);
-            }
-            if (onGrass)
-            {
-                SoundManager.Instance.PlaySound(grassFootsteps[UnityEngine.Random.Range(0, grassFootsteps.Length)]);
-            }
+
         }
-        
-
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        
-
-    }
-    
     private void CalculateJump()
     {
         jumpingForce = Vector3.SmoothDamp(jumpingForce, Vector3.zero, ref jumpingForceVelocity,
