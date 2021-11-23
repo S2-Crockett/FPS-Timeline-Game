@@ -49,6 +49,22 @@ public class @Select : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""MoveDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""5432643c-ef32-4868-bc7d-40291a54239a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""MoveUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""e012164e-6cf4-491e-853e-63aa2c423532"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -95,6 +111,28 @@ public class @Select : IInputActionCollection, IDisposable
                     ""action"": ""Leave"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cb18f857-0018-4f38-8e2f-9b9202553827"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": ""Tap"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f01e5ca0-4113-47d6-8017-a52ea9249853"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": ""Tap"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -107,6 +145,8 @@ public class @Select : IInputActionCollection, IDisposable
         m_Move_MoveRight = m_Move.FindAction("MoveRight", throwIfNotFound: true);
         m_Move_Select = m_Move.FindAction("Select", throwIfNotFound: true);
         m_Move_Leave = m_Move.FindAction("Leave", throwIfNotFound: true);
+        m_Move_MoveDown = m_Move.FindAction("MoveDown", throwIfNotFound: true);
+        m_Move_MoveUp = m_Move.FindAction("MoveUp", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -160,6 +200,8 @@ public class @Select : IInputActionCollection, IDisposable
     private readonly InputAction m_Move_MoveRight;
     private readonly InputAction m_Move_Select;
     private readonly InputAction m_Move_Leave;
+    private readonly InputAction m_Move_MoveDown;
+    private readonly InputAction m_Move_MoveUp;
     public struct MoveActions
     {
         private @Select m_Wrapper;
@@ -168,6 +210,8 @@ public class @Select : IInputActionCollection, IDisposable
         public InputAction @MoveRight => m_Wrapper.m_Move_MoveRight;
         public InputAction @Select => m_Wrapper.m_Move_Select;
         public InputAction @Leave => m_Wrapper.m_Move_Leave;
+        public InputAction @MoveDown => m_Wrapper.m_Move_MoveDown;
+        public InputAction @MoveUp => m_Wrapper.m_Move_MoveUp;
         public InputActionMap Get() { return m_Wrapper.m_Move; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -189,6 +233,12 @@ public class @Select : IInputActionCollection, IDisposable
                 @Leave.started -= m_Wrapper.m_MoveActionsCallbackInterface.OnLeave;
                 @Leave.performed -= m_Wrapper.m_MoveActionsCallbackInterface.OnLeave;
                 @Leave.canceled -= m_Wrapper.m_MoveActionsCallbackInterface.OnLeave;
+                @MoveDown.started -= m_Wrapper.m_MoveActionsCallbackInterface.OnMoveDown;
+                @MoveDown.performed -= m_Wrapper.m_MoveActionsCallbackInterface.OnMoveDown;
+                @MoveDown.canceled -= m_Wrapper.m_MoveActionsCallbackInterface.OnMoveDown;
+                @MoveUp.started -= m_Wrapper.m_MoveActionsCallbackInterface.OnMoveUp;
+                @MoveUp.performed -= m_Wrapper.m_MoveActionsCallbackInterface.OnMoveUp;
+                @MoveUp.canceled -= m_Wrapper.m_MoveActionsCallbackInterface.OnMoveUp;
             }
             m_Wrapper.m_MoveActionsCallbackInterface = instance;
             if (instance != null)
@@ -205,6 +255,12 @@ public class @Select : IInputActionCollection, IDisposable
                 @Leave.started += instance.OnLeave;
                 @Leave.performed += instance.OnLeave;
                 @Leave.canceled += instance.OnLeave;
+                @MoveDown.started += instance.OnMoveDown;
+                @MoveDown.performed += instance.OnMoveDown;
+                @MoveDown.canceled += instance.OnMoveDown;
+                @MoveUp.started += instance.OnMoveUp;
+                @MoveUp.performed += instance.OnMoveUp;
+                @MoveUp.canceled += instance.OnMoveUp;
             }
         }
     }
@@ -215,5 +271,7 @@ public class @Select : IInputActionCollection, IDisposable
         void OnMoveRight(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
         void OnLeave(InputAction.CallbackContext context);
+        void OnMoveDown(InputAction.CallbackContext context);
+        void OnMoveUp(InputAction.CallbackContext context);
     }
 }

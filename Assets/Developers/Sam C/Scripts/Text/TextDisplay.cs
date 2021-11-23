@@ -19,6 +19,7 @@ public class TextDisplay : MonoBehaviour
     public Text TextDescription;
 
     public int level = 1;
+    public int Section = 1;
 
     public bool show = false;
     public bool finished = true;

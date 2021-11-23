@@ -67,6 +67,7 @@ public class Table : MonoBehaviour
                     mainCamera.transform.rotation = tableGoal.rotation;
                     if(Vector3.Distance(mainCamera.transform.position, tableGoal.position) < 1.0f)
                     {
+                        text.level = 1;
                         text.show = true;
                         stage = STAGES.INSCREEN;
                     }
@@ -87,6 +88,7 @@ public class Table : MonoBehaviour
                     if (mainCamera.transform.rotation.y == portalGoal.rotation.y)
                     {
                         Particles.SetActive(true);
+                        text.selectable = false;
                         stage = STAGES.LEAVEPORTAL;
                         Screen.SetActive(false);
                     }
@@ -99,6 +101,7 @@ public class Table : MonoBehaviour
                     {
                         mainCamera.gameObject.SetActive(false);
                         player.SetActive(true);
+                        text.selectable = false;
                         stage = STAGES.OUTSIDE;
                     }
                     break;
@@ -108,7 +111,8 @@ public class Table : MonoBehaviour
 
                         mainCamera.gameObject.SetActive(false);
                         player.SetActive(true);
-                        stage = STAGES.OUTSIDE;
+                    text.selectable = false;
+                    stage = STAGES.OUTSIDE;
       
                     break;
                 }
