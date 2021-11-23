@@ -157,6 +157,71 @@ public class PlayerController : MonoBehaviour
 
         characterController.Move(movementSpeed);
 
+
+
+        RaycastHit tag;
+
+        if(Physics.Raycast(cameraHolder.transform.position, cameraHolder.transform.up * -1, out tag, 3))
+        {
+            
+            if (tag.transform.tag == "FloorDirt")
+            {
+                onDirt = true;
+                onWater = false;
+                onConcrete = false;
+                onWood = false;
+                onMetal = false;
+                onGrass = false;
+            }
+            else if (tag.transform.tag == "FloorWater")
+            {
+                onDirt = false;
+                onWater = true;
+                onConcrete = false;
+                onWood = false;
+                onMetal = false;
+                onGrass = false;
+            }
+            else if (tag.transform.tag == "FloorConcrete")
+            {
+                onDirt = false;
+                onWater = false;
+                onConcrete = true;
+                onWood = false;
+                onMetal = false;
+                onGrass = false;
+            }
+            else if (tag.transform.tag == "FloorWood")
+            {
+                onDirt = false;
+                onWater = false;
+                onConcrete = false;
+                onWood = true;
+                onMetal = false;
+                onGrass = false;
+            }
+            else if (tag.transform.tag == "FloorMetal")
+            {
+                onDirt = false;
+                onWater = false;
+                onConcrete = false;
+                onWood = false;
+                onMetal = true;
+                onGrass = false;
+            }
+            else if (tag.transform.tag == "FloorGrass")
+            {
+                onDirt = false;
+                onWater = false;
+                onConcrete = false;
+                onWood = false;
+                onMetal = false;
+                onGrass = true;
+            }
+        }
+
+
+
         if( movementSpeed.x > 0.01f ||
             movementSpeed.x < -0.01f || 
             movementSpeed.z > 0.01f || 
@@ -193,60 +258,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "FloorDirt")
-        {
-            onDirt = true;
-            onWater = false;
-            onConcrete = false;
-            onWood = false;
-            onMetal = false;
-            onGrass = false;
-        }
-        else if (other.gameObject.tag == "FloorWater")
-        {
-            onDirt = false;
-            onWater = true;
-            onConcrete = false;
-            onWood = false;
-            onMetal = false;
-            onGrass = false;
-        }
-        else if (other.gameObject.tag == "FloorConcrete")
-        {
-            onDirt = false;
-            onWater = false;
-            onConcrete = true;
-            onWood = false;
-            onMetal = false;
-            onGrass = false;
-        }
-        else if(other.gameObject.tag == "FloorWood")
-        {
-            onDirt = false;
-            onWater = false;
-            onConcrete = false;
-            onWood = true;
-            onMetal = false;
-            onGrass = false;
-        }
-        else if (other.gameObject.tag == "FloorMetal")
-        {
-            onDirt = false;
-            onWater = false;
-            onConcrete = false;
-            onWood = false;
-            onMetal = true;
-            onGrass = false;
-        }
-        else if (other.gameObject.tag == "FloorGrass")
-        {
-            onDirt = false;
-            onWater = false;
-            onConcrete = false;
-            onWood = false;
-            onMetal = false;
-            onGrass = true;
-        }
+        
 
     }
     
