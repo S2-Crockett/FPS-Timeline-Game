@@ -18,7 +18,7 @@ public class SwitchWeapons : MonoBehaviour
         
     }
 
-    void OnTriggerEnter(Collider other)
+    /*void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
@@ -27,5 +27,5 @@ public class SwitchWeapons : MonoBehaviour
             weaponshandler.currentActiveIndex = 2;
             weaponshandler.currentWeapon = weaponshandler.weaponRefs[2].GetComponent<WeaponController>();
         }
-    }
+    }*/
 }

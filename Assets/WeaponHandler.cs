@@ -15,7 +15,6 @@ public class WeaponHandler : MonoBehaviour
     public int currentActiveIndex;
     public GameObject[] weaponRefs = new GameObject[5];
     public WeaponSlot[] weaponSlots;
-    public WeaponType[] weapontype;
 
     [Header("References")] 
     private PlayerController player;
@@ -119,17 +118,38 @@ public class WeaponHandler : MonoBehaviour
     {
         isAiming = false;
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Zone")
+        {
+            weaponRefs[2].SetActive(false);
+            weaponRefs[3].SetActive(false);
+            weaponRefs[0].SetActive(true);
+            currentActiveIndex = 0;
+            currentWeapon = weaponRefs[0].GetComponent<WeaponController>();
+        }
+        if (other.gameObject.tag == "Zone1")
+        {
+            weaponRefs[0].SetActive(false);
+            weaponRefs[3].SetActive(false);
+            weaponRefs[2].SetActive(true);
+            currentActiveIndex = 2;
+            currentWeapon = weaponRefs[2].GetComponent<WeaponController>();
+        }
+        if (other.gameObject.tag == "Zone2")
+        {
+            weaponRefs[0].SetActive(false);
+            weaponRefs[2].SetActive(false);
+            weaponRefs[3].SetActive(true);
+            currentActiveIndex = 3;
+            currentWeapon = weaponRefs[3].GetComponent<WeaponController>();
+        }
+    }
 }
 
 [Serializable]
 public class WeaponSlot
-{
-    public int weaponIndex;
-    public GameObject weaponObject;
-}
-
-[Serializable]
-public class WeaponType
 {
     public int weaponIndex;
     public GameObject weaponObject;

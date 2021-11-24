@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8147397889259295354}
   - component: {fileID: 1643544140843586459}
   - component: {fileID: 6105493201653205976}
+  - component: {fileID: -155748020573135862}
   m_Layer: 0
   m_Name: bar
   m_TagString: Untagged
@@ -82,3 +83,53 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-155748020573135862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2559043237074955559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00a53554972eca74ba012d1be0789da3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAiming: 0
+  settings:
+    swayAmount: 0
+    swayYInverted: 0
+    swayXInverted: 0
+    swaySmoothing: 0
+    swayResetSmoothing: 0
+    swayClampX: 0
+    swayClampY: 0
+    movementSwayZ: 0
+    movementSwayY: 0
+    movementSwayZInverted: 0
+    movementSwayYInverted: 0
+    movementSwaySmoothing: 0
+  fireRate: 1
+  damage: 50
+  range: 200
+  sprayRadius: 0
+  magazineSize: 10
+  equippedAmmo: 50
+  reloadTime: 1
+  recoilSpread: 0
+  maxRecoilX: -20
+  maxRecoilY: -10
+  maxTransY: 1
+  maxTransZ: -1
+  recoilSpeed: 10
+  swayObject: {fileID: 0}
+  swayAmountA: 1
+  swayAmountB: 2
+  swayScale: 600
+  swayLerpSpeed: 14
+  sightTarget: {fileID: 0}
+  sightOffset: 0
+  aimingTime: 0
+  muzzleParticle: {fileID: 0}
+  hitParticle: {fileID: 0}
+  hitmarkerClip: {fileID: 0}
