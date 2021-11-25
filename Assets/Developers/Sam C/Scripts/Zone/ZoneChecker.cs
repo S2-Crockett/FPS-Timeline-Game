@@ -45,7 +45,10 @@ public class ZoneChecker : MonoBehaviour
         CheckZone();
 
         ChangeArrayObjects(floor.Length, floor, zone[index].timezone1);
-        ChangeArrayObjects(enemy.Length, enemy, zone[index].material);
+        for (int i = 0; i < enemy.Length; i++)
+        {
+            enemy[i].GetComponent<MeshFilter>().mesh = zone[index].material;
+        }
 
     }
 

@@ -11,8 +11,9 @@ TagManager:
   - LevelDifficulty
   - LevelDescription
   - Enemy
-  - Zone1
-  - Zone2
+  - 2000
+  - 3000
+  - 4000
   layers:
   - Default
   - TransparentFX
