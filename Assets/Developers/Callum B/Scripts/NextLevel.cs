@@ -29,7 +29,7 @@ public class NextLevel : MonoBehaviour
             if (guiObject.activeInHierarchy == true && Input.GetButtonDown("Use"))
             {
                 Debug.Log("loading level");
-                Application.LoadLevel(LevelToLoad);
+                //Application.LoadLevel(LevelToLoad);
             }
         }
     }

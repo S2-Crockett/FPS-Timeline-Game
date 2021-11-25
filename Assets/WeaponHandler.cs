@@ -21,6 +21,12 @@ public class WeaponHandler : MonoBehaviour
     private GameObject cameraHolder;
     public Transform weaponHolder;
 
+    public Zone zone;
+    public ZoneChecker zoneCheck;
+
+    private bool test = true;
+    private bool test1 = true;
+
     private void Awake()
     {
         defaultInput = new DefaultInput();
@@ -67,7 +73,7 @@ public class WeaponHandler : MonoBehaviour
         currentWeapon = weaponRefs[0].GetComponent<WeaponController>();
     }
 
-    private void SwapWeapon(int newIndex)
+    public void SwapWeapon(int newIndex)
     {
         if (weaponRefs[newIndex] != null)
         {

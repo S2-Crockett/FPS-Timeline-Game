@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     public PlayerController fpsc;
     private bool isAware = false;
     private NavMeshAgent agent;
-    private Renderer renderer;
+    private Renderer renderer_;
     private Animator animator;
     public float viewDistance = 10f;
     public float fov = 120f;
@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        renderer = GetComponent<Renderer>();
+        renderer_ = GetComponent<Renderer>();
         animator = GetComponentInChildren<Animator>();
     }
 
