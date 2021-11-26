@@ -15,5 +15,5 @@ MonoBehaviour:
   timezone1: {fileID: 2100000, guid: 4716ba34ae46f1a46b607bdaaa6a490e, type: 2}
   floor1: []
   Player: {fileID: 4963024755645646197, guid: fb0314374a87dd2468847150afa5c603, type: 3}
-  material: {fileID: 2100000, guid: 4716ba34ae46f1a46b607bdaaa6a490e, type: 2}
+  material: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
   weapon: {fileID: 8249656883338130075, guid: d15ad2123ad5dd94d8c8bed43143f8c2, type: 3}

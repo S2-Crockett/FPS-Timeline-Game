@@ -13,7 +13,7 @@ public class Zone : ScriptableObject
     public GameObject Player;
 
     [Header("Enemy")]
-    public Mesh material;
+    public GameObject material;
 
     [Header("Weapons")]
     public GameObject weapon;

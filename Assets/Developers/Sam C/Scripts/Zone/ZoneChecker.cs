@@ -18,7 +18,19 @@ public class ZoneChecker : MonoBehaviour
 
 
     private WeaponHandler weaponHandler;
+
+
     public int index = 0;
+    public int prevIndex = 0;
+
+
+
+    private bool change = true;
+    GameObject[] newGameObject;
+
+
+    private Vector3[] pos;
+    private Quaternion[] rot;
 
 
     RaycastHit hit;
@@ -27,13 +39,21 @@ public class ZoneChecker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        newGameObject = new GameObject[enemy.Length];
+        prevIndex = index;
         player = GameObject.Find("Player");
         weaponHandler = player.GetComponent<WeaponHandler>();
     }
 
+
     // Update is called once per frame
     void Update()
     {
+        if(prevIndex != index)
+        {
+            prevIndex = index;
+            change = true;
+        }
         if(Physics.Raycast(player.transform.position, player.transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity, layerMask))
         {
             ChangeObjects();
@@ -43,13 +63,8 @@ public class ZoneChecker : MonoBehaviour
     private void ChangeObjects()
     {
         CheckZone();
-
         ChangeArrayObjects(floor.Length, floor, zone[index].timezone1);
-        for (int i = 0; i < enemy.Length; i++)
-        {
-            enemy[i].GetComponent<MeshFilter>().mesh = zone[index].material;
-        }
-
+        CreateNewObjects();
     }
 
     private void ChangeArrayObjects(int length, GameObject[] gameObject, Material material1)
@@ -57,6 +72,22 @@ public class ZoneChecker : MonoBehaviour
         for (int i = 0; i < length; i++)
         {
             gameObject[i].gameObject.GetComponent<MeshRenderer>().material = material1;
+        }
+    }
+
+    private void CreateNewObjects()
+    {
+        if (change)
+        {
+            for (int i = 0; i < enemy.Length; i++)
+            {
+                Destroy(newGameObject[i]);
+            }
+            for (int i = 0; i < enemy.Length; i++)
+            {
+                newGameObject[i] = Instantiate(zone[index].material, enemy[i].transform.position, enemy[i].transform.rotation);
+            }
+            change = false;
         }
     }
 
