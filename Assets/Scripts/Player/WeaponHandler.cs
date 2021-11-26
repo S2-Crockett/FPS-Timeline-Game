@@ -33,7 +33,9 @@ public class WeaponHandler : MonoBehaviour
         
         defaultInput.Weapon.Aim.started += e => AimingPressed();
         defaultInput.Weapon.Aim.canceled += e => AimingReleased();
-        
+
+        defaultInput.Weapon.Reload.performed += e => Reload();
+
         defaultInput.Enable();
     }
 
@@ -41,10 +43,12 @@ public class WeaponHandler : MonoBehaviour
     {
         player = controller;
         InitiateBaseWeapons();
+        StartCoroutine(InitiateBaseWeapons());
     }
 
-    private void InitiateBaseWeapons()
+    private IEnumerator InitiateBaseWeapons()
     {
+        yield return new WaitForSeconds(0.2f);
         int x = 0;
         foreach (var slot in weaponSlots)
         {
@@ -97,6 +101,11 @@ public class WeaponHandler : MonoBehaviour
         //fire the current weapon equipped? might need to check so you can do it whilst doing certain things?
         //apply offset of the camera based on the equipped weapons recoil amounts
         shouldShoot = !shouldShoot;
+    }
+
+    private void Reload()
+    {
+        StartCoroutine(currentWeapon.Reload());
     }
 
     private void CalculateAiming()

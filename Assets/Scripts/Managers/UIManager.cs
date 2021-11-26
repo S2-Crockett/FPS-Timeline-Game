@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Managers
@@ -7,13 +8,18 @@ namespace Managers
     {
         public static UIManager Instance;
 
-        [Header("AmmoUI")]
-        public Text currentAmmoText;
+        [Header("AmmoUI")] public Text currentAmmoText;
         public Text currentHeldAmmoText;
-    
+
+        [Header("Health")] 
+        public PlayerHealthBar healthBar;
+        public HealthComponent health;
+
+        [Header("Crosshair")] public GameObject crosshair;
+
         void Awake()
         {
-            if(Instance == null)
+            if (Instance == null)
             {
                 Instance = this;
                 DontDestroyOnLoad(gameObject);
@@ -32,6 +38,21 @@ namespace Managers
         public void UpdateHeldAmmoText(int ammo)
         {
             currentHeldAmmoText.text = ammo.ToString();
+        }
+
+        public void UpdateHealthBarDamage()
+        {
+            healthBar.OnDamage();
+        }
+
+        public void UpdateHealthBarHeal()
+        {
+            healthBar.OnHealed();
+        }
+
+        public float GetHealthNormalized()
+        {
+            return health.GetHealthNormalized();
         }
     }
 }

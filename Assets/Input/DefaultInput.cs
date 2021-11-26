@@ -223,6 +223,14 @@ public class @DefaultInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""d304f5f1-8a07-4c90-bd37-6819dbe4217b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -291,6 +299,17 @@ public class @DefaultInput : IInputActionCollection, IDisposable
                     ""action"": ""WeaponSlot4"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d3180231-c6e2-4d58-a79e-f5efdb6a58fa"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -312,6 +331,7 @@ public class @DefaultInput : IInputActionCollection, IDisposable
         m_Weapon_WeaponSlot2 = m_Weapon.FindAction("WeaponSlot2", throwIfNotFound: true);
         m_Weapon_WeaponSlot3 = m_Weapon.FindAction("WeaponSlot3", throwIfNotFound: true);
         m_Weapon_WeaponSlot4 = m_Weapon.FindAction("WeaponSlot4", throwIfNotFound: true);
+        m_Weapon_Reload = m_Weapon.FindAction("Reload", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -432,6 +452,7 @@ public class @DefaultInput : IInputActionCollection, IDisposable
     private readonly InputAction m_Weapon_WeaponSlot2;
     private readonly InputAction m_Weapon_WeaponSlot3;
     private readonly InputAction m_Weapon_WeaponSlot4;
+    private readonly InputAction m_Weapon_Reload;
     public struct WeaponActions
     {
         private @DefaultInput m_Wrapper;
@@ -442,6 +463,7 @@ public class @DefaultInput : IInputActionCollection, IDisposable
         public InputAction @WeaponSlot2 => m_Wrapper.m_Weapon_WeaponSlot2;
         public InputAction @WeaponSlot3 => m_Wrapper.m_Weapon_WeaponSlot3;
         public InputAction @WeaponSlot4 => m_Wrapper.m_Weapon_WeaponSlot4;
+        public InputAction @Reload => m_Wrapper.m_Weapon_Reload;
         public InputActionMap Get() { return m_Wrapper.m_Weapon; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -469,6 +491,9 @@ public class @DefaultInput : IInputActionCollection, IDisposable
                 @WeaponSlot4.started -= m_Wrapper.m_WeaponActionsCallbackInterface.OnWeaponSlot4;
                 @WeaponSlot4.performed -= m_Wrapper.m_WeaponActionsCallbackInterface.OnWeaponSlot4;
                 @WeaponSlot4.canceled -= m_Wrapper.m_WeaponActionsCallbackInterface.OnWeaponSlot4;
+                @Reload.started -= m_Wrapper.m_WeaponActionsCallbackInterface.OnReload;
+                @Reload.performed -= m_Wrapper.m_WeaponActionsCallbackInterface.OnReload;
+                @Reload.canceled -= m_Wrapper.m_WeaponActionsCallbackInterface.OnReload;
             }
             m_Wrapper.m_WeaponActionsCallbackInterface = instance;
             if (instance != null)
@@ -491,6 +516,9 @@ public class @DefaultInput : IInputActionCollection, IDisposable
                 @WeaponSlot4.started += instance.OnWeaponSlot4;
                 @WeaponSlot4.performed += instance.OnWeaponSlot4;
                 @WeaponSlot4.canceled += instance.OnWeaponSlot4;
+                @Reload.started += instance.OnReload;
+                @Reload.performed += instance.OnReload;
+                @Reload.canceled += instance.OnReload;
             }
         }
     }
@@ -511,5 +539,6 @@ public class @DefaultInput : IInputActionCollection, IDisposable
         void OnWeaponSlot2(InputAction.CallbackContext context);
         void OnWeaponSlot3(InputAction.CallbackContext context);
         void OnWeaponSlot4(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
     }
 }

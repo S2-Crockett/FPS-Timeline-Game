@@ -60,7 +60,6 @@ public class PlayerController : MonoBehaviour
     public StanceSettings aimingSettings;
     public StanceSettings sprintingSettings;
     public StanceSettings crouchingSettings;
-    private PlayerController fpsc;
 
     private float stanceCheckMargin = 0.05f;
     private float cameraHeight;
@@ -143,8 +142,8 @@ public class PlayerController : MonoBehaviour
         var verticalSpeed = GetStanceSettings().stanceForwardMovementSpeed;
         var horizontalSpeed = GetStanceSettings().stanceStrafeMovementSpeed;
 
-        var vertSpeed = verticalSpeed * inputMovement.y * Time.deltaTime;
-        var horSpeed = horizontalSpeed * inputMovement.x * Time.deltaTime;
+        var vertSpeed = verticalSpeed * inputMovement.y * Time.smoothDeltaTime;
+        var horSpeed = horizontalSpeed * inputMovement.x * Time.smoothDeltaTime;
 
         newMovementSpeed = Vector3.SmoothDamp(newMovementSpeed, new Vector3(horSpeed, 0, vertSpeed),
             ref newMovementSpeedVelocity, characterController.isGrounded ? movementSmoothing : playerSettings.fallingSmoothing);
@@ -161,7 +160,7 @@ public class PlayerController : MonoBehaviour
         }
 
         movementSpeed.y += playerGravity;
-        movementSpeed += jumpingForce * Time.deltaTime;
+        movementSpeed += jumpingForce * Time.smoothDeltaTime;
 
         characterController.Move(movementSpeed);
 

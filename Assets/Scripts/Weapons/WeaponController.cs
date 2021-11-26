@@ -86,7 +86,7 @@ public class WeaponController : MonoBehaviour
         UIManager.Instance.UpdateCurrentAmmo(currentAmmo);
         UIManager.Instance.UpdateHeldAmmoText(equippedAmmo);
     }
-
+    
     private void Start()
     {
         cam = playerController.camera;
@@ -150,7 +150,7 @@ public class WeaponController : MonoBehaviour
       
     }
 
-    IEnumerator Reload()
+    public IEnumerator Reload()
     {
         isReloading = true;
         if (currentAmmo == magazineSize)
