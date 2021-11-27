@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3857857a9269304c939c9adc4976a4f, type: 3}
   m_Name: 3000
   m_EditorClassIdentifier: 
-  timezone1: {fileID: 2100000, guid: 279953e14a35b9049acc792b8fe25b28, type: 2}
-  floor1: []
+  timezone1: {fileID: 8786721618504453535, guid: 6b9c162b5c0e89f4eaf7fa17947a591d, type: 3}
+  floor1:
+  - {fileID: 8786721618504453535, guid: 6b9c162b5c0e89f4eaf7fa17947a591d, type: 3}
   Player: {fileID: 4963024755645646197, guid: fb0314374a87dd2468847150afa5c603, type: 3}
   material: {fileID: 2374082615991560977, guid: d1b3d7a742fe9744992faf558bf2874c, type: 3}
   weapons:

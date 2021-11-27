@@ -14,7 +14,9 @@ public class ZoneChecker : MonoBehaviour
     public GameObject[] enemy;
 
     [Header("Environment")]
-    public GameObject[] floor;
+    public GameObject floor;
+
+
 
 
     private WeaponHandler weaponHandler;
@@ -27,6 +29,7 @@ public class ZoneChecker : MonoBehaviour
 
     private bool change = true;
     GameObject[] newGameObject;
+    GameObject newFloorObject;
 
 
     RaycastHit hit;
@@ -39,6 +42,12 @@ public class ZoneChecker : MonoBehaviour
         prevIndex = index;
         player = GameObject.Find("Player");
         weaponHandler = player.GetComponent<WeaponHandler>();
+        newFloorObject = Instantiate(zone[index].timezone1, floor.transform.position, floor.transform.rotation);
+
+        for(int i = 0; i < zone.Length; i++)
+        {
+            zone[i].timezone1.tag = zone[0].name;
+        }
     }
 
 
@@ -59,17 +68,10 @@ public class ZoneChecker : MonoBehaviour
     private void ChangeObjects()
     {
         CheckZone();
-        ChangeArrayObjects(floor.Length, floor, zone[index].timezone1);
         CreateNewObjects();
     }
 
-    private void ChangeArrayObjects(int length, GameObject[] gameObject, Material material1)
-    {
-        for (int i = 0; i < length; i++)
-        {
-            gameObject[i].gameObject.GetComponent<MeshRenderer>().material = material1;
-        }
-    }
+
 
     private void CreateNewObjects()
     {
@@ -78,6 +80,8 @@ public class ZoneChecker : MonoBehaviour
             weaponHandler.WeaponIndex = zone[index].weaponIndex;
             weaponHandler.change = true;
             weaponHandler.SwapWeapon(zone[index].weaponIndex);
+            Destroy(newFloorObject);
+            newFloorObject = Instantiate(zone[index].timezone1, floor.transform.position, floor.transform.rotation);
             for (int i = 0; i < enemy.Length; i++)
             {
                 Destroy(newGameObject[i]);
@@ -86,6 +90,7 @@ public class ZoneChecker : MonoBehaviour
             {
                 newGameObject[i] = Instantiate(zone[index].material, enemy[i].transform.position, enemy[i].transform.rotation);
             }
+
             change = false;
         }
     }

@@ -6,7 +6,7 @@ using UnityEngine;
 public class Zone : ScriptableObject
 {
     [Header("Environment Details")]
-    public Material timezone1;
+    public GameObject timezone1;
     public GameObject[] floor1;
 
     [Header("Player")]
