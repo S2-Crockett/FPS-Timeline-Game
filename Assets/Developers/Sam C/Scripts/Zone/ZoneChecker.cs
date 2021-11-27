@@ -20,17 +20,13 @@ public class ZoneChecker : MonoBehaviour
     private WeaponHandler weaponHandler;
 
 
-    public int index = 0;
-    public int prevIndex = 0;
+    private int index = 0;
+    private int prevIndex = 0;
 
 
 
     private bool change = true;
     GameObject[] newGameObject;
-
-
-    private Vector3[] pos;
-    private Quaternion[] rot;
 
 
     RaycastHit hit;

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -209,20 +209,32 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 5112141260891272993, guid: fb0314374a87dd2468847150afa5c603, type: 3}
+      propertyPath: test
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5112141260891272993, guid: fb0314374a87dd2468847150afa5c603, type: 3}
       propertyPath: zone
       value: 
       objectReference: {fileID: 11400000, guid: b1f79208159479f478ca36256bf2e10c, type: 2}
+    - target: {fileID: 5112141260891272993, guid: fb0314374a87dd2468847150afa5c603, type: 3}
+      propertyPath: test1
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5112141260891272993, guid: fb0314374a87dd2468847150afa5c603, type: 3}
       propertyPath: zoneCheck
       value: 
       objectReference: {fileID: 1040728856}
     - target: {fileID: 5112141260891272993, guid: fb0314374a87dd2468847150afa5c603, type: 3}
       propertyPath: weaponSlots.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5112141260891272993, guid: fb0314374a87dd2468847150afa5c603, type: 3}
       propertyPath: weaponSlots.Array.data[2].weaponIndex
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5112141260891272993, guid: fb0314374a87dd2468847150afa5c603, type: 3}
+      propertyPath: weaponSlots.Array.data[3].weaponIndex
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5112141260891272993, guid: fb0314374a87dd2468847150afa5c603, type: 3}
       propertyPath: weaponSlots.Array.data[0].weaponObject
@@ -235,7 +247,11 @@ PrefabInstance:
     - target: {fileID: 5112141260891272993, guid: fb0314374a87dd2468847150afa5c603, type: 3}
       propertyPath: weaponSlots.Array.data[2].weaponObject
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8249656883338130075, guid: 56f721acdcf33ab42bf12f019185e057, type: 3}
+    - target: {fileID: 5112141260891272993, guid: fb0314374a87dd2468847150afa5c603, type: 3}
+      propertyPath: weaponSlots.Array.data[3].weaponObject
+      value: 
+      objectReference: {fileID: 8249656883338130075, guid: 6d2801df75dd3cb4e8366134c92aaec6, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb0314374a87dd2468847150afa5c603, type: 3}
 --- !u!1001 &445299084
@@ -336,8 +352,6 @@ MonoBehaviour:
   - {fileID: 7602618384749301384}
   - {fileID: 6171232928794906456}
   - {fileID: 1813208753}
-  index: 0
-  prevIndex: 0
 --- !u!4 &1040728857
 Transform:
   m_ObjectHideFlags: 0
@@ -535,7 +549,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1813208753}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 19.78}
+  m_LocalPosition: {x: 0, y: 0, z: 20}
   m_LocalScale: {x: 20, y: 1, z: 20}
   m_Children: []
   m_Father: {fileID: 0}

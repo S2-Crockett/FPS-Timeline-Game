@@ -24,8 +24,8 @@ public class WeaponHandler : MonoBehaviour
     public Zone zone;
     public ZoneChecker zoneCheck;
 
-    private bool test = true;
-    private bool test1 = true;
+    public bool test = true;
+    public bool test1 = true;
 
     private void Awake()
     {
@@ -61,7 +61,6 @@ public class WeaponHandler : MonoBehaviour
             weaponRefs[x] = obj;
             x++;
         }
-
         StartCoroutine(SpawnPrimaryWeapon());
     }
 
@@ -87,6 +86,19 @@ public class WeaponHandler : MonoBehaviour
 
     private void Update()
     {
+        if(test)
+        {
+            defaultInput.Weapon.WeaponSlot1.started += e => SwapWeapon(2);
+            defaultInput.Weapon.WeaponSlot2.started += e => SwapWeapon(3);
+            test = false;
+        }
+        if(test1)
+        {
+            defaultInput.Weapon.WeaponSlot1.started += e => SwapWeapon(0);
+            defaultInput.Weapon.WeaponSlot2.started += e => SwapWeapon(1);
+            test1 = false;
+        }
+
         CalculateAiming();
         
         if (shouldShoot)
