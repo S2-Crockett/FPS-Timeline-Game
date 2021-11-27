@@ -16,5 +16,8 @@ public class Zone : ScriptableObject
     public GameObject material;
 
     [Header("Weapons")]
-    public GameObject weapon;
+    public GameObject[] weapons;
+    public int weaponIndex;
+
+
 }

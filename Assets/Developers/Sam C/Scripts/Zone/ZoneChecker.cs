@@ -20,7 +20,7 @@ public class ZoneChecker : MonoBehaviour
     private WeaponHandler weaponHandler;
 
 
-    private int index = 0;
+    public int index = 0;
     private int prevIndex = 0;
 
 
@@ -75,6 +75,9 @@ public class ZoneChecker : MonoBehaviour
     {
         if (change)
         {
+            weaponHandler.WeaponIndex = zone[index].weaponIndex;
+            weaponHandler.change = true;
+            weaponHandler.SwapWeapon(zone[index].weaponIndex);
             for (int i = 0; i < enemy.Length; i++)
             {
                 Destroy(newGameObject[i]);

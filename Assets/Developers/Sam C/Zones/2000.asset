@@ -17,4 +17,7 @@ MonoBehaviour:
   - {fileID: 6171232928190130156, guid: 2698249205f85cd42a6bae31876d0a5b, type: 3}
   Player: {fileID: 4963024755645646197, guid: fb0314374a87dd2468847150afa5c603, type: 3}
   material: {fileID: 2344578208183949070, guid: 46dedaf3f9a2905479b3d8e9a3b318a1, type: 3}
-  weapon: {fileID: 8249656883338130075, guid: d15ad2123ad5dd94d8c8bed43143f8c2, type: 3}
+  weapons:
+  - {fileID: 8249656883338130075, guid: d15ad2123ad5dd94d8c8bed43143f8c2, type: 3}
+  - {fileID: 8249656883338130075, guid: dc2c0b450e1b58640900a8accaeeb57b, type: 3}
+  weaponIndex: 0

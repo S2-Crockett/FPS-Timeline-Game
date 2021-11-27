@@ -21,11 +21,10 @@ public class WeaponHandler : MonoBehaviour
     private GameObject cameraHolder;
     public Transform weaponHolder;
 
-    public Zone zone;
     public ZoneChecker zoneCheck;
 
-    public bool test = true;
-    public bool test1 = true;
+    public bool change = true;
+    public int WeaponIndex = 0;
 
     private void Awake()
     {
@@ -34,13 +33,27 @@ public class WeaponHandler : MonoBehaviour
         defaultInput.Weapon.Shoot.started += e => Shoot();
         defaultInput.Weapon.Shoot.canceled += e => Shoot();
 
-        defaultInput.Weapon.WeaponSlot1.started += e => SwapWeapon(0); 
-        defaultInput.Weapon.WeaponSlot2.started += e => SwapWeapon(1);
+        defaultInput.Weapon.WeaponSlot1.started += e => SwapWeapon(WeaponIndex); 
+        defaultInput.Weapon.WeaponSlot2.started += e => SwapWeapon(WeaponIndex + 1);
         
         defaultInput.Weapon.Aim.started += e => AimingPressed();
         defaultInput.Weapon.Aim.canceled += e => AimingReleased();
         
         defaultInput.Enable();
+
+
+        for(int i = 0; i < weaponSlots.Length; i++)
+        {
+            if (i <= 1)
+            {
+                weaponSlots[i].weaponObject = zoneCheck.zone[0].weapons[i];
+            }
+            if (i >= 2)
+            {
+                weaponSlots[i].weaponObject = zoneCheck.zone[1].weapons[i - 2];
+            }
+        }
+
     }
 
     public void Initialise(PlayerController controller)
@@ -86,17 +99,11 @@ public class WeaponHandler : MonoBehaviour
 
     private void Update()
     {
-        if(test)
+        if(change)
         {
-            defaultInput.Weapon.WeaponSlot1.started += e => SwapWeapon(2);
-            defaultInput.Weapon.WeaponSlot2.started += e => SwapWeapon(3);
-            test = false;
-        }
-        if(test1)
-        {
-            defaultInput.Weapon.WeaponSlot1.started += e => SwapWeapon(0);
-            defaultInput.Weapon.WeaponSlot2.started += e => SwapWeapon(1);
-            test1 = false;
+            defaultInput.Weapon.WeaponSlot1.started += e => SwapWeapon(WeaponIndex);
+            defaultInput.Weapon.WeaponSlot2.started += e => SwapWeapon(WeaponIndex + 1);
+            change = false;
         }
 
         CalculateAiming();
