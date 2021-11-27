@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponController : MonoBehaviour
@@ -16,13 +14,13 @@ public class WeaponController : MonoBehaviour
     public int startingAmmo;
     private float nextTimeToFire = 0f;
 
-    [Header("Recoil")] 
+    [Header("Recoil")]
     public float recoilSpread;
     public float recoilKickAmount;
-    
+
     [Header("Effects")] public ParticleSystem muzzleParticle;
     public GameObject hitParticle;
-    
+
     [Header("Animations")]
 
     private bool isInitialised;

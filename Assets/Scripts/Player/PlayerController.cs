@@ -1,49 +1,40 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private AudioClip[] dirtFootsteps;
-    [SerializeField] private AudioClip[] waterFootsteps;
-    [SerializeField] private AudioClip[] concreteFootsteps;
-    [SerializeField] private AudioClip[] woodFootsteps;
-    [SerializeField] private AudioClip[] metalFootsteps;
-    [SerializeField] private AudioClip[] grassFootsteps;
+
 
     private CharacterController characterController;
     private DefaultInput defaultInput;
-    
+
     [HideInInspector]
     public Vector2 inputMovement;
     public Vector2 inputView;
-    
+
     private Vector3 jumpingForce;
     private Vector3 jumpingForceVelocity;
 
     private Vector3 newCameraRotation;
     private Vector3 newPlayerRotation;
 
-    [Header("Weapon")] 
+    [Header("Weapon")]
     public WeaponController currentWeapon;
 
-    [Header("References")] 
+    [Header("References")]
     public Transform cameraHolder;
     public Transform feetTransform;
 
-    [Header("Gravity")] 
+    [Header("Gravity")]
     public float gravityAmount;
     public float gravityMin;
     private float playerGravity;
-    
+
     [Header("Settings")]
     public PlayerSettings playerSettings;
     public LayerMask playerMask;
 
-    [Header("Movement")] 
+    [Header("Movement")]
     public float movementSmoothing;
 
     private Vector3 newMovementSpeed;
@@ -55,7 +46,7 @@ public class PlayerController : MonoBehaviour
     public StanceSettings standingSettings;
     public StanceSettings sprintingSettings;
     public StanceSettings crouchingSettings;
-    
+
     private float stanceCheckMargin = 0.05f;
     private float cameraHeight;
     private float cameraHeightVelocity;
@@ -67,7 +58,7 @@ public class PlayerController : MonoBehaviour
     public bool onWood = false;
     public bool onMetal = false;
     public bool onGrass = false;
-    
+
     private bool shouldShoot;
     private void Awake()
     {
@@ -92,7 +83,7 @@ public class PlayerController : MonoBehaviour
 
         characterController = GetComponent<CharacterController>();
         cameraHeight = cameraHolder.localPosition.y;
-        
+
         if (currentWeapon)
         {
             currentWeapon.Initialise(this);
@@ -119,7 +110,7 @@ public class PlayerController : MonoBehaviour
     {
         newPlayerRotation.y += playerSettings.viewXSensitivity * (playerSettings.viewXInverted ? inputView.x : -inputView.x) * Time.deltaTime;
         transform.localRotation = Quaternion.Euler(newPlayerRotation);
-        
+
         newCameraRotation.x += playerSettings.viewYSensitivity * (playerSettings.viewYInverted ? inputView.y : -inputView.y) * Time.deltaTime;
         newCameraRotation.x = Mathf.Clamp(newCameraRotation.x, playerSettings.viewClampYMin, playerSettings.viewClampYMax);
         cameraHolder.localRotation = Quaternion.Euler(newCameraRotation);
@@ -172,30 +163,55 @@ public class PlayerController : MonoBehaviour
             movementSpeed.z > 0.01f ||
             movementSpeed.z < -0.01f)
             {
-                if (tag.transform.tag == "FloorDirt")
+                if (tag.transform.gameObject.layer == 7)
                 {
-                    SoundManager.Instance.PlaySound(dirtFootsteps[UnityEngine.Random.Range(0, dirtFootsteps.Length)]);
+                    onDirt = true;
                 }
-                else if (tag.transform.tag == "FloorWater")
+                else
                 {
-                    SoundManager.Instance.PlaySound(waterFootsteps[UnityEngine.Random.Range(0, waterFootsteps.Length)]);
+                    onDirt = false;
                 }
-                else if (tag.transform.tag == "FloorConcrete")
+                if (tag.transform.tag == "FloorWater")
                 {
-                    SoundManager.Instance.PlaySound(concreteFootsteps[UnityEngine.Random.Range(0, concreteFootsteps.Length)]);
+                    onWater = true;
                 }
-                else if (tag.transform.tag == "FloorWood")
+                else
                 {
-                    SoundManager.Instance.PlaySound(woodFootsteps[UnityEngine.Random.Range(0, woodFootsteps.Length)]);
+                    onWater = false;
                 }
-                else if (tag.transform.tag == "FloorMetal")
+                if (tag.transform.tag == "FloorConcrete")
                 {
-                    SoundManager.Instance.PlaySound(metalFootsteps[UnityEngine.Random.Range(0, metalFootsteps.Length)]);
+                    onConcrete = true;
                 }
-                else if (tag.transform.tag == "FloorGrass")
+                else
                 {
-                    SoundManager.Instance.PlaySound(grassFootsteps[UnityEngine.Random.Range(0, grassFootsteps.Length)]);
+                    onConcrete = false;
                 }
+                if (tag.transform.tag == "FloorWood")
+                {
+                    onWood = true;
+                }
+                else
+                {
+                    onWood = false;
+                }
+                if (tag.transform.tag == "FloorMetal")
+                {
+                    onMetal = true;
+                }
+                else
+                {
+                    onMetal = false;
+                }
+                if (tag.transform.tag == "FloorGrass")
+                {
+                    onGrass = true;
+                }
+                else
+                {
+                    onGrass = false;
+                }
+
             }
 
         }
@@ -210,7 +226,7 @@ public class PlayerController : MonoBehaviour
     {
         float stanceHeight = standingSettings.cameraHeight;
         float capsuleHeight = standingSettings.capsuleHeight;
-        
+
         if (playerStance == PlayerStance.PSCrouching)
         {
             stanceHeight = GetStanceSettings().cameraHeight;
@@ -222,11 +238,11 @@ public class PlayerController : MonoBehaviour
             stanceHeight = GetStanceSettings().cameraHeight;
             capsuleHeight = GetStanceSettings().capsuleHeight;
         }
-        
+
         cameraHeight = Mathf.SmoothDamp(cameraHolder.localPosition.y, stanceHeight,
             ref cameraHeightVelocity, playerStanceSmoothing);
-        
-        cameraHolder.localPosition = new Vector3(cameraHolder.localPosition.x,cameraHeight,cameraHolder.localPosition.z);
+
+        cameraHolder.localPosition = new Vector3(cameraHolder.localPosition.x, cameraHeight, cameraHolder.localPosition.z);
         characterController.height = capsuleHeight;
     }
 
@@ -245,7 +261,7 @@ public class PlayerController : MonoBehaviour
                 return;
             }
         }
-        
+
         jumpingForce = Vector3.up * playerSettings.jumpHeight;
         playerGravity = 0;
     }
@@ -267,7 +283,7 @@ public class PlayerController : MonoBehaviour
                 characterController.center = new Vector3(0, 0, 0);
                 break;
             case PlayerStance.PSSprinting:
-                
+
                 // could go into a slide here?
                 playerStance = PlayerStance.PSCrouching;
                 break;
@@ -282,19 +298,19 @@ public class PlayerController : MonoBehaviour
             isSprinting = false;
             return;
         }
-        
+
         isSprinting = true;
         playerStance = PlayerStance.PSSprinting;
     }
-    
+
 
     private void StopSprint()
     {
         //stops players sprinting again after sprint crouching.. (sliding)
         if (playerStance != PlayerStance.PSCrouching)
         {
-             isSprinting = false;
-             playerStance = PlayerStance.PSStanding;
+            isSprinting = false;
+            playerStance = PlayerStance.PSStanding;
         }
     }
 
@@ -302,7 +318,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 startPos = new Vector3(feetTransform.position.x, feetTransform.position.y + characterController.radius + stanceCheckMargin, feetTransform.position.z);
         Vector3 endPos = new Vector3(feetTransform.position.x, feetTransform.position.y - characterController.radius - stanceCheckMargin + stanceCheckHeight, feetTransform.position.z);
-        
+
         return Physics.CheckCapsule(startPos, endPos, characterController.radius, playerMask);
     }
 
@@ -347,17 +363,17 @@ public class StanceSettings
 [Serializable]
 public class PlayerSettings
 {
-    [Header("View Settings")] 
+    [Header("View Settings")]
     public float viewXSensitivity;
     public float viewYSensitivity;
 
     public bool viewXInverted;
     public bool viewYInverted;
-    
+
     public float viewClampYMin = -70;
     public float viewClampYMax = 80;
 
-    [Header("Jumping")] 
+    [Header("Jumping")]
     public float jumpHeight;
     public float jumpFalloff;
     public float fallingSmoothing;
