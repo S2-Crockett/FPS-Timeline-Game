@@ -11,6 +11,13 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip[] metalFootsteps;
     [SerializeField] private AudioClip[] grassFootsteps;
 
+    [SerializeField] private AudioClip[] dirtRunning;
+    [SerializeField] private AudioClip[] waterRunning;
+    [SerializeField] private AudioClip[] concreteRunnings;
+    [SerializeField] private AudioClip[] woodRunning;
+    [SerializeField] private AudioClip[] metalRunning;
+    [SerializeField] private AudioClip[] grassRunning;
+
     [SerializeField] private AudioSource _FootstepSource;
 
     public PlayerController pController;
@@ -44,6 +51,28 @@ public class SoundManager : MonoBehaviour
     {
         if (pController != null)
         {
+            float defaultSpeed = 0.6f;
+            float defaultVolume = 0.1f;
+            float newSpeed = 1.2f;
+            float newVolume = 0.05f;
+            if(pController.isSprinting == true)
+            {
+                _FootstepSource.pitch = newSpeed;
+            }
+            else
+            {
+                _FootstepSource.pitch = defaultSpeed;
+            }
+
+            if (pController.isCrouching == true)
+            {
+                _FootstepSource.volume = newVolume;
+            }
+            else
+            {
+                _FootstepSource.volume = defaultVolume;
+            }
+
             if (pController.onDirt == true)
             {
                 Instance.PlaySound(dirtFootsteps[UnityEngine.Random.Range(0, dirtFootsteps.Length)]);

@@ -50,7 +50,9 @@ public class PlayerController : MonoBehaviour
     private float stanceCheckMargin = 0.05f;
     private float cameraHeight;
     private float cameraHeightVelocity;
-    private bool isSprinting;
+
+    public bool isSprinting;
+    public bool isCrouching;
 
     public bool onDirt = false;
     public bool onWater = false;
@@ -240,12 +242,22 @@ public class PlayerController : MonoBehaviour
         {
             stanceHeight = GetStanceSettings().cameraHeight;
             capsuleHeight = GetStanceSettings().capsuleHeight;
+            isCrouching = true;
+        }
+        else
+        {
+            isCrouching = false;
         }
 
         if (playerStance == PlayerStance.PSSprinting)
         {
             stanceHeight = GetStanceSettings().cameraHeight;
             capsuleHeight = GetStanceSettings().capsuleHeight;
+            isSprinting = true;
+        }
+        else
+        {
+            isSprinting = false;
         }
 
         cameraHeight = Mathf.SmoothDamp(cameraHolder.localPosition.y, stanceHeight,
