@@ -11,13 +11,6 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip[] metalFootsteps;
     [SerializeField] private AudioClip[] grassFootsteps;
 
-    [SerializeField] private AudioClip[] dirtRunning;
-    [SerializeField] private AudioClip[] waterRunning;
-    [SerializeField] private AudioClip[] concreteRunnings;
-    [SerializeField] private AudioClip[] woodRunning;
-    [SerializeField] private AudioClip[] metalRunning;
-    [SerializeField] private AudioClip[] grassRunning;
-
     [SerializeField] private AudioSource _FootstepSource;
 
     public PlayerController pController;
