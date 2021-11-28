@@ -18,12 +18,12 @@ TagManager:
   - Water
   - UI
   - Player
-  - Dirt
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Dirt Footsteps
+  - Water Footsteps
+  - Concrete Footsteps
+  - Wood Footsteps
+  - Metal Footsteps
+  - Grass Footsteps
   - 
   - 
   - 

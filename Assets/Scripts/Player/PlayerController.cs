@@ -171,7 +171,7 @@ public class PlayerController : MonoBehaviour
                 {
                     onDirt = false;
                 }
-                if (tag.transform.tag == "FloorWater")
+                if (tag.transform.gameObject.layer == 8)
                 {
                     onWater = true;
                 }
@@ -179,7 +179,7 @@ public class PlayerController : MonoBehaviour
                 {
                     onWater = false;
                 }
-                if (tag.transform.tag == "FloorConcrete")
+                if (tag.transform.gameObject.layer == 9)
                 {
                     onConcrete = true;
                 }
@@ -187,7 +187,7 @@ public class PlayerController : MonoBehaviour
                 {
                     onConcrete = false;
                 }
-                if (tag.transform.tag == "FloorWood")
+                if (tag.transform.gameObject.layer == 10)
                 {
                     onWood = true;
                 }
@@ -195,7 +195,7 @@ public class PlayerController : MonoBehaviour
                 {
                     onWood = false;
                 }
-                if (tag.transform.tag == "FloorMetal")
+                if (tag.transform.gameObject.layer == 11)
                 {
                     onMetal = true;
                 }
@@ -203,7 +203,7 @@ public class PlayerController : MonoBehaviour
                 {
                     onMetal = false;
                 }
-                if (tag.transform.tag == "FloorGrass")
+                if (tag.transform.gameObject.layer == 12)
                 {
                     onGrass = true;
                 }
@@ -212,6 +212,15 @@ public class PlayerController : MonoBehaviour
                     onGrass = false;
                 }
 
+            }
+            else
+            {
+                onDirt = false;
+                onWater = false;
+                onConcrete = false;
+                onWood = false;
+                onMetal = false;
+                onGrass = false;
             }
 
         }
