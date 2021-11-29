@@ -178,6 +178,12 @@ public class WeaponController : MonoBehaviour
         UIManager.Instance.UpdateHeldAmmoText(equippedAmmo);
     }
 
+    public void AddAmmo(int ammo)
+    {
+        equippedAmmo += ammo;
+        UIManager.Instance.UpdateHeldAmmoText(equippedAmmo);
+    }
+
     public void Shoot(Camera cam)
     {
         if (isReloading)

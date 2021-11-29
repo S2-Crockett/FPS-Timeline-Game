@@ -22,18 +22,11 @@
     <list default="true" id="b7d5abbc-e8eb-400a-a78c-2d13f0ee5620" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Developers/Sam S/Test_Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Developers/Sam S/Test_Scene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Components/HealthComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Components/HealthComponent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/UIManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Testing/AreaDamage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Testing/AreaDamage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Crosshair.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Crosshair.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/PlayerHealthBar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/PlayerHealthBar.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Particles/WeaponEffects/Prefabs/MuzzleFlashEffect.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Particles/WeaponEffects/Prefabs/MuzzleFlashEffect.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Weapons/BasePrimary.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Weapons/BasePrimary.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Weapons/BaseSecondary.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Weapons/BaseSecondary.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/WeaponHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/WeaponHandler.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/UI/health-backdrop.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/UI/health-backdrop.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/UI/health-fill.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/UI/health-fill.png.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,8 +56,11 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Testing/AreaDamage.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Managers/UIManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/Crosshair.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/ShieldPickup.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Player/WeaponHandler.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/AmmoPickup.cs" />
       </list>
     </option>
   </component>
@@ -112,7 +108,7 @@
       <workItem from="1637576465249" duration="33177000" />
       <workItem from="1637936174158" duration="10815000" />
       <workItem from="1638013832684" duration="5715000" />
-      <workItem from="1638125213533" duration="11492000" />
+      <workItem from="1638125213533" duration="14171000" />
     </task>
     <servers />
   </component>

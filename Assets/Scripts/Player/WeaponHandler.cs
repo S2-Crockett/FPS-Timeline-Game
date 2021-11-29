@@ -13,7 +13,8 @@ public class WeaponHandler : MonoBehaviour
     [Header("Weapon")] 
     private WeaponController currentWeapon;
     private int currentActiveIndex;
-    private GameObject[] weaponRefs = new GameObject[5];
+    [HideInInspector]
+    public GameObject[] weaponRefs = new GameObject[5];
     public WeaponSlot[] weaponSlots;
 
     [Header("References")] 
