@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AreaDamage : MonoBehaviour
+public class ReverbZone : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -14,13 +14,5 @@ public class AreaDamage : MonoBehaviour
     void Update()
     {
         
-    }
-    
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            other.GetComponent<HealthComponent>().Damage(30);
-        }
     }
 }

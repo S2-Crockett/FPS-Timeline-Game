@@ -61,6 +61,10 @@
             <e p="PlayerController.cs" t="Include" />
             <e p="WeaponHandler.cs" t="Include" />
           </e>
+          <e p="Sounds" t="Include">
+            <e p="ReverbZone.cs" t="Include" />
+            <e p="ShootingSounds.cs" t="Include" />
+          </e>
           <e p="Testing" t="Include">
             <e p="AreaDamage.cs" t="Include" />
             <e p="AreaHeal.cs" t="Include" />

@@ -29,7 +29,7 @@ public class HealthComponent : MonoBehaviour
             {
                 health = 0;
             }
-            UIManager.Instance.UpdateHealthBarDamage();
+            UIManager.Instance.UpdateHealthDamage();
         }
         else
         {
@@ -40,6 +40,7 @@ public class HealthComponent : MonoBehaviour
                 int damageDif = shield - damageAmount;
                 shield = 0;
                 health -= damageDif;
+                UIManager.Instance.UpdateHealthDamage();
             }
             else
             {
@@ -49,6 +50,7 @@ public class HealthComponent : MonoBehaviour
                 {
                     shield= 0;
                 }
+                UIManager.Instance.UpdateHealthDamage();
             }
         }
     }
@@ -60,7 +62,7 @@ public class HealthComponent : MonoBehaviour
         {
             health = maxHealth;
         }
-        UIManager.Instance.UpdateHealthBarHeal();
+        UIManager.Instance.UpdateHealthHeal();
     }
 
     public void AddShield(int amount)
@@ -70,11 +72,17 @@ public class HealthComponent : MonoBehaviour
         {
             shield = maxShield;
         }
+        UIManager.Instance.UpdateHealthHeal();
     }
 
     public float GetHealthNormalized()
     {
         return (float)health / maxHealth;
+    }
+    
+    public float GetShieldNormalized()
+    {
+        return (float)shield / maxShield;
     }
 
     public int GetHealth()

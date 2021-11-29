@@ -193,9 +193,10 @@ public class WeaponController : MonoBehaviour
         if (Time.time >= nextTimeToFire)
         {
             nextTimeToFire = Time.time + 1f / fireRate;
-            
+
             currentAmmo--;
             UIManager.Instance.UpdateCurrentAmmo(currentAmmo);
+            UIManager.Instance.crosshair.SetCrosshairRecoil(0.1f);
             recoil += 0.1f;
             muzzleParticle.Play();
             
@@ -207,6 +208,7 @@ public class WeaponController : MonoBehaviour
                 if (target != null)
                 {
                     audioSource.PlayOneShot(hitmarkerClip);
+                    UIManager.Instance.crosshair.SetHitmarker();
                     target.TakeDamage(damage);
                 }
 
@@ -215,10 +217,13 @@ public class WeaponController : MonoBehaviour
                     enemy.TakeDamage(damage);
                 }
 
-                GameObject ImpactObject = Instantiate(hitParticle, hit.point, Quaternion.LookRotation(hit.normal));
-                Destroy(ImpactObject, 0.4f);
+                //GameObject ImpactObject = Instantiate(hitParticle, hit.point, Quaternion.LookRotation(hit.normal));
+                //Destroy(ImpactObject, 0.4f);
             }
+            
         }
+        
+        //UIManager.Instance.crosshair.SetIsShooting(false);
         
     }
 

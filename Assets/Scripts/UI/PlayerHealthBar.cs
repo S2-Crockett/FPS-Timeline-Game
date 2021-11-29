@@ -7,26 +7,35 @@ using UnityEngine.UI;
 
 public class PlayerHealthBar : MonoBehaviour
 {
-    private Image barImage;
-    private Image damagedBarImage;
+    private Image healthBarImage;
+    private Image healthDamagedBarImage;
+    private Image shieldBarImage;
+    private Image shieldDamagedBarImage;
     private float damageHealthTimerMax = 1f;
     
     [Header("Damage")]
-    public Color damagedColor;
+    public Color healthDamagedColor;
+    public Color shieldDamagedColor;
     public float damageHealthTimer;
     public float shrinkSpeed = 3f;
     
     private void Awake()
     {
-        barImage = transform.Find("HealthAmount").GetComponent<Image>();
-        damagedBarImage = transform.Find("HealthChangeAmount").GetComponent<Image>();
-        damagedBarImage.color = damagedColor;
+        healthBarImage = transform.Find("HealthAmount").GetComponent<Image>();
+        healthDamagedBarImage = transform.Find("HealthChangeAmount").GetComponent<Image>();
+        shieldBarImage = transform.Find("ShieldAmount").GetComponent<Image>();
+        shieldDamagedBarImage = transform.Find("ShieldChangeAmount").GetComponent<Image>();
+        
+        healthDamagedBarImage.color = healthDamagedColor;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        damagedBarImage.fillAmount = barImage.fillAmount;
+        healthDamagedBarImage.fillAmount = healthBarImage.fillAmount;
+        shieldDamagedBarImage.fillAmount = healthBarImage.fillAmount;
+        SetHealth(UIManager.Instance.GetHealthNormalized());
+        SetShield(UIManager.Instance.GetShieldNormalized());
     }
 
     // Update is called once per frame
@@ -35,27 +44,43 @@ public class PlayerHealthBar : MonoBehaviour
         damageHealthTimer -= Time.deltaTime;
         if (damageHealthTimer < 0)
         {
-            if (barImage.fillAmount < damagedBarImage.fillAmount)
+            if (shieldBarImage.fillAmount < shieldDamagedBarImage.fillAmount)
             {
-                damagedBarImage.fillAmount -= shrinkSpeed * Time.deltaTime;
+                shieldDamagedBarImage.fillAmount -= shrinkSpeed * Time.deltaTime;
             }
+            
+            if (healthBarImage.fillAmount < healthDamagedBarImage.fillAmount)
+            {
+                healthDamagedBarImage.fillAmount -= shrinkSpeed * Time.deltaTime;
+            }
+          
         }
     }
 
     public void OnHealed()
     {
         SetHealth(UIManager.Instance.GetHealthNormalized());
-        damagedBarImage.fillAmount = barImage.fillAmount;
+        SetShield(UIManager.Instance.GetShieldNormalized());
+        healthDamagedBarImage.fillAmount = healthBarImage.fillAmount;
+        shieldDamagedBarImage.fillAmount = shieldBarImage.fillAmount;
     }
 
     public void OnDamage()
     {
         damageHealthTimer = damageHealthTimerMax;
         SetHealth(UIManager.Instance.GetHealthNormalized());
+        SetShield(UIManager.Instance.GetShieldNormalized());
     }
 
     private void SetHealth(float health)
     {
-        barImage.fillAmount = health;
+        healthBarImage.fillAmount = health;
     }
+
+    private void SetShield(float shield)
+    {
+        shieldBarImage.fillAmount = shield;
+    }
+    
+    
 }

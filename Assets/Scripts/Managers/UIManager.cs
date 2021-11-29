@@ -15,7 +15,8 @@ namespace Managers
         public PlayerHealthBar healthBar;
         public HealthComponent health;
 
-        [Header("Crosshair")] public GameObject crosshair;
+        [Header("Crosshair")] 
+        public Crosshair crosshair;
 
         void Awake()
         {
@@ -40,12 +41,12 @@ namespace Managers
             currentHeldAmmoText.text = ammo.ToString();
         }
 
-        public void UpdateHealthBarDamage()
+        public void UpdateHealthDamage()
         {
             healthBar.OnDamage();
         }
 
-        public void UpdateHealthBarHeal()
+        public void UpdateHealthHeal()
         {
             healthBar.OnHealed();
         }
@@ -53,6 +54,11 @@ namespace Managers
         public float GetHealthNormalized()
         {
             return health.GetHealthNormalized();
+        }
+        
+        public float GetShieldNormalized()
+        {
+            return health.GetShieldNormalized();
         }
     }
 }

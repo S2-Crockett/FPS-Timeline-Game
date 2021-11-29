@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Managers;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -82,7 +83,7 @@ public class PlayerController : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             
             defaultInput = new DefaultInput();
-    
+            
             defaultInput.Player.Movement.performed += e => inputMovement = e.ReadValue<Vector2>();
             defaultInput.Player.View.performed += e => inputView = e.ReadValue<Vector2>();
             defaultInput.Player.Jump.performed += e => Jump();
@@ -92,7 +93,6 @@ public class PlayerController : MonoBehaviour
             defaultInput.Player.Sprint.canceled += e => StopSprint();
             defaultInput.Weapon.Aim.started += e => StartAiming();
             defaultInput.Weapon.Aim.canceled += e => StopAiming();
-
             
             defaultInput.Enable();
     
@@ -118,9 +118,32 @@ public class PlayerController : MonoBehaviour
         CalculateMovement();
         CalculateJump();
         CalculateCameraHeight();
+        SetLookAtTargetCrosshair();
     }
     
     #endregion
+
+    private void SetLookAtTargetCrosshair()
+    {
+        // this will need to be replaced with enemies at some point when they are implemented
+        // need to add a max distance that you can do this.
+        if (UIManager.Instance)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, 100.0f))
+            {
+                ShootingTarget target = hit.transform.GetComponent<ShootingTarget>();
+                if (target != null)
+                {
+                    UIManager.Instance.crosshair.UpdateLookAtColour(true);
+                }
+                else
+                {
+                    UIManager.Instance.crosshair.UpdateLookAtColour(false);
+                }
+            }
+        }
+    }
     
     private void CalculateView()
     {
