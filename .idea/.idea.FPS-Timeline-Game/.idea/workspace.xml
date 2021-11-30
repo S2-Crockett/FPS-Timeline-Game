@@ -22,11 +22,11 @@
     <list default="true" id="b7d5abbc-e8eb-400a-a78c-2d13f0ee5620" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Developers/Sam S/Test_Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Developers/Sam S/Test_Scene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Particles/WeaponEffects/Prefabs/MuzzleFlashEffect.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Particles/WeaponEffects/Prefabs/MuzzleFlashEffect.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Weapons/BasePrimary.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Weapons/BasePrimary.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Weapons/BaseSecondary.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Weapons/BaseSecondary.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/WeaponHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/WeaponHandler.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/WeaponHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/WeaponHandler.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,18 +38,29 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.probuilder@5.0.3/Editor/EditorCore/ProBuilderShapeEditor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Testing/AreaHeal.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.visualscripting@1.6.1/Runtime/VisualScripting.Core/Ensure/EnsureThat.Objects.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Testing/ShootingTarget.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.0.2/InputSystem/Utilities/DelegateHelpers.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Testing/ShootingTarget.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Assets/Scripts/Testing/ShootingTarget.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Managers/UIManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponController.cs" />
         <option value="$PROJECT_DIR$/Assets/WeaponHandler.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI/HealthComponent.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Components/ShieldComponent.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Testing/AreaHeal.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI/PlayerHealthBar.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Components/HealthComponent.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Testing/AreaDamage.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Managers/UIManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI/Crosshair.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/ShieldPickup.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Player/WeaponHandler.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/AmmoPickup.cs" />
       </list>
     </option>
   </component>
@@ -95,6 +106,9 @@
       <workItem from="1637257808453" duration="90000" />
       <workItem from="1637328958726" duration="29310000" />
       <workItem from="1637576465249" duration="33177000" />
+      <workItem from="1637936174158" duration="10815000" />
+      <workItem from="1638013832684" duration="5715000" />
+      <workItem from="1638125213533" duration="14171000" />
     </task>
     <servers />
   </component>
@@ -119,13 +133,22 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="321" y="293" key="#Notifications" timestamp="1637954244752">
+      <screen x="0" y="0" width="2293" height="929" />
+    </state>
+    <state x="321" y="293" key="#Notifications/0.0.2293.929@0.0.2293.929" timestamp="1637954244752" />
     <state x="248" y="89" key="RiderGenerateDialog" timestamp="1637336323305">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="248" y="89" key="RiderGenerateDialog/0.0.1536.824@0.0.1536.824" timestamp="1637336323305" />
-    <state x="108" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1637343034049">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="1261" y="0" width="1046" height="915" key="dock-window-1" timestamp="1638188985433">
+      <screen x="0" y="0" width="2293" height="929" />
+    </state>
+    <state x="1261" y="0" width="1046" height="915" key="dock-window-1/0.0.2293.929@0.0.2293.929" timestamp="1638188985433" />
+    <state x="161" y="163" width="1004" height="765" key="search.everywhere.popup" timestamp="1638185082764">
+      <screen x="0" y="0" width="2293" height="929" />
     </state>
     <state x="108" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1637343034049" />
+    <state x="161" y="163" width="1004" height="765" key="search.everywhere.popup/0.0.2293.929@0.0.2293.929" timestamp="1638185082764" />
   </component>
 </project>

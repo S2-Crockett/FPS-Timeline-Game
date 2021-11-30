@@ -128,6 +128,7 @@ GameObject:
   - component: {fileID: 4963024755645646191}
   - component: {fileID: 4963024755645646184}
   - component: {fileID: 5112141260891272993}
+  - component: {fileID: 3849701617584532922}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -189,6 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9644aafad947ab64baf6fd5d44b3cf7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  footsteps: {fileID: 0}
   inputMovement: {x: 0, y: 0}
   inputView: {x: 0, y: 0}
   isAiming: 0
@@ -236,6 +238,10 @@ MonoBehaviour:
     capsuleHeight: 1.1
     stanceForwardMovementSpeed: 2
     stanceStrafeMovementSpeed: 1
+  onDirt: 0
+  onWater: 0
+  onConcrete: 0
+  camera: {fileID: 0}
 --- !u!114 &5112141260891272993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,13 +254,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c62f62e3aff6bc9499c065a02d2e1ed6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAiming: 0
   weaponSlots:
   - weaponIndex: 0
     weaponObject: {fileID: 8249656883338130075, guid: d15ad2123ad5dd94d8c8bed43143f8c2, type: 3}
   - weaponIndex: 1
     weaponObject: {fileID: 8249656883338130075, guid: 6a717d9391f6dce429847a9e11ec0c94, type: 3}
   weaponHolder: {fileID: 3152302368809756434}
+--- !u!114 &3849701617584532922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4963024755645646197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1851afe69b6d1a4e8fd1a60a9344a18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  maxHealth: 100
+  shield: 0
+  maxShield: 100
 --- !u!1 &4963024756243053338
 GameObject:
   m_ObjectHideFlags: 0
