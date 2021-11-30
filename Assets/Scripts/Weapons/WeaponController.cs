@@ -101,6 +101,11 @@ public class WeaponController : MonoBehaviour
         isInitialised = true;
     }
 
+    public void InitialiseEnemy()
+    {
+        isInitialised = true;
+    }
+
     private void Update()
     {
         swayObject = transform.parent.transform;
