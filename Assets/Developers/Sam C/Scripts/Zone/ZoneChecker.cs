@@ -80,8 +80,13 @@ public class ZoneChecker : MonoBehaviour
             weaponHandler.WeaponIndex = zone[index].weaponIndex;
             weaponHandler.change = true;
             weaponHandler.SwapWeapon(zone[index].weaponIndex);
+
+
             Destroy(newFloorObject);
             newFloorObject = Instantiate(zone[index].timezone1, floor.transform.position, floor.transform.rotation);
+
+
+
             for (int i = 0; i < enemy.Length; i++)
             {
                 Destroy(newGameObject[i]);
@@ -90,6 +95,7 @@ public class ZoneChecker : MonoBehaviour
             {
                 newGameObject[i] = Instantiate(zone[index].material, enemy[i].transform.position, enemy[i].transform.rotation);
             }
+
 
             change = false;
         }

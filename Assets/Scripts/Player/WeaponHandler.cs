@@ -11,7 +11,7 @@ public class WeaponHandler : MonoBehaviour
     private bool isAiming;
     
     [Header("Weapon")] 
-    private WeaponController currentWeapon;
+    public WeaponController currentWeapon;
     private int currentActiveIndex;
     [HideInInspector]
     public GameObject[] weaponRefs = new GameObject[5];
@@ -45,15 +45,18 @@ public class WeaponHandler : MonoBehaviour
         defaultInput.Enable();
 
 
-        for(int i = 0; i < weaponSlots.Length; i++)
+        if (zoneCheck != null)
         {
-            if (i <= 1)
+            for (int i = 0; i < weaponSlots.Length; i++)
             {
-                weaponSlots[i].weaponObject = zoneCheck.zone[0].weapons[i];
-            }
-            if (i >= 2)
-            {
-                weaponSlots[i].weaponObject = zoneCheck.zone[1].weapons[i - 2];
+                if (i <= 1)
+                {
+                    weaponSlots[i].weaponObject = zoneCheck.zone[0].weapons[i];
+                }
+                if (i >= 2)
+                {
+                    weaponSlots[i].weaponObject = zoneCheck.zone[1].weapons[i - 2];
+                }
             }
         }
 

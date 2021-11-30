@@ -215,14 +215,13 @@ public class WeaponController : MonoBehaviour
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))
             {
                 ShootingTarget target = hit.transform.GetComponent<ShootingTarget>();
-                EnemyDead enemy = hit.transform.GetComponent<EnemyDead>();
                 if (target != null)
                 {
                     audioSource.PlayOneShot(hitmarkerClip);
                     UIManager.Instance.crosshair.SetHitmarker();
                     target.TakeDamage(damage);
                 }
-
+                EnemyDead enemy = hit.transform.GetComponent<EnemyDead>();
                 if (enemy != null)
                 {
                     enemy.TakeDamage(damage);
