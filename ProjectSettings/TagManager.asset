@@ -7,6 +7,9 @@ TagManager:
   - FloorDirt
   - FloorWater
   - FloorConcrete
+  - FloorWood
+  - FloorMetal
+  - FloorGrass
   - LevelText
   - LevelDifficulty
   - LevelDescription
@@ -31,12 +34,12 @@ TagManager:
   - Water
   - UI
   - Player
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Dirt Footsteps
+  - Water Footsteps
+  - Concrete Footsteps
+  - Wood Footsteps
+  - Metal Footsteps
+  - Grass Footsteps
   - 
   - 
   - 
