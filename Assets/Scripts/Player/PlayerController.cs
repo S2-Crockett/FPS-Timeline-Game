@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
-
     private CharacterController characterController;
     private DefaultInput defaultInput;
 
@@ -54,12 +52,22 @@ public class PlayerController : MonoBehaviour
     public bool isSprinting;
     public bool isCrouching;
 
+
     public bool onDirt = false;
     public bool onWater = false;
     public bool onConcrete = false;
     public bool onWood = false;
     public bool onMetal = false;
     public bool onGrass = false;
+
+    public bool onDirtLand = false;
+    public bool onWaterLand = false;
+    public bool onConcreteLand = false;
+    public bool onWoodLand = false;
+    public bool onMetalLand = false;
+    public bool onGrassLand = false;
+
+    public float airTime;
 
     private bool shouldShoot;
     private void Awake()
@@ -150,15 +158,17 @@ public class PlayerController : MonoBehaviour
 
         characterController.Move(movementSpeed);
 
-
+        CheckLand();
         CreateSounds(movementSpeed);
+
+        CheckAirTime();
 
     }
     private void CreateSounds(Vector3 movementSpeed)
     {
         RaycastHit tag;
 
-        if (Physics.Raycast(cameraHolder.transform.position, cameraHolder.transform.up * -1, out tag, 3))
+        if (Physics.Raycast(cameraHolder.transform.position, cameraHolder.transform.up * -1, out tag, 2))
         {
             if (movementSpeed.x > 0.01f ||
             movementSpeed.x < -0.01f ||
@@ -213,7 +223,6 @@ public class PlayerController : MonoBehaviour
                 {
                     onGrass = false;
                 }
-
             }
             else
             {
@@ -224,7 +233,6 @@ public class PlayerController : MonoBehaviour
                 onMetal = false;
                 onGrass = false;
             }
-
         }
     }
     private void CalculateJump()
@@ -269,6 +277,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
+
         if (!characterController.isGrounded)
         {
             return;
@@ -285,6 +294,90 @@ public class PlayerController : MonoBehaviour
 
         jumpingForce = Vector3.up * playerSettings.jumpHeight;
         playerGravity = 0;
+
+    }
+    private void CheckAirTime()
+    {
+        if (characterController.isGrounded)
+        {
+            airTime = 0f;
+
+        }
+        else
+        {
+            airTime += Time.deltaTime;
+        }
+    }
+    private void CheckLand()
+    {
+        if (airTime > 0)
+        {
+            if (characterController.isGrounded)
+            {
+                RaycastHit tag;
+
+                if (Physics.Raycast(cameraHolder.transform.position, cameraHolder.transform.up * -1, out tag, 2))
+                {
+                    if (tag.transform.gameObject.layer == 7)
+                    {
+                        onDirtLand = true;
+                    }
+                    else
+                    {
+                        onDirtLand = false;
+                    }
+                    if (tag.transform.gameObject.layer == 8)
+                    {
+                        onWaterLand = true;
+                    }
+                    else
+                    {
+                        onWaterLand = false;
+                    }
+                    if (tag.transform.gameObject.layer == 9)
+                    {
+                        onConcreteLand = true;
+                    }
+                    else
+                    {
+                        onConcreteLand = false;
+                    }
+                    if (tag.transform.gameObject.layer == 10)
+                    {
+                        onWoodLand = true;
+                    }
+                    else
+                    {
+                        onWoodLand = false;
+                    }
+                    if (tag.transform.gameObject.layer == 11)
+                    {
+                        onMetalLand = true;
+                    }
+                    else
+                    {
+                        onMetalLand = false;
+                    }
+                    if (tag.transform.gameObject.layer == 12)
+                    {
+                        onGrassLand = true;
+                    }
+                    else
+                    {
+                        onGrassLand = false;
+                    }
+                }
+            }
+        }
+        if (airTime == 0)
+        {
+            onDirtLand = false;
+            onGrassLand = false;
+            onConcreteLand = false;
+            onWoodLand = false;
+            onWaterLand = false;
+            onMetalLand = false;
+        }
     }
 
     private void Crouch()

@@ -11,7 +11,15 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip[] metalFootsteps;
     [SerializeField] private AudioClip[] grassFootsteps;
 
+    [SerializeField] private AudioClip[] dirtLanding;
+    [SerializeField] private AudioClip[] waterLanding;
+    [SerializeField] private AudioClip[] concreteLanding;
+    [SerializeField] private AudioClip[] woodLanding;
+    [SerializeField] private AudioClip[] metalLanding;
+    [SerializeField] private AudioClip[] grassLanding;
+
     [SerializeField] private AudioSource _FootstepSource;
+    [SerializeField] private AudioSource _LandingSource;
 
     public PlayerController pController;
 
@@ -35,6 +43,14 @@ public class SoundManager : MonoBehaviour
 
         }
     }
+    public void PlayLandingSound(AudioClip clip)
+    {
+        if (!_LandingSource.isPlaying)
+        {
+            _LandingSource.PlayOneShot(clip);
+
+        }
+    }
     private void Update()
     {
         AccessSound();
@@ -47,8 +63,9 @@ public class SoundManager : MonoBehaviour
             float defaultSpeed = 0.6f;
             float defaultVolume = 0.1f;
             float newSpeed = 1.2f;
+            float slowSpeed = 0.3f;
             float newVolume = 0.05f;
-            if(pController.isSprinting == true)
+            if (pController.isSprinting == true)
             {
                 _FootstepSource.pitch = newSpeed;
             }
@@ -60,10 +77,12 @@ public class SoundManager : MonoBehaviour
             if (pController.isCrouching == true)
             {
                 _FootstepSource.volume = newVolume;
+                _FootstepSource.pitch = slowSpeed;
             }
             else
             {
                 _FootstepSource.volume = defaultVolume;
+                //_FootstepSource.pitch = defaultSpeed;
             }
 
             if (pController.onDirt == true)
@@ -89,6 +108,31 @@ public class SoundManager : MonoBehaviour
             else if (pController.onGrass == true)
             {
                 Instance.PlaySound(grassFootsteps[UnityEngine.Random.Range(0, grassFootsteps.Length)]);
+            }
+
+            if (pController.onDirtLand == true)
+            {
+                Instance.PlaySound(dirtLanding[UnityEngine.Random.Range(0, dirtLanding.Length)]);
+            }
+            else if (pController.onWaterLand == true)
+            {
+                Instance.PlaySound(waterLanding[UnityEngine.Random.Range(0, waterLanding.Length)]);
+            }
+            else if (pController.onConcreteLand == true)
+            {
+                Instance.PlaySound(concreteLanding[UnityEngine.Random.Range(0, concreteLanding.Length)]);
+            }
+            else if (pController.onWoodLand == true)
+            {
+                Instance.PlaySound(woodLanding[UnityEngine.Random.Range(0, woodLanding.Length)]);
+            }
+            else if (pController.onMetalLand == true)
+            {
+                Instance.PlaySound(metalLanding[UnityEngine.Random.Range(0, metalLanding.Length)]);
+            }
+            else if (pController.onGrassLand == true)
+            {
+                Instance.PlaySound(grassLanding[UnityEngine.Random.Range(0, grassLanding.Length)]);
             }
         }
 
