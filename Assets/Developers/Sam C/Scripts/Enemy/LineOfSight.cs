@@ -30,7 +30,7 @@ public class LineOfSight : MonoBehaviour
     
         for(int i = 0; i < weaponSlots.Length; i++)
         {
-            weaponSlots[i].weaponObject.gameObject.transform.localScale = new Vector3(3,3,3);
+            weaponSlots[i].weaponObject.gameObject.transform.localScale = new Vector3(1,1,1);
         }
 
     }
