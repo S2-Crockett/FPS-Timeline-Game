@@ -477,7 +477,10 @@ MonoBehaviour:
   zone:
   - {fileID: 11400000, guid: b1f79208159479f478ca36256bf2e10c, type: 2}
   - {fileID: 11400000, guid: 7f7ceb4c429e88648a273ecea4218ac8, type: 2}
-  enemy: []
+  enemy:
+  - {fileID: 1830084133}
+  - {fileID: 10110148}
+  - {fileID: 2140359077}
   floor: {fileID: 557524706}
   index: 0
 --- !u!4 &1040728857
