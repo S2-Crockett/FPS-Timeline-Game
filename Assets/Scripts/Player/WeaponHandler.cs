@@ -10,7 +10,8 @@ public class WeaponHandler : MonoBehaviour
     private bool shouldShoot;
     private bool isAiming;
     
-    [Header("Weapon")] 
+    [Header("Weapon")]
+    [HideInInspector]
     public WeaponController currentWeapon;
     private int currentActiveIndex;
     [HideInInspector]

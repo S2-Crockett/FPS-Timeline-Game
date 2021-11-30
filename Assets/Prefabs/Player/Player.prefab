@@ -127,8 +127,8 @@ GameObject:
   - component: {fileID: 4963024755645646186}
   - component: {fileID: 4963024755645646191}
   - component: {fileID: 4963024755645646184}
-  - component: {fileID: 5112141260891272993}
   - component: {fileID: 3849701617584532922}
+  - component: {fileID: 7354509692417185165}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -190,12 +190,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9644aafad947ab64baf6fd5d44b3cf7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dirtFootsteps: []
-  waterFootsteps: []
-  concreteFootsteps: []
-  woodFootsteps: []
-  metalFootsteps: []
-  grassFootsteps: []
   inputMovement: {x: 0, y: 0}
   inputView: {x: 0, y: 0}
   isAiming: 0
@@ -243,60 +237,22 @@ MonoBehaviour:
     capsuleHeight: 1.1
     stanceForwardMovementSpeed: 2
     stanceStrafeMovementSpeed: 1
+  isSprinting: 0
+  isCrouching: 0
   onDirt: 0
   onWater: 0
   onConcrete: 0
   onWood: 0
   onMetal: 0
   onGrass: 0
---- !u!1 &4100669832735744598
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5624164401789708040}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5624164401789708040
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4100669832735744598}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.00000047683716, y: 0.74999976, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 94300682040533629}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &5662008856415132196
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4963024755645646197}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c62f62e3aff6bc9499c065a02d2e1ed6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponSlots:
-  - weaponIndex: 0
-    weaponObject: {fileID: 8249656883338130075, guid: d15ad2123ad5dd94d8c8bed43143f8c2, type: 3}
-  - weaponIndex: 1
-    weaponObject: {fileID: 8249656883338130075, guid: 6a717d9391f6dce429847a9e11ec0c94, type: 3}
-  weaponHolder: {fileID: 3152302368809756434}
+  onDirtLand: 0
+  onWaterLand: 0
+  onConcreteLand: 0
+  onWoodLand: 0
+  onMetalLand: 0
+  onGrassLand: 0
+  airTime: 0
+  camera: {fileID: 0}
 --- !u!114 &3849701617584532922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,6 +269,38 @@ MonoBehaviour:
   maxHealth: 100
   shield: 0
   maxShield: 100
+--- !u!114 &7354509692417185165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4963024755645646197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c62f62e3aff6bc9499c065a02d2e1ed6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentWeapon: {fileID: 0}
+  weaponRefs:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  weaponSlots:
+  - weaponIndex: 0
+    weaponObject: {fileID: 0}
+  - weaponIndex: 0
+    weaponObject: {fileID: 0}
+  - weaponIndex: 0
+    weaponObject: {fileID: 0}
+  - weaponIndex: 0
+    weaponObject: {fileID: 0}
+  weaponHolder: {fileID: 3152302368809756434}
+  zoneCheck: {fileID: 0}
+  change: 1
+  WeaponIndex: 0
 --- !u!1 &4963024756243053338
 GameObject:
   m_ObjectHideFlags: 0

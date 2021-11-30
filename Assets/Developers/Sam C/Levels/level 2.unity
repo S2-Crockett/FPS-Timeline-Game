@@ -470,6 +470,14 @@ PrefabInstance:
       propertyPath: weaponSlots.Array.data[1].weaponObject
       value: 
       objectReference: {fileID: 8249656883338130075, guid: dc2c0b450e1b58640900a8accaeeb57b, type: 3}
+    - target: {fileID: 7354509692417185165, guid: fb0314374a87dd2468847150afa5c603, type: 3}
+      propertyPath: zoneCheck
+      value: 
+      objectReference: {fileID: 903552297}
+    - target: {fileID: 7354509692417185165, guid: fb0314374a87dd2468847150afa5c603, type: 3}
+      propertyPath: weaponSlots.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb0314374a87dd2468847150afa5c603, type: 3}
 --- !u!1 &1216611881

@@ -137,7 +137,7 @@ PrefabInstance:
     - target: {fileID: 94300681406828028, guid: fb0314374a87dd2468847150afa5c603, type: 3}
       propertyPath: muzzleParticle
       value: 
-      objectReference: {fileID: 1847152635}
+      objectReference: {fileID: 0}
     - target: {fileID: 94300682040533601, guid: fb0314374a87dd2468847150afa5c603, type: 3}
       propertyPath: m_Name
       value: Player
@@ -145,7 +145,7 @@ PrefabInstance:
     - target: {fileID: 94300682040533628, guid: fb0314374a87dd2468847150afa5c603, type: 3}
       propertyPath: cam
       value: 
-      objectReference: {fileID: 1601294116}
+      objectReference: {fileID: 0}
     - target: {fileID: 94300682040533628, guid: fb0314374a87dd2468847150afa5c603, type: 3}
       propertyPath: footsteps
       value: 
@@ -530,7 +530,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0b7ddffbc53233243b65be1eb6b2b7ff, type: 2}
+  - {fileID: 2100000, guid: 29711bb8f2beb5e4385f35775ca155cb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -572,7 +572,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &92896660
 BoxCollider:
@@ -823,7 +823,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &435718302
 GameObject:
@@ -1061,7 +1061,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &681406273
 GameObject:
@@ -1117,7 +1117,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a3b459802f9202345ae7df322e398843, type: 2}
+  - {fileID: 2100000, guid: 0ba182e4048e7c24fa81f8e9fb14e8d1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1159,7 +1159,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &681406278
 BoxCollider:
@@ -1205,7 +1205,7 @@ Transform:
   - {fileID: 435718303}
   - {fileID: 336844280}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &823319403
 MonoBehaviour:
@@ -1305,7 +1305,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9da398670483b6a40bb989ac691220f4, type: 3}
   _FootstepSource: {fileID: 435718304}
   _LandingSource: {fileID: 336844281}
-  pController: {fileID: 1691801020}
+  pController: {fileID: 1719997506}
 --- !u!1 &956407513
 GameObject:
   m_ObjectHideFlags: 0
@@ -1360,7 +1360,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 94f582face7b6e649a13ba0be6a336c6, type: 2}
+  - {fileID: 2100000, guid: 4be28c2948d2ad04eb5a4a4277ea6e76, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1402,7 +1402,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &956407518
 BoxCollider:
@@ -1508,7 +1508,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1035022707
 GameObject:
@@ -1619,16 +1619,11 @@ Transform:
   m_LocalScale: {x: 0.5, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!20 &1601294116 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 94300681996866214, guid: fb0314374a87dd2468847150afa5c603, type: 3}
-  m_PrefabInstance: {fileID: 45339809}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1691801020 stripped
+--- !u!114 &1719997506 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 94300682040533628, guid: fb0314374a87dd2468847150afa5c603, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4963024755645646184, guid: fb0314374a87dd2468847150afa5c603, type: 3}
   m_PrefabInstance: {fileID: 45339809}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -1637,8 +1632,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9644aafad947ab64baf6fd5d44b3cf7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!198 &1847152635 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 5488780703676627604, guid: fb0314374a87dd2468847150afa5c603, type: 3}
-  m_PrefabInstance: {fileID: 45339809}
-  m_PrefabAsset: {fileID: 0}
