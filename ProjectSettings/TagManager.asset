@@ -14,6 +14,12 @@ TagManager:
   - Zone1
   - Zone
   - Zone2
+  - Nextlevel
+  - Objective1
+  - Objective1complete
+  - Objective2
+  - Objective3
+  - Objective4
   layers:
   - Default
   - TransparentFX
