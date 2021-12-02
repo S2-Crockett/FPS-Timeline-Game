@@ -21,12 +21,27 @@
   <component name="ChangeListManager">
     <list default="true" id="b7d5abbc-e8eb-400a-a78c-2d13f0ee5620" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Particles/WeaponEffects/Prefabs/MuzzleFlashEffect.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Particles/WeaponEffects/Prefabs/MuzzleFlashEffect.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Weapons/BasePrimary.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Weapons/BasePrimary.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Weapons/BaseSecondary.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Weapons/BaseSecondary.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/WeaponHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/WeaponHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animations/Misc.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Developers/Sam C/Pipeline/UniversalRenderPipelineAsset_Renderer.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Developers/Sam C/Pipeline/UniversalRenderPipelineAsset_Renderer.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Developers/Sam S/Test_Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Developers/Sam S/Test_Scene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Prototype-Materials/Misc/M_DarkWall.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Prototype-Materials/Misc/M_DarkWall.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Prototype-Materials/Misc/M_RedDoor.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Prototype-Materials/Misc/M_RedDoor.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Prototype-Materials/Misc/M_RedWall.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Prototype-Materials/Misc/M_RedWall.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Prototype-Materials/Misc/M_StandardEmissive.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Prototype-Materials/Misc/M_StandardEmissive.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Components/HealthComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Components/HealthComponent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/UIManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,8 +55,10 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.probuilder@5.0.3/Editor/EditorCore/ProBuilderShapeEditor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Testing/AreaHeal.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.visualscripting@1.6.1/Runtime/VisualScripting.Core/Ensure/EnsureThat.Objects.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/UIUtilities.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.0.2/InputSystem/Utilities/DelegateHelpers.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Testing/ShootingTarget.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Respawn/RespawnPoint.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -52,15 +69,18 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Components/ShieldComponent.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Testing/AreaHeal.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/PlayerHealthBar.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Components/HealthComponent.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Testing/AreaDamage.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Managers/UIManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/Crosshair.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/ShieldPickup.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/WeaponHandler.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/AmmoPickup.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Respawn/RespawnPoint.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Components/HealthComponent.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Managers/UIManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Player/PlayerDeathController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI/UIUtilities.cs" />
       </list>
     </option>
   </component>
@@ -108,7 +128,9 @@
       <workItem from="1637576465249" duration="33177000" />
       <workItem from="1637936174158" duration="10815000" />
       <workItem from="1638013832684" duration="5715000" />
-      <workItem from="1638125213533" duration="14171000" />
+      <workItem from="1638125213533" duration="14505000" />
+      <workItem from="1638281248938" duration="4346000" />
+      <workItem from="1638464955043" duration="9988000" />
     </task>
     <servers />
   </component>

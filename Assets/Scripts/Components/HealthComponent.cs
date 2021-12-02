@@ -12,11 +12,14 @@ public class HealthComponent : MonoBehaviour
     [Header("Shield")] 
     public int shield;
     public int maxShield;
+
+    private PlayerDeathController _deathController;
     
     // Start is called before the first frame update
     void Start()
     {
         health = maxHealth;
+        _deathController = GetComponent<PlayerDeathController>();
     }
 
     public void Damage(int damageAmount)
@@ -28,6 +31,7 @@ public class HealthComponent : MonoBehaviour
             if (health < 0)
             {
                 health = 0;
+                _deathController.SetIsDead(true);
             }
             UIManager.Instance.UpdateHealthDamage();
         }
@@ -37,7 +41,7 @@ public class HealthComponent : MonoBehaviour
             // out the different and take that from our health
             if (damageAmount >= shield)
             {
-                int damageDif = shield - damageAmount;
+                int damageDif = damageAmount - shield;
                 shield = 0;
                 health -= damageDif;
                 UIManager.Instance.UpdateHealthDamage();

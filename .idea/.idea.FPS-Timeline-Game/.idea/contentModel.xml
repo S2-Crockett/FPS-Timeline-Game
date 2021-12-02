@@ -63,7 +63,12 @@
           <e p="Player" t="Include">
             <e p="Cursorhide.cs" t="Include" />
             <e p="PlayerController.cs" t="Include" />
+            <e p="PlayerDeathController.cs" t="Include" />
             <e p="WeaponHandler.cs" t="Include" />
+          </e>
+          <e p="Respawn" t="Include">
+            <e p="RespawnManager.cs" t="Include" />
+            <e p="RespawnPoint.cs" t="Include" />
           </e>
           <e p="Sounds" t="Include">
             <e p="ReverbZone.cs" t="Include" />
@@ -77,6 +82,7 @@
           <e p="UI" t="Include">
             <e p="Crosshair.cs" t="Include" />
             <e p="PlayerHealthBar.cs" t="Include" />
+            <e p="UIUtilities.cs" t="Include" />
           </e>
           <e p="Weapons" t="Include">
             <e p="WeaponController.cs" t="Include" />
