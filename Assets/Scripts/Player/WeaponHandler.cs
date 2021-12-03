@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+
 // ReSharper disable All
 
 public class WeaponHandler : MonoBehaviour
@@ -9,29 +10,26 @@ public class WeaponHandler : MonoBehaviour
     private DefaultInput defaultInput;
     private bool shouldShoot;
     private bool isAiming;
-    
-    [Header("Weapon")] 
-    private WeaponController currentWeapon;
+
+    [Header("Weapon")] private WeaponController currentWeapon;
     private int currentActiveIndex;
-    [HideInInspector]
-    public GameObject[] weaponRefs = new GameObject[5];
+    [HideInInspector] public GameObject[] weaponRefs = new GameObject[5];
     public WeaponSlot[] weaponSlots;
 
-    [Header("References")] 
-    private PlayerController player;
+    [Header("References")] private PlayerController player;
     private GameObject cameraHolder;
     public Transform weaponHolder;
 
     private void Awake()
     {
         defaultInput = new DefaultInput();
-        
+
         defaultInput.Weapon.Shoot.started += e => Shoot();
         defaultInput.Weapon.Shoot.canceled += e => Shoot();
 
-        defaultInput.Weapon.WeaponSlot1.started += e => SwapWeapon(0); 
+        defaultInput.Weapon.WeaponSlot1.started += e => SwapWeapon(0);
         defaultInput.Weapon.WeaponSlot2.started += e => SwapWeapon(1);
-        
+
         defaultInput.Weapon.Aim.started += e => AimingPressed();
         defaultInput.Weapon.Aim.canceled += e => AimingReleased();
 
@@ -53,7 +51,7 @@ public class WeaponHandler : MonoBehaviour
         int x = 0;
         foreach (var slot in weaponSlots)
         {
-            GameObject obj = Instantiate(slot.weaponObject,weaponHolder.position, weaponHolder.rotation);
+            GameObject obj = Instantiate(slot.weaponObject, weaponHolder.position, weaponHolder.rotation);
             obj.transform.parent = weaponHolder;
             obj.GetComponent<WeaponController>().Initialise(player);
             obj.SetActive(false);
@@ -76,23 +74,26 @@ public class WeaponHandler : MonoBehaviour
     {
         if (weaponRefs[newIndex] != null)
         {
-             weaponRefs[currentActiveIndex].SetActive(false);
-             weaponRefs[newIndex].SetActive(true);
-             
-             currentWeapon =  weaponRefs[newIndex].GetComponent<WeaponController>();
-             currentActiveIndex = newIndex;
+            weaponRefs[currentActiveIndex].SetActive(false);
+            weaponRefs[newIndex].SetActive(true);
+
+            currentWeapon = weaponRefs[newIndex].GetComponent<WeaponController>();
+            currentActiveIndex = newIndex;
         }
     }
 
     private void Update()
     {
-        CalculateAiming();
-        
-        if (shouldShoot)
+        if (!player.isDead)
         {
-            if (currentWeapon)
+            CalculateAiming();
+
+            if (shouldShoot)
             {
-                currentWeapon.Shoot(player.camera);
+                if (currentWeapon)
+                {
+                    currentWeapon.Shoot(player.camera);
+                }
             }
         }
     }
@@ -115,7 +116,7 @@ public class WeaponHandler : MonoBehaviour
         {
             return;
         }
-        
+
         currentWeapon.isAiming = this.isAiming;
     }
 

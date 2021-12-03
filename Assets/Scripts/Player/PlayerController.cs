@@ -108,9 +108,10 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        CalculateView();
+        
         if (!isDead)
         {
+            CalculateView();
             CalculateMovement();
             CalculateJump();
             CalculateCameraHeight();

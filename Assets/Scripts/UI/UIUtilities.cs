@@ -33,8 +33,11 @@ public class UIUtilities : MonoBehaviour
             
             yield return new WaitForEndOfFrame();
         }
-        
-        function.Invoke();
+
+        if (function != null)
+        {
+            function.Invoke();
+        }
     }
     
 }

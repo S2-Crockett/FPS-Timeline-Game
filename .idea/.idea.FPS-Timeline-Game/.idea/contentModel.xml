@@ -49,11 +49,28 @@
         <e p="Input" t="Include">
           <e p="DefaultInput.cs" t="Include" />
         </e>
+        <e p="Packages" t="Include">
+          <e p="LeanTween" t="Include">
+            <e p="Framework" t="Include">
+              <e p="LeanAudio.cs" t="Include" />
+              <e p="LeanSmooth.cs" t="Include" />
+              <e p="LeanTest.cs" t="Include" />
+              <e p="LeanTween.cs" t="Include" />
+              <e p="LeanTweenExt.cs" t="Include" />
+              <e p="LTDescr.cs" t="Include" />
+              <e p="LTDescrOptional.cs" t="Include" />
+              <e p="LTSeq.cs" t="Include" />
+            </e>
+            <e p="License.txt" t="Include" />
+            <e p="ReadMe.txt" t="Include" />
+          </e>
+        </e>
         <e p="Scripts" t="Include">
           <e p="Components" t="Include">
             <e p="HealthComponent.cs" t="Include" />
           </e>
           <e p="Managers" t="Include">
+            <e p="CameraManager.cs" t="Include" />
             <e p="UIManager.cs" t="Include" />
           </e>
           <e p="Pickups" t="Include">

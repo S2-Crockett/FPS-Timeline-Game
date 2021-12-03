@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using Cinemachine;
 using Managers;
 using UnityEngine;
@@ -9,20 +10,20 @@ using UnityEngine.Rendering.Universal;
 
 public class PlayerDeathController : MonoBehaviour
 {
+    public float test;
     [Header("Post Processing")] 
     public Volume postProcessing;
-    public float defaultSaturation = 1;
-    public float minSaturation;
+    public float defaultSaturation = 0;
+    public float minSaturation = -1;
+    public float timeToChange = 1;
 
     [Header("Cameras")] 
     public CinemachineVirtualCamera playerCam;
     public CinemachineVirtualCamera deathCam;
 
-    [Header("HUD Swap")] 
-    public GameObject playerHUD;
-    public GameObject deathHUD;
+    [Header("HUD Swap")]
     public CanvasGroup playerCanvas;
-    private CanvasGroup deathCavnas;
+    public CanvasGroup deathCavnas;
     
     
     private bool isDead;
@@ -33,14 +34,25 @@ public class PlayerDeathController : MonoBehaviour
     void Start()
     {
         _controller = GetComponent<PlayerController>();
-        // feed information to the camera switcher
+        
+        //register both of our cameras with the register
+        CameraManager.Register(playerCam);
+        CameraManager.Register(deathCam);
+        
+        CameraManager.SwitchCamera(playerCam);
+    }
+
+    private void OnDestroy()
+    {
+        CameraManager.Unregister(playerCam);
+        CameraManager.Unregister(deathCam);
     }
 
     private void Update()
     {
         if (isDead)
         {
-            //lerp post processing
+           
         }
         else if(isRespawning && !isDead)
         {
@@ -55,25 +67,50 @@ public class PlayerDeathController : MonoBehaviour
         
         if (isDead)
         {
-            // camera switch
+            if (CameraManager.IsActiveCamera(playerCam))
+            {
+                CameraManager.SwitchCamera(deathCam);
+            }
+            
             if (postProcessing.profile.TryGet<ColorAdjustments>(out var saturation))
             {
-                saturation.saturation.value = -100;
+                LeanTween.value(gameObject, defaultSaturation, minSaturation, timeToChange)
+                    .setOnUpdate((value) =>
+                    {
+                        saturation.saturation.value = value;
+                    });
             }
+            
             UIManager.Utilities.FadeOutCanvas(playerCanvas, 0.25f,(CompleteAfterDeath));
         }
     }
 
    public void CompleteAfterDeath()
     {
-        // set the canvas group to disabled? 
+        UIManager.Utilities.FadeInCanvas(deathCavnas, 0.25f, null);
+        UIManager.Instance.SetCursor(true);
     }
 
+    //this might need to be changed..? // added to respawn manager?
     public void SetRespawning(bool results)
     {
         isRespawning = results;
         if (isRespawning)
         {
+            if (postProcessing.profile.TryGet<ColorAdjustments>(out var saturation))
+            {
+                LeanTween.value(gameObject, minSaturation, defaultSaturation, timeToChange)
+                    .setOnUpdate((value) =>
+                    {
+                        saturation.saturation.value = value;
+                    });
+            }
+            if (CameraManager.IsActiveCamera(deathCam))
+            {
+                CameraManager.SwitchCamera(playerCam);
+            }
+            // 
+            // use the Respawn manager for that..
             // start a function in respawn menu to respawn player and result all their stuff.
             // camera switch
             // update hud to transition to player hud // fade

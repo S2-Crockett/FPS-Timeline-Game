@@ -44,6 +44,11 @@ public class HealthComponent : MonoBehaviour
                 int damageDif = damageAmount - shield;
                 shield = 0;
                 health -= damageDif;
+                if (damageDif >= health)
+                {
+                    health = 0;
+                    _deathController.SetIsDead(true);
+                }
                 UIManager.Instance.UpdateHealthDamage();
             }
             else
