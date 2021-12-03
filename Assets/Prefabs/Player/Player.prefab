@@ -268,7 +268,7 @@ MonoBehaviour:
   fieldOfViewChangeTime: 4
   cameraHolder: {fileID: 4963024754864949922}
   feetTransform: {fileID: 4963024756243053337}
-  gravityAmount: 0.03
+  gravityAmount: 0.06
   gravityMin: -2
   playerSettings:
     viewXSensitivity: 10
@@ -327,7 +327,7 @@ MonoBehaviour:
   postProcessing: {fileID: 0}
   defaultSaturation: 0
   minSaturation: -100
-  timeToChange: 0.75
+  timeToChange: 1.5
   playerCam: {fileID: 0}
   deathCam: {fileID: 0}
   playerCanvas: {fileID: 0}

@@ -24,6 +24,7 @@ public class RespawnManager : MonoBehaviour
     [Header("Cameras")] 
     public CinemachineVirtualCamera playerCam;
     public CinemachineVirtualCamera deathCam;
+    public CinemachineVirtualCamera startCam;
 
     private bool isFirstLevelLoad = false;
     
@@ -32,7 +33,6 @@ public class RespawnManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -45,14 +45,27 @@ public class RespawnManager : MonoBehaviour
         if (!isFirstLevelLoad)
         {
             isFirstLevelLoad = true;
+            
             _player = Instantiate(player,GetLastRepsawn() );
             _player.transform.SetParent(null);
+            
             //register both of our cameras with the register
             CameraManager.Register(deathCam);
             CameraManager.Register(playerCam);
-            CameraManager.SwitchCamera(playerCam);
-            Debug.Log("start");
+            CameraManager.Register(startCam);
+            
+            CameraManager.SwitchCamera(startCam);
+            StartCoroutine(DelayedCameraStart());
         }
+    }
+
+    private IEnumerator DelayedCameraStart()
+    {
+        yield return new WaitForSeconds(3.0f);
+        CameraManager.SwitchCamera(playerCam);
+        _player.GetComponent<PlayerController>().isDead = false;
+        UIManager.Instance.FadeGameHUD(0,1, 3.0f);
+        
     }
 
     public void AddRespawn(Transform position)

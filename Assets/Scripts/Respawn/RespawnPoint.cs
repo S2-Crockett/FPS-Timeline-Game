@@ -14,7 +14,6 @@ public class RespawnPoint : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Debug.Log("Unlock Checkpoint");
             RespawnManager.Instance.AddRespawn(spawnPosition);
             UIManager.Instance.SetNewCheckpoint(respawnName);
             gameObject.SetActive(false);

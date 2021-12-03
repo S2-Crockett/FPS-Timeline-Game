@@ -64,6 +64,13 @@
             <e p="License.txt" t="Include" />
             <e p="ReadMe.txt" t="Include" />
           </e>
+          <e p="Skybox" t="Include">
+            <e p="Skyboxes" t="Include">
+              <e p="Shaders" t="Include">
+                <e p="Stylized Sky.shader" t="Include" />
+              </e>
+            </e>
+          </e>
         </e>
         <e p="Scripts" t="Include">
           <e p="Components" t="Include">

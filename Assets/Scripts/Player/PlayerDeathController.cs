@@ -40,12 +40,14 @@ public class PlayerDeathController : MonoBehaviour
         
         playerCam = GameObject.Find("CMPlayer").GetComponent<CinemachineVirtualCamera>();
         deathCam = GameObject.Find("CMDeath").GetComponent<CinemachineVirtualCamera>();
+        CinemachineVirtualCamera startCamera = GameObject.Find("CMStart").GetComponent<CinemachineVirtualCamera>();
         
         playerCanvas = GameObject.Find("GameHUD").GetComponent<CanvasGroup>();
         deathCavnas = GameObject.Find("DeathHUD").GetComponent<CanvasGroup>();
-        
+
         _controller = GetComponent<PlayerController>();
         playerCam.m_Follow = camHolder.transform;
+        startCamera.m_LookAt = player.transform;
     }
 
     // Start is called before the first frame update

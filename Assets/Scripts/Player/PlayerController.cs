@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
 
     public Camera camera;
 
-    [HideInInspector] public bool isDead;
+    [HideInInspector] public bool isDead = true;
 
     #region - Awake -
 
@@ -83,19 +83,17 @@ public class PlayerController : MonoBehaviour
         defaultInput.Weapon.Aim.canceled += e => StopAiming();
 
         defaultInput.Enable();
-
+        
         newCameraRotation = cameraHolder.localRotation.eulerAngles;
         newPlayerRotation = transform.localRotation.eulerAngles;
 
         characterController = GetComponent<CharacterController>();
         cameraHeight = cameraHolder.localPosition.y;
         UIManager.Instance.SetCursor(false);
-        
     }
 
     private void Start()
     {
-        
         camera.fieldOfView = defaultFOV;
         weaponHandler = GetComponent<WeaponHandler>();
         weaponHandler.Initialise(this);
@@ -107,11 +105,11 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        
+        CalculateMovement();
+
         if (!isDead)
         {
             CalculateView();
-            CalculateMovement();
             CalculateJump();
             CalculateCameraHeight();
             SetLookAtTargetCrosshair();
@@ -157,21 +155,26 @@ public class PlayerController : MonoBehaviour
 
     private void CalculateMovement()
     {
-        if (inputMovement.y <= 0.2f)
+        Vector3 movementSpeed = new Vector3();
+
+        if (!isDead)
         {
-            isSprinting = false;
+            if (inputMovement.y <= 0.2f)
+            {
+                isSprinting = false;
+            }
+
+            var verticalSpeed = GetStanceSettings().stanceForwardMovementSpeed;
+            var horizontalSpeed = GetStanceSettings().stanceStrafeMovementSpeed;
+
+            var vertSpeed = verticalSpeed * inputMovement.y * Time.smoothDeltaTime;
+            var horSpeed = horizontalSpeed * inputMovement.x * Time.smoothDeltaTime;
+
+            newMovementSpeed = Vector3.SmoothDamp(newMovementSpeed, new Vector3(horSpeed, 0, vertSpeed),
+                ref newMovementSpeedVelocity,
+                characterController.isGrounded ? movementSmoothing : playerSettings.fallingSmoothing);
+            movementSpeed = transform.TransformDirection(newMovementSpeed);
         }
-
-        var verticalSpeed = GetStanceSettings().stanceForwardMovementSpeed;
-        var horizontalSpeed = GetStanceSettings().stanceStrafeMovementSpeed;
-
-        var vertSpeed = verticalSpeed * inputMovement.y * Time.smoothDeltaTime;
-        var horSpeed = horizontalSpeed * inputMovement.x * Time.smoothDeltaTime;
-
-        newMovementSpeed = Vector3.SmoothDamp(newMovementSpeed, new Vector3(horSpeed, 0, vertSpeed),
-            ref newMovementSpeedVelocity,
-            characterController.isGrounded ? movementSmoothing : playerSettings.fallingSmoothing);
-        var movementSpeed = transform.TransformDirection(newMovementSpeed);
 
         if (playerGravity > gravityMin)
         {
@@ -182,7 +185,7 @@ public class PlayerController : MonoBehaviour
         {
             playerGravity = -0.1f;
         }
-
+        
         movementSpeed.y += playerGravity;
         movementSpeed += jumpingForce * Time.smoothDeltaTime;
 

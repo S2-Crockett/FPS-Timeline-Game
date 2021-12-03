@@ -10,7 +10,7 @@ Material:
   m_Name: PortalMaterial
   m_Shader: {fileID: -6465566751694194690, guid: b37ed61388024e043a417a2646a0d173, type: 3}
   m_ShaderKeywords: 
-  m_LightmapFlags: 4
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -37,9 +37,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Density: 3.5
-    - Power: 2
-    - Strength: 28
+    - Density: 4.27
+    - Power: 1
+    - Strength: -9.49
     - _Offset: 0.5
     m_Colors:
     - _Color: {r: 7.027451, g: 47.937256, b: 10.039216, a: 1}

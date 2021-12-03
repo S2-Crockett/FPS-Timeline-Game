@@ -10,6 +10,8 @@ namespace Managers
     {
         public static UIManager Instance;
         public static UIUtilities Utilities;
+        [Header("HUDS")] 
+        public CanvasGroup gameCanvas;
 
         [Header("AmmoUI")] public Text currentAmmoText;
         public Text currentHeldAmmoText;
@@ -117,6 +119,15 @@ namespace Managers
         public void EnableRespawnButton()
         {
             deathPanel.EnableRespawnButton(true);
+        }
+
+        public void FadeGameHUD(float start, float end, float time)
+        {
+            LeanTween.value(gameObject, start, end, time)
+                .setOnUpdate((value) =>
+                {
+                    gameCanvas.alpha = value;
+                });
         }
 
     }
