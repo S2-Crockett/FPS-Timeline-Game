@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7721725388225011071}
   m_Layer: 6
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 204667687222369351}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.49, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4963024754864949922}
@@ -57,11 +57,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
+  near clip plane: 0.01
+  far clip plane: 5000
   field of view: 60
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -213,7 +213,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4963024755645646197}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.9, y: 1.06, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4963024754864949922}
@@ -271,8 +271,8 @@ MonoBehaviour:
   gravityAmount: 0.03
   gravityMin: -2
   playerSettings:
-    viewXSensitivity: 20
-    viewYSensitivity: 20
+    viewXSensitivity: 10
+    viewYSensitivity: 10
     viewXInverted: 1
     viewYInverted: 0
     viewClampYMin: -70
@@ -309,7 +309,7 @@ MonoBehaviour:
   onDirt: 0
   onWater: 0
   onConcrete: 0
-  camera: {fileID: 0}
+  camera: {fileID: 8148509830744877317}
   isDead: 0
 --- !u!114 &5366620956268042168
 MonoBehaviour:
@@ -323,6 +323,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08ca8ab8f49e336418027734f026695a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  test: 0
+  postProcessing: {fileID: 0}
+  defaultSaturation: 0
+  minSaturation: -100
+  timeToChange: 0.75
+  playerCam: {fileID: 0}
+  deathCam: {fileID: 0}
+  playerCanvas: {fileID: 0}
+  deathCavnas: {fileID: 0}
+  camHolder: {fileID: 4963024754864949923}
+  player: {fileID: 4963024755645646197}
 --- !u!114 &5112141260891272993
 MonoBehaviour:
   m_ObjectHideFlags: 0

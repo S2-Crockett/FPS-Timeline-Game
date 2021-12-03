@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
 
     private bool shouldShoot;
 
-    [HideInInspector] public Camera camera;
+    public Camera camera;
 
     [HideInInspector] public bool isDead;
 
@@ -89,17 +89,16 @@ public class PlayerController : MonoBehaviour
 
         characterController = GetComponent<CharacterController>();
         cameraHeight = cameraHolder.localPosition.y;
-
-        camera = Camera.main;
-        camera.fieldOfView = defaultFOV;
-
-        weaponHandler = GetComponent<WeaponHandler>();
-        weaponHandler.Initialise(this);
+        UIManager.Instance.SetCursor(false);
+        
     }
 
     private void Start()
     {
-        UIManager.Instance.SetCursor(false);
+        
+        camera.fieldOfView = defaultFOV;
+        weaponHandler = GetComponent<WeaponHandler>();
+        weaponHandler.Initialise(this);
     }
 
     #endregion

@@ -47,7 +47,7 @@ public class WeaponHandler : MonoBehaviour
 
     private IEnumerator InitiateBaseWeapons()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
         int x = 0;
         foreach (var slot in weaponSlots)
         {

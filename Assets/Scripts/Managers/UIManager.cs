@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -16,9 +17,14 @@ namespace Managers
         [Header("Health")] 
         public PlayerHealthBar healthBar;
         public HealthComponent health;
+        public DeathPanel deathPanel;
 
         [Header("Crosshair")] 
         public Crosshair crosshair;
+
+        [Header("Checkpoint")] 
+        public CanvasGroup checkpointCanvas;
+        public Text checkPointNameText;
 
         void Awake()
         {
@@ -81,5 +87,37 @@ namespace Managers
                 Cursor.lockState = CursorLockMode.Locked;
             }
         }
+
+        public void SetNewCheckpoint(string name)
+        {
+            checkPointNameText.text = name;
+            LeanTween.value(gameObject, 0, 1, 0.75f)
+                .setOnUpdate((value) =>
+                {
+                    checkpointCanvas.alpha = value;
+                })
+                .setOnComplete(FadeOutNewCheckpoint);
+        }
+        
+        public void FadeOutNewCheckpoint()
+        {
+            StartCoroutine(FadeOut());
+        }
+
+        IEnumerator FadeOut()
+        {
+            yield return new WaitForSeconds(4f);
+            LeanTween.value(gameObject, 1, 0, 0.75f)
+                .setOnUpdate((value) =>
+                {
+                    checkpointCanvas.alpha = value;
+                });
+        }
+
+        public void EnableRespawnButton()
+        {
+            deathPanel.EnableRespawnButton(true);
+        }
+
     }
 }

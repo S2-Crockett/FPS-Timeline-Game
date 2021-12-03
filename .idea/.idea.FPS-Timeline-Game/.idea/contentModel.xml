@@ -98,6 +98,7 @@
           </e>
           <e p="UI" t="Include">
             <e p="Crosshair.cs" t="Include" />
+            <e p="DeathPanel.cs" t="Include" />
             <e p="PlayerHealthBar.cs" t="Include" />
             <e p="UIUtilities.cs" t="Include" />
           </e>

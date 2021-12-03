@@ -25,29 +25,35 @@ public class PlayerDeathController : MonoBehaviour
     public CanvasGroup playerCanvas;
     public CanvasGroup deathCavnas;
     
+    [Header("References")]
+    public GameObject camHolder;
+    public GameObject player;
+    
     
     private bool isDead;
     private bool isRespawning;
     private PlayerController _controller;
-    
+
+    private void Awake()
+    {
+        postProcessing = GameObject.Find("PPV").GetComponent<Volume>();
+        
+        playerCam = GameObject.Find("CMPlayer").GetComponent<CinemachineVirtualCamera>();
+        deathCam = GameObject.Find("CMDeath").GetComponent<CinemachineVirtualCamera>();
+        
+        playerCanvas = GameObject.Find("GameHUD").GetComponent<CanvasGroup>();
+        deathCavnas = GameObject.Find("DeathHUD").GetComponent<CanvasGroup>();
+        
+        _controller = GetComponent<PlayerController>();
+        playerCam.m_Follow = camHolder.transform;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        _controller = GetComponent<PlayerController>();
         
-        //register both of our cameras with the register
-        CameraManager.Register(playerCam);
-        CameraManager.Register(deathCam);
-        
-        CameraManager.SwitchCamera(playerCam);
     }
-
-    private void OnDestroy()
-    {
-        CameraManager.Unregister(playerCam);
-        CameraManager.Unregister(deathCam);
-    }
-
+    
     private void Update()
     {
         if (isDead)
@@ -62,6 +68,9 @@ public class PlayerDeathController : MonoBehaviour
 
     public void SetIsDead(bool results)
     {
+        deathCam.m_Follow = camHolder.transform;
+        deathCam.m_LookAt = player.transform;
+        
         isDead = results;
         _controller.isDead = this.isDead;
         
@@ -91,6 +100,17 @@ public class PlayerDeathController : MonoBehaviour
         UIManager.Instance.SetCursor(true);
     }
 
+   public void CompleteAfterRespawn()
+   {
+       UIManager.Utilities.FadeInCanvas(playerCanvas, 0.25f, null);
+       UIManager.Instance.EnableRespawnButton();
+       UIManager.Instance.SetCursor(false);
+       if (CameraManager.IsActiveCamera(deathCam))
+       {
+           CameraManager.SwitchCamera(playerCam);
+       }
+   }
+
     //this might need to be changed..? // added to respawn manager?
     public void SetRespawning(bool results)
     {
@@ -105,10 +125,8 @@ public class PlayerDeathController : MonoBehaviour
                         saturation.saturation.value = value;
                     });
             }
-            if (CameraManager.IsActiveCamera(deathCam))
-            {
-                CameraManager.SwitchCamera(playerCam);
-            }
+            
+            UIManager.Utilities.FadeOutCanvas(deathCavnas, 0.25f,(CompleteAfterRespawn));
             // 
             // use the Respawn manager for that..
             // start a function in respawn menu to respawn player and result all their stuff.

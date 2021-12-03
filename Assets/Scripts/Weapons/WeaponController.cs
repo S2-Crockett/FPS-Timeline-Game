@@ -89,7 +89,6 @@ public class WeaponController : MonoBehaviour
     
     private void Start()
     {
-        cam = playerController.camera;
         audioSource = GetComponent<AudioSource>();
         newWeaponRotation = transform.localRotation.eulerAngles;
         swayPosition = transform.parent.position;
@@ -98,6 +97,7 @@ public class WeaponController : MonoBehaviour
     public void Initialise(PlayerController controller)
     {
         playerController = controller;
+        cam = playerController.camera;
         isInitialised = true;
     }
 
