@@ -1,15 +1,26 @@
 fileFormatVersion: 2
-guid: 02af499709338f0408fa959ab1d2303f
-timeCreated: 1491775752
-licenseType: Store
+guid: 07358e1fb79dc0d4ca1ca57365d9cd8f
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Trunk
+    100000: Leaves01
+    100002: Leaves02
+    100004: //RootNode
+    100006: Trunk
+    400000: Leaves01
+    400002: Leaves02
+    400004: //RootNode
+    400006: Trunk
+    2300000: Leaves01
+    2300002: Leaves02
+    2300004: Trunk
+    3300000: Leaves01
+    3300002: Leaves02
+    3300004: Trunk
+    4300000: Leaves01
+    4300002: Trunk
+    4300004: Leaves02
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -48,12 +59,12 @@ ModelImporter:
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
-    useFileScale: 1
+    useFileScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
-    tangentImportMode: 3
-  importAnimation: 1
+    tangentImportMode: 4
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2
@@ -70,7 +81,7 @@ ModelImporter:
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
-    skeletonHasParents: 1
+    skeletonHasParents: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 0
   humanoidOversampling: 1

@@ -7,7 +7,6 @@ public class Zone : ScriptableObject
 {
     [Header("Environment Details")]
     public GameObject timezone1;
-    public GameObject[] floor1;
 
     [Header("Player")]
     public GameObject Player;
