@@ -27,8 +27,8 @@ public class PlayerDeathController : MonoBehaviour
     
     [Header("References")]
     public GameObject camHolder;
+    public GameObject camLookAt;
     public GameObject player;
-    
     
     private bool isDead;
     private bool isRespawning;
@@ -47,6 +47,7 @@ public class PlayerDeathController : MonoBehaviour
 
         _controller = GetComponent<PlayerController>();
         playerCam.m_Follow = camHolder.transform;
+        playerCam.m_LookAt = camLookAt.transform;
         startCamera.m_LookAt = player.transform;
     }
 

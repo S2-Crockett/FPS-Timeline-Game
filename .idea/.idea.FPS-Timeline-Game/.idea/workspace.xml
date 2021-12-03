@@ -20,24 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b7d5abbc-e8eb-400a-a78c-2d13f0ee5620" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Developers/Sam C/Materials/PortalMaterial.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Developers/Sam C/Materials/PortalMaterial.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Developers/Sam C/Prefabs/Portal.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Developers/Sam C/Prefabs/Portal.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Developers/Sam C/Shaders/Portal.shadergraph" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Developers/Sam C/Shaders/Portal.shadergraph" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Developers/Sam S/Test_Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Developers/Sam S/Test_Scene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/Prototype-Materials/Misc/M_RedDoor.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Prototype-Materials/Misc/M_RedDoor.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/Prototype-Materials/Misc/M_RedWall.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Prototype-Materials/Misc/M_RedWall.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/CMCameras.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/CMCameras.prefab.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/UIManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Weapons/BasePrimary.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Weapons/BasePrimary.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Weapons/BaseSecondary.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Weapons/BaseSecondary.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerDeathController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerDeathController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Respawn/RespawnManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Respawn/RespawnManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Respawn/RespawnPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Respawn/RespawnPoint.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +64,6 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Components/HealthComponent.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/UIUtilities.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/WeaponHandler.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponController.cs" />
         <option value="$PROJECT_DIR$/Assets/Developers/Sam C/Scripts/Exit Door/Exit.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Managers/CameraManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/DeathPanel.cs" />
@@ -83,6 +72,7 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Respawn/RespawnManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/PlayerDeathController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponController.cs" />
       </list>
     </option>
   </component>
@@ -140,7 +130,7 @@
       <workItem from="1638013832684" duration="5715000" />
       <workItem from="1638125213533" duration="14505000" />
       <workItem from="1638281248938" duration="4346000" />
-      <workItem from="1638464955043" duration="37341000" />
+      <workItem from="1638464955043" duration="40353000" />
     </task>
     <servers />
   </component>

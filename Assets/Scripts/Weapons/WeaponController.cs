@@ -33,9 +33,10 @@ public class WeaponController : MonoBehaviour
     public float maxTransY = 1.0f;
     public float maxTransZ = -1.0f;
     public float recoilSpeed = 10.0f;
+    public float cameraRecoil = 1.0f;
     private float recoil = 0.0f;
     
-    private Vector3 newRecoilCameraRotation;
+    private Vector3 newRecoilCameraPosition;
     private Vector3 newRecoilCameraVelocity;
     private Vector3 newRecoilTargetCameraRotation;
     private Vector3 newRecoilTargetCameraVelocity; 
@@ -73,7 +74,7 @@ public class WeaponController : MonoBehaviour
     private Vector3 targetWeaponMovementRotationVelocity;
 
     private AudioSource audioSource;
-    private Camera cam;
+    private GameObject lookAtTarget;
 
     private void Awake()
     {
@@ -97,7 +98,7 @@ public class WeaponController : MonoBehaviour
     public void Initialise(PlayerController controller)
     {
         playerController = controller;
-        cam = playerController.camera;
+        lookAtTarget = playerController.LookAtTarget;
         isInitialised = true;
     }
 
@@ -147,7 +148,6 @@ public class WeaponController : MonoBehaviour
         CalculateBreathing();
         CalculateAiming();
         CalculateRecoil();
-      
     }
 
     public IEnumerator Reload()
@@ -271,25 +271,14 @@ public class WeaponController : MonoBehaviour
         transform.position = weaponSwayPosition;
     }
     
-    private void CalculateCameraRecoil()
-    {
-        var targetRotation = new Vector3(cam.transform.localRotation.x - 10.0f, cam.transform.localRotation.y, cam.transform.localRotation.z);
-
-        newRecoilCameraRotation = playerController.cameraHolder.localRotation.eulerAngles;
-        newRecoilCameraRotation =
-            Vector3.SmoothDamp(newRecoilCameraRotation, targetRotation, ref newRecoilCameraVelocity, 2.0f);
-        cam.transform.localRotation = Quaternion.Euler(newRecoilCameraRotation);
-    }
-
-
     private void CalculateRecoil()
     {
         if (recoil > 0)
         {
-            float currentTrans = cam.transform.localRotation.x;
-            var newRotation = currentTrans -= 5;
-            newRecoilCameraRotation = new Vector3(currentTrans, cam.transform.localRotation.y, cam.transform.localRotation.z);
-            cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation, Quaternion.Euler(newRecoilCameraRotation),  Time.deltaTime * recoilSpeed);
+            float currentTrans = lookAtTarget.transform.localPosition.y;
+            var newRotation = currentTrans += cameraRecoil;
+            newRecoilCameraPosition = new Vector3(lookAtTarget.transform.localPosition.x, currentTrans, lookAtTarget.transform.localPosition.z);
+            lookAtTarget.transform.localPosition = Vector3.Slerp(lookAtTarget.transform.localPosition, newRecoilCameraPosition,  Time.deltaTime * recoilSpeed);
             
             var maxRecoil = Quaternion.Euler(Random.Range(transform.parent.localRotation.x, maxRecoilX), Random.Range(transform.parent.localRotation.y - maxRecoilY, maxRecoilY), transform.parent.localRotation.z);
             
@@ -306,9 +295,9 @@ public class WeaponController : MonoBehaviour
             recoil = 0;
             var minRecoil = Quaternion.Euler(Random.Range(0, transform.parent.localRotation.x), Random.Range(0, transform.parent.localRotation.y), transform.parent.localRotation.z);
             transform.parent.localRotation = Quaternion.Slerp(transform.parent.localRotation, minRecoil, Time.deltaTime * recoilSpeed / 2);
-            
-            var minRotation = Quaternion.Euler(0, cam.transform.localRotation.y, cam.transform.localRotation.z);
-            cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation, minRotation,  Time.deltaTime * recoilSpeed);
+
+            Vector3 minPosition = new Vector3(lookAtTarget.transform.localPosition.x, 0, lookAtTarget.transform.localPosition.z);
+            lookAtTarget.transform.localPosition = Vector3.Slerp(lookAtTarget.transform.localPosition, minPosition,  Time.deltaTime * recoilSpeed);
             
             var minTranslation = new Vector3(
                 transform.parent.localPosition.x, Random.Range(0, transform.parent.localPosition.y), transform.parent.localPosition.z);

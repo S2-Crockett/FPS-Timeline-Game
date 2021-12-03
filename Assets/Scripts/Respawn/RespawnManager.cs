@@ -61,10 +61,10 @@ public class RespawnManager : MonoBehaviour
 
     private IEnumerator DelayedCameraStart()
     {
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(2.0f);
         CameraManager.SwitchCamera(playerCam);
         _player.GetComponent<PlayerController>().isDead = false;
-        UIManager.Instance.FadeGameHUD(0,1, 3.0f);
+        UIManager.Instance.FadeGameHUD(0,1, 1.0f);
         
     }
 

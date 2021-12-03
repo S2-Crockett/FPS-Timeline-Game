@@ -30,8 +30,10 @@ public class PlayerController : MonoBehaviour
     public float aimingFOV = 45.0f;
     public float fieldOfViewChangeTime = 4.0f;
 
-    [Header("References")] public Transform cameraHolder;
+    [Header("References")] 
+    public Transform cameraHolder;
     public Transform feetTransform;
+    public GameObject LookAtTarget;
 
     [Header("Gravity")] public float gravityAmount;
     public float gravityMin;
