@@ -89,7 +89,10 @@ public class WeaponController : MonoBehaviour
     
     private void Start()
     {
-        cam = playerController.camera;
+        if (playerController != null)
+        {
+            cam = playerController.camera;
+        }
         audioSource = GetComponent<AudioSource>();
         newWeaponRotation = transform.localRotation.eulerAngles;
         swayPosition = transform.parent.position;
@@ -114,44 +117,46 @@ public class WeaponController : MonoBehaviour
         {
             return;
         }
+        if (this.tag == "Player")
+        {
+            targetWeaponRotation.y += settings.swayAmount *
+                                      (settings.swayXInverted
+                                          ? -playerController.inputView.x
+                                          : playerController.inputView.x) * Time.deltaTime;
+            targetWeaponRotation.x += settings.swayAmount *
+                                      (settings.swayYInverted
+                                          ? playerController.inputView.y
+                                          : -playerController.inputView.y) * Time.deltaTime;
 
-        targetWeaponRotation.y += settings.swayAmount *
-                                  (settings.swayXInverted
-                                      ? -playerController.inputView.x
-                                      : playerController.inputView.x) * Time.deltaTime;
-        targetWeaponRotation.x += settings.swayAmount *
-                                  (settings.swayYInverted
-                                      ? playerController.inputView.y
-                                      : -playerController.inputView.y) * Time.deltaTime;
+            targetWeaponRotation.y = Mathf.Clamp(targetWeaponRotation.y, -settings.swayClampY, settings.swayClampY);
+            targetWeaponRotation.x = Mathf.Clamp(targetWeaponRotation.x, -settings.swayClampX, settings.swayClampX);
+            targetWeaponRotation.z = targetWeaponRotation.y * 2;
 
-        targetWeaponRotation.y = Mathf.Clamp(targetWeaponRotation.y, -settings.swayClampY, settings.swayClampY);
-        targetWeaponRotation.x = Mathf.Clamp(targetWeaponRotation.x, -settings.swayClampX, settings.swayClampX);
-        targetWeaponRotation.z = targetWeaponRotation.y * 2;
+            targetWeaponRotation = Vector3.SmoothDamp(targetWeaponRotation, Vector3.zero, ref targetWeaponRotationVelocity,
+                settings.swayResetSmoothing);
+            newWeaponRotation = Vector3.SmoothDamp(newWeaponRotation, targetWeaponRotation, ref newWeaponRotationVelocity,
+                settings.swaySmoothing);
 
-        targetWeaponRotation = Vector3.SmoothDamp(targetWeaponRotation, Vector3.zero, ref targetWeaponRotationVelocity,
-            settings.swayResetSmoothing);
-        newWeaponRotation = Vector3.SmoothDamp(newWeaponRotation, targetWeaponRotation, ref newWeaponRotationVelocity,
-            settings.swaySmoothing);
+            targetWeaponMovementRotation.z = settings.movementSwayZ * (settings.movementSwayZInverted
+                ? -playerController.inputMovement.x
+                : playerController.inputMovement.x);
+            targetWeaponMovementRotation.x = settings.movementSwayY * (settings.movementSwayYInverted
+                ? -playerController.inputMovement.y
+                : playerController.inputMovement.y);
 
-        targetWeaponMovementRotation.z = settings.movementSwayZ * (settings.movementSwayZInverted
-            ? -playerController.inputMovement.x
-            : playerController.inputMovement.x);
-        targetWeaponMovementRotation.x = settings.movementSwayY * (settings.movementSwayYInverted
-            ? -playerController.inputMovement.y
-            : playerController.inputMovement.y);
+            targetWeaponMovementRotation = Vector3.SmoothDamp(targetWeaponMovementRotation, Vector3.zero,
+                ref targetWeaponMovementRotationVelocity,
+                settings.movementSwaySmoothing);
+            newWeaponMovementRotation = Vector3.SmoothDamp(newWeaponMovementRotation, targetWeaponMovementRotation,
+                ref newWeaponMovementRotationVelocity,
+                settings.movementSwaySmoothing);
 
-        targetWeaponMovementRotation = Vector3.SmoothDamp(targetWeaponMovementRotation, Vector3.zero,
-            ref targetWeaponMovementRotationVelocity,
-            settings.movementSwaySmoothing);
-        newWeaponMovementRotation = Vector3.SmoothDamp(newWeaponMovementRotation, targetWeaponMovementRotation,
-            ref newWeaponMovementRotationVelocity,
-            settings.movementSwaySmoothing);
+            transform.localRotation = Quaternion.Euler(newWeaponRotation + newWeaponMovementRotation);
 
-        transform.localRotation = Quaternion.Euler(newWeaponRotation + newWeaponMovementRotation);
-       
-        CalculateBreathing();
-        CalculateAiming();
-        CalculateRecoil();
+            CalculateBreathing();
+            CalculateAiming();
+            CalculateRecoil();
+        }
       
     }
 
@@ -189,7 +194,7 @@ public class WeaponController : MonoBehaviour
         UIManager.Instance.UpdateHeldAmmoText(equippedAmmo);
     }
 
-    public void Shoot(Camera cam)
+    public void Shoot(Transform cam)
     {
         if (isReloading)
         {
@@ -212,7 +217,7 @@ public class WeaponController : MonoBehaviour
             muzzleParticle.Play();
             
             RaycastHit hit;
-            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))
+            if (Physics.Raycast(cam.position, cam.forward, out hit, range))
             {
                 ShootingTarget target = hit.transform.GetComponent<ShootingTarget>();
                 if (target != null)
@@ -226,15 +231,11 @@ public class WeaponController : MonoBehaviour
                 {
                     enemy.TakeDamage(damage);
                 }
-
                 //GameObject ImpactObject = Instantiate(hitParticle, hit.point, Quaternion.LookRotation(hit.normal));
                 //Destroy(ImpactObject, 0.4f);
             }
-            
         }
-        
         //UIManager.Instance.crosshair.SetIsShooting(false);
-        
     }
 
     private void CalculateBreathing()

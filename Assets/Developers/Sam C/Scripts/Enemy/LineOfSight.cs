@@ -1,9 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class LineOfSight : MonoBehaviour
 {
+
+    enum Stages
+    {
+        SEARCHING,
+        IN_RANGE,
+        FOUND
+    }
 
     private ZoneChecker LevelManager;
     private GameObject player;
@@ -12,8 +20,14 @@ public class LineOfSight : MonoBehaviour
     private WeaponController currentWeapon;
     private int currentActiveIndex;
     private GameObject[] weaponRefs = new GameObject[5];
-    public WeaponSlot[] weaponSlots;
+    public WeaponSlot_[] weaponSlots;
     public Transform weaponHolder;
+
+
+    private Stages stages;
+    private Vector3 targetDir;
+    private float rotation;
+    private float distance;
 
 
     public int speed = 2;
@@ -22,6 +36,7 @@ public class LineOfSight : MonoBehaviour
     {
         LevelManager = GameObject.Find("LevelManager").GetComponent<ZoneChecker>();
         player = GameObject.Find("Player");
+        stages = Stages.SEARCHING;
     }
 
     private void Awake()
@@ -37,26 +52,84 @@ public class LineOfSight : MonoBehaviour
 
     void Update()
     {
-
-        Vector3 targetDir = player.transform.position - transform.position;
-
-        float rotation = Vector3.Angle(targetDir, transform.forward);
-        float distance = Vector3.Distance(player.transform.position, transform.position);
-
-        if (rotation < 45 && distance < 15)
+        switch (stages)
         {
-            weaponHolder.LookAt(player.transform);
-            if (currentWeapon)
-            {
-                currentWeapon.Shoot(player.GetComponent<Camera>());
-            }
+            case Stages.SEARCHING:
+                {
+                    if (Searching())
+                    {
+                        stages = Stages.IN_RANGE;
+                    }
+                    break;
+                }
+            case Stages.IN_RANGE:
+                {
+                    inRange();
+                    break;
+                }
+            case Stages.FOUND:
+                {
+                    Vector3 target = player.transform.position - weaponHolder.transform.position;
+                    Quaternion rotation = Quaternion.LookRotation(target, Vector3.forward);
+                    weaponHolder.transform.rotation = rotation;
+                    if (currentWeapon)
+                    {
+                        currentWeapon.Shoot(weaponHolder.transform);
+                    }
+                    break;
+                }
         }
     }
+
+    private bool Searching()
+    {
+        targetDir = player.transform.position - transform.position;
+
+        rotation = Vector3.Angle(targetDir, transform.forward);
+        distance = Vector3.Distance(player.transform.position, transform.position);
+
+        if (rotation < 45 && distance < 8)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private void inRange()
+    {
+        Vector3 target = player.transform.position - weaponHolder.transform.position;
+
+        Quaternion rotation = Quaternion.LookRotation(target, Vector3.forward);
+        weaponHolder.transform.rotation = rotation;
+
+        RaycastHit hit;
+        if (Physics.Raycast(weaponHolder.transform.position, weaponHolder.transform.forward, out hit, Mathf.Infinity, 1))
+        {
+            if (hit.collider.gameObject.tag == "Player")
+            {
+                //print("hit");
+                stages = Stages.FOUND;
+            }
+        }
+        if (!Searching())
+        {
+            stages = Stages.SEARCHING;
+        }
+    }
+
+
+
+
 
     public void Initialise()
     {
         InitiateBaseWeapons();
     }
+
+
 
     private void InitiateBaseWeapons()
     {
@@ -73,6 +146,8 @@ public class LineOfSight : MonoBehaviour
         StartCoroutine(SpawnPrimaryWeapon());
     }
 
+
+
     IEnumerator SpawnPrimaryWeapon()
     {
         yield return new WaitForSeconds(0.1f);
@@ -80,4 +155,11 @@ public class LineOfSight : MonoBehaviour
         currentActiveIndex = 0;
         currentWeapon = weaponRefs[0].GetComponent<WeaponController>();
     }
+
+}
+[Serializable]
+public class WeaponSlot_
+{
+    public int weaponIndex;
+    public GameObject weaponObject;
 }

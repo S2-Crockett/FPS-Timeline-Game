@@ -121,7 +121,7 @@ public class WeaponHandler : MonoBehaviour
         {
             if (currentWeapon)
             {
-                currentWeapon.Shoot(player.camera);
+                currentWeapon.Shoot(player.camera.transform);
             }
         }
     }
