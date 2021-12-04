@@ -20,6 +20,7 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField] private AudioSource _FootstepSource;
     [SerializeField] private AudioSource _LandingSource;
+    [SerializeField] private AudioSource _PickupSource;
 
     public PlayerController pController;
 
@@ -48,6 +49,14 @@ public class SoundManager : MonoBehaviour
         if (!_LandingSource.isPlaying)
         {
             _LandingSource.PlayOneShot(clip);
+
+        }
+    }
+    public void PlayPickupSound(AudioClip clip)
+    {
+        if (!_PickupSource.isPlaying)
+        {
+            _PickupSource.PlayOneShot(clip);
 
         }
     }

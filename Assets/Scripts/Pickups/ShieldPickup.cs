@@ -43,6 +43,7 @@ public class ShieldPickup : MonoBehaviour
         {
             _healthComponent = other.GetComponent<HealthComponent>();
             _healthComponent.AddShield(AddShieldAmount);
+            SoundManager.Instance.PlayPickupSound(pickupSound);
             //play sound? 
             Destroy(gameObject);
         }
