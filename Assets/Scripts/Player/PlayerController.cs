@@ -211,10 +211,10 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(cameraHolder.transform.position, cameraHolder.transform.up * -1, out tag, 2))
         {
-            if (movementSpeed.x > 0.01f ||
-            movementSpeed.x < -0.01f ||
-            movementSpeed.z > 0.01f ||
-            movementSpeed.z < -0.01f)
+            if (movementSpeed.x > 0.001f ||
+            movementSpeed.x < -0.001f ||
+            movementSpeed.z > 0.001f ||
+            movementSpeed.z < -0.001f)
             {
                 if (tag.transform.gameObject.layer == 7)
                 {
