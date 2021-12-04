@@ -33,7 +33,7 @@ public class WeaponHandler : MonoBehaviour
         defaultInput.Weapon.Aim.started += e => AimingPressed();
         defaultInput.Weapon.Aim.canceled += e => AimingReleased();
 
-        defaultInput.Weapon.Reload.performed += e => Reload();
+        defaultInput.Weapon.Reload.started += e => Reload();
 
         defaultInput.Enable();
     }
@@ -107,7 +107,13 @@ public class WeaponHandler : MonoBehaviour
 
     private void Reload()
     {
-        StartCoroutine(currentWeapon.Reload());
+        if (this)
+        {
+            if (currentWeapon)
+            {
+                 StartCoroutine(currentWeapon.Reload()); 
+            }
+        }
     }
 
     private void CalculateAiming()

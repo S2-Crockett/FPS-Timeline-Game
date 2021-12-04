@@ -14,6 +14,10 @@ public class WeaponController : MonoBehaviour
     [Header("Settings")] 
     public WeaponSettings settings;
 
+    [Header("HUD")] 
+    public int minHeldAmmoDisplay = 10;
+    public int minCurrentAmmoDisplay = 5;
+
     [Header("Weapon")] public float fireRate;
     public float damage;
     public float range;
@@ -79,6 +83,8 @@ public class WeaponController : MonoBehaviour
     private void Awake()
     {
         currentAmmo = magazineSize;
+        minHeldAmmoDisplay = magazineSize;
+        minCurrentAmmoDisplay = magazineSize / 3;
     }
 
     private void OnEnable()
@@ -86,6 +92,17 @@ public class WeaponController : MonoBehaviour
         isReloading = false;
         UIManager.Instance.UpdateCurrentAmmo(currentAmmo);
         UIManager.Instance.UpdateHeldAmmoText(equippedAmmo);
+        
+        CheckHeldAmmo();
+        CheckCurrentAmmo();
+    }
+    
+    private void OnDisable()
+    {
+        UIManager.Instance.ammoDisplay.FadeOut();
+        //fade out the current ammo stuff if it is visible?
+
+        // check the visibility in the UI manager for whether its visile or not? 
     }
     
     private void Start()
@@ -100,8 +117,10 @@ public class WeaponController : MonoBehaviour
         playerController = controller;
         lookAtTarget = playerController.LookAtTarget;
         isInitialised = true;
+        
+        // update the currently equipped weapon image.
     }
-
+    
     private void Update()
     {
         swayObject = transform.parent.transform;
@@ -153,6 +172,7 @@ public class WeaponController : MonoBehaviour
     public IEnumerator Reload()
     {
         isReloading = true;
+        
         if (currentAmmo == magazineSize)
         {
             // no need to reload instantly return
@@ -174,14 +194,48 @@ public class WeaponController : MonoBehaviour
             isReloading = false;
         }
         
+        CheckHeldAmmo();
+        CheckCurrentAmmo();
+        
         UIManager.Instance.UpdateCurrentAmmo(currentAmmo);
         UIManager.Instance.UpdateHeldAmmoText(equippedAmmo);
+    }
+
+    private void CheckHeldAmmo()
+    {
+        if (isActiveAndEnabled)
+        {
+            if (equippedAmmo <= minHeldAmmoDisplay)
+            {
+                UIManager.Instance.ammoDisplay.FadeIn();
+            }
+            else
+            {
+                UIManager.Instance.ammoDisplay.FadeOut();
+            }
+        }
+    }
+
+    private void CheckCurrentAmmo()
+    {
+        if (isActiveAndEnabled)
+        {
+            if (currentAmmo <= minCurrentAmmoDisplay)
+            {
+                UIManager.Instance.reloadDisplay.FadeIn();
+            }
+            else
+            {
+                UIManager.Instance.reloadDisplay.FadeOut();
+            }
+        }
     }
 
     public void AddAmmo(int ammo)
     {
         equippedAmmo += ammo;
         UIManager.Instance.UpdateHeldAmmoText(equippedAmmo);
+        CheckHeldAmmo();
     }
 
     public void Shoot(Camera cam)
@@ -205,6 +259,7 @@ public class WeaponController : MonoBehaviour
             UIManager.Instance.crosshair.SetCrosshairRecoil(0.1f);
             recoil += 0.1f;
             muzzleParticle.Play();
+            CheckCurrentAmmo();
             
             RaycastHit hit;
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))

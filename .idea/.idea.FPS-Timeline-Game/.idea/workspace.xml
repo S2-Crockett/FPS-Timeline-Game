@@ -20,12 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b7d5abbc-e8eb-400a-a78c-2d13f0ee5620" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Weapons/BasePrimary.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Weapons/BasePrimary.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Weapons/BaseSecondary.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Weapons/BaseSecondary.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerDeathController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerDeathController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Developers/Sam S/Test_Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Developers/Sam S/Test_Scene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/HUD/UI.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/HUD/UI.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/UIManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/WeaponHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/WeaponHandler.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Respawn/RespawnManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Respawn/RespawnManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponController.cs" afterDir="false" />
     </list>
@@ -45,6 +45,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/UIUtilities.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.0.2/InputSystem/Utilities/DelegateHelpers.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Managers/CameraManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/ReloadDisplay.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Testing/ShootingTarget.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Respawn/RespawnPoint.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -63,16 +64,18 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Testing/AreaDamage.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Components/HealthComponent.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/UIUtilities.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Player/WeaponHandler.cs" />
         <option value="$PROJECT_DIR$/Assets/Developers/Sam C/Scripts/Exit Door/Exit.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Managers/CameraManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/DeathPanel.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Managers/UIManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Respawn/RespawnPoint.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Respawn/RespawnManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/PlayerDeathController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Managers/UIManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI/AmmoDisplay.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI/ReloadDisplay.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Player/WeaponHandler.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Respawn/RespawnManager.cs" />
       </list>
     </option>
   </component>
@@ -130,7 +133,8 @@
       <workItem from="1638013832684" duration="5715000" />
       <workItem from="1638125213533" duration="14505000" />
       <workItem from="1638281248938" duration="4346000" />
-      <workItem from="1638464955043" duration="40353000" />
+      <workItem from="1638464955043" duration="40953000" />
+      <workItem from="1638620481130" duration="8699000" />
     </task>
     <servers />
   </component>
@@ -171,10 +175,34 @@
       <screen x="0" y="0" width="2293" height="929" />
     </state>
     <state x="1261" y="0" width="1046" height="915" key="dock-window-1/0.0.2293.929@0.0.2293.929" timestamp="1638188985433" />
-    <state x="161" y="163" width="1004" height="765" key="search.everywhere.popup" timestamp="1638185082764">
-      <screen x="0" y="0" width="2293" height="929" />
+    <state x="296" y="153" key="run.anything.popup" timestamp="1638623264917">
+      <screen x="0" y="0" width="1280" height="689" />
     </state>
+    <state x="296" y="153" key="run.anything.popup/0.0.1280.689@0.0.1280.689" timestamp="1638623264917" />
+    <state x="90" y="121" width="672" height="568" key="search.everywhere.popup" timestamp="1638620596107">
+      <screen x="0" y="0" width="1280" height="689" />
+    </state>
+    <state x="90" y="121" width="672" height="568" key="search.everywhere.popup/0.0.1280.689@0.0.1280.689" timestamp="1638620596107" />
     <state x="108" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1637343034049" />
     <state x="161" y="163" width="1004" height="765" key="search.everywhere.popup/0.0.2293.929@0.0.2293.929" timestamp="1638185082764" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs</url>
+          <line>73</line>
+          <properties documentPath="D:\University Files\3rd Year\CGD\FPS-Timeline-Game\Assets\Scripts\Player\PlayerController.cs" initialLine="73">
+            <startOffsets>
+              <option value="2040" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2041" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

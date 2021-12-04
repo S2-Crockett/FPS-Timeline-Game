@@ -10,8 +10,11 @@ namespace Managers
     {
         public static UIManager Instance;
         public static UIUtilities Utilities;
+        
         [Header("HUDS")] 
         public CanvasGroup gameCanvas;
+        public AmmoDisplay ammoDisplay;
+        public ReloadDisplay reloadDisplay;
 
         [Header("AmmoUI")] public Text currentAmmoText;
         public Text currentHeldAmmoText;
