@@ -74,6 +74,7 @@ public class WeaponController : MonoBehaviour
 
     private AudioSource audioSource;
     private Camera cam;
+    public AudioClip weaponSound;
 
     private void Awake()
     {
@@ -210,6 +211,7 @@ public class WeaponController : MonoBehaviour
             UIManager.Instance.crosshair.SetCrosshairRecoil(0.1f);
             recoil += 0.1f;
             muzzleParticle.Play();
+            SoundManager.Instance.PlayWeaponSound(weaponSound);
             
             RaycastHit hit;
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))

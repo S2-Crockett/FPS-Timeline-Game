@@ -4873,6 +4873,7 @@ MonoBehaviour:
   muzzleParticle: {fileID: 4548563306457368050}
   hitParticle: {fileID: 1000010355441670, guid: 02a509a7fa70ed740ba4197e20c5d32d, type: 3}
   hitmarkerClip: {fileID: 8300000, guid: 5783dbc0187545a43858428e3a983cbc, type: 3}
+  weaponSound: {fileID: 8300000, guid: b39ec697f76aec04fb8081c0c4f6dbae, type: 3}
 --- !u!82 &2755018913690595573
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4885,7 +4886,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 5783dbc0187545a43858428e3a983cbc, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.05
+  m_Volume: 0.509
   m_Pitch: 1.2
   Loop: 0
   Mute: 0
