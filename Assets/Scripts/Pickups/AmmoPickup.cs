@@ -42,8 +42,7 @@ public class AmmoPickup : MonoBehaviour
         if (other.tag == "Player")
         {
             _weaponHandler = other.GetComponent<WeaponHandler>();
-            _weaponHandler.weaponRefs[0].GetComponent<WeaponController>().AddAmmo(AddAmmoAmountPrimary);
-            _weaponHandler.weaponRefs[1].GetComponent<WeaponController>().AddAmmo(AddAmmoAmountSecondary);
+            _weaponHandler.currentWeapon.GetComponent<WeaponController>().AddAmmo(AddAmmoAmountSecondary);
             // this will need to be changed with the weapon switching stuff from the time mechanic
       
             Destroy(gameObject);

@@ -49,6 +49,11 @@
         <e p="Input" t="Include">
           <e p="DefaultInput.cs" t="Include" />
         </e>
+        <e p="Materials" t="Include">
+          <e p="Shaders" t="Include">
+            <e p="Shader.shader" t="Include" />
+          </e>
+        </e>
         <e p="Packages" t="Include">
           <e p="LeanTween" t="Include">
             <e p="Framework" t="Include">
@@ -107,9 +112,11 @@
             <e p="AmmoDisplay.cs" t="Include" />
             <e p="Crosshair.cs" t="Include" />
             <e p="DeathPanel.cs" t="Include" />
+            <e p="HealthPanel.cs" t="Include" />
             <e p="PlayerHealthBar.cs" t="Include" />
             <e p="ReloadDisplay.cs" t="Include" />
             <e p="UIUtilities.cs" t="Include" />
+            <e p="WeaponPanel.cs" t="Include" />
           </e>
           <e p="Weapons" t="Include">
             <e p="WeaponController.cs" t="Include" />

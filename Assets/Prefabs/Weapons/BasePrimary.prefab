@@ -4819,11 +4819,13 @@ MonoBehaviour:
     movementSwayZInverted: 0
     movementSwayYInverted: 0
     movementSwaySmoothing: 0.2
+  minHeldAmmoDisplay: 10
+  minCurrentAmmoDisplay: 5
   fireRate: 8
   damage: 25
   range: 100
   sprayRadius: 0.88
-  magazineSize: 30
+  magazineSize: 20
   equippedAmmo: 120
   reloadTime: 1
   recoilSpread: 0

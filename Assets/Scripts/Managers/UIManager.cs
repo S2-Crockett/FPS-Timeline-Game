@@ -15,12 +15,16 @@ namespace Managers
         public CanvasGroup gameCanvas;
         public AmmoDisplay ammoDisplay;
         public ReloadDisplay reloadDisplay;
+        public Canvas gameGroup;
+        public Canvas deathGroup;
 
-        [Header("AmmoUI")] public Text currentAmmoText;
+        [Header("AmmoUI")] 
+        public Text currentAmmoText;
         public Text currentHeldAmmoText;
+        public WeaponPanel weaponPanel;
 
         [Header("Health")] 
-        public PlayerHealthBar healthBar;
+        public HealthPanel healthPanel;
         public HealthComponent health;
         public DeathPanel deathPanel;
 
@@ -49,26 +53,26 @@ namespace Managers
             Utilities = GetComponent<UIUtilities>();
         }
 
-        public void UpdateCurrentAmmo(int ammo)
+        public void UpdateAmmo(int currAmmo, int heldAmmo)
         {
-            currentAmmoText.text = ammo.ToString();
+            weaponPanel.UpdateAmmo(currAmmo, heldAmmo);
         }
 
-        public void UpdateHeldAmmoText(int ammo)
+        public void SetAmmo(int maxAmmo, int heldAmmo, int maxCurrentAmmo)
         {
-            currentHeldAmmoText.text = ammo.ToString();
+            weaponPanel.SetAmmo(maxAmmo, heldAmmo, maxCurrentAmmo);
+        }
+        
+        public void SetHealthShield(int maxHealth, int maxShield)
+        {
+            healthPanel.SetHealthInformation(maxHealth, maxShield);
         }
 
-        public void UpdateHealthDamage()
+        public void UpdateHealth(int normalizedHealth, int normalizedShield)
         {
-            healthBar.OnDamage();
+            healthPanel.CalculateNewPercentage(normalizedHealth, normalizedShield);
         }
-
-        public void UpdateHealthHeal()
-        {
-            healthBar.OnHealed();
-        }
-
+        
         public float GetHealthNormalized()
         {
             return health.GetHealthNormalized();
@@ -131,6 +135,12 @@ namespace Managers
                 {
                     gameCanvas.alpha = value;
                 });
+        }
+
+        public void SetCameraHUD(Camera cam)
+        {
+            gameGroup.worldCamera = cam;
+            deathGroup.worldCamera = cam;
         }
 
     }

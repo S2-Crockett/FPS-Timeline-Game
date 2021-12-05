@@ -10,8 +10,8 @@ public class HealthComponent : MonoBehaviour
     public int maxHealth;
 
     [Header("Shield")] 
-    public int shield;
-    public int maxShield;
+    public int shield = 50;
+    public int maxShield = 50;
 
     private PlayerDeathController _deathController;
     
@@ -20,6 +20,7 @@ public class HealthComponent : MonoBehaviour
     {
         health = maxHealth;
         _deathController = GetComponent<PlayerDeathController>();
+        UIManager.Instance.SetHealthShield(maxHealth, maxShield);
     }
 
     public void Damage(int damageAmount)
@@ -32,8 +33,9 @@ public class HealthComponent : MonoBehaviour
             {
                 health = 0;
                 _deathController.SetIsDead(true);
+                UIManager.Instance.healthPanel.ClearPoints();
             }
-            UIManager.Instance.UpdateHealthDamage();
+            UIManager.Instance.UpdateHealth(health, shield);
         }
         else
         {
@@ -48,8 +50,9 @@ public class HealthComponent : MonoBehaviour
                 {
                     health = 0;
                     _deathController.SetIsDead(true);
+                    UIManager.Instance.healthPanel.ClearPoints();
                 }
-                UIManager.Instance.UpdateHealthDamage();
+                UIManager.Instance.UpdateHealth(health, shield);
             }
             else
             {
@@ -59,7 +62,7 @@ public class HealthComponent : MonoBehaviour
                 {
                     shield= 0;
                 }
-                UIManager.Instance.UpdateHealthDamage();
+                UIManager.Instance.UpdateHealth(health, shield);
             }
         }
     }
@@ -71,7 +74,7 @@ public class HealthComponent : MonoBehaviour
         {
             health = maxHealth;
         }
-        UIManager.Instance.UpdateHealthHeal();
+        UIManager.Instance.UpdateHealth(health, shield);
     }
 
     public void AddShield(int amount)
@@ -81,7 +84,7 @@ public class HealthComponent : MonoBehaviour
         {
             shield = maxShield;
         }
-        UIManager.Instance.UpdateHealthHeal();
+        UIManager.Instance.UpdateHealth(health, shield);
     }
 
     public float GetHealthNormalized()

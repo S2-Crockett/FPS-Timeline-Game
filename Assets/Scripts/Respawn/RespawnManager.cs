@@ -48,6 +48,8 @@ public class RespawnManager : MonoBehaviour
             
             _player = Instantiate(player,GetLastRepsawn() );
             _player.transform.SetParent(null);
+            Camera UICam = GameObject.Find("UICamera").GetComponent<Camera>();
+            UIManager.Instance.SetCameraHUD(UICam);
             
             //register both of our cameras with the register
             CameraManager.Register(deathCam);
@@ -65,7 +67,6 @@ public class RespawnManager : MonoBehaviour
         CameraManager.SwitchCamera(playerCam);
         _player.GetComponent<PlayerController>().isDead = false;
         UIManager.Instance.FadeGameHUD(0,1, 3.5f);
-        
     }
 
     public void AddRespawn(Transform position)
@@ -89,9 +90,13 @@ public class RespawnManager : MonoBehaviour
     {
         var newPlayer = Instantiate(player,GetLastRepsawn() );
         newPlayer.transform.SetParent(null);
+        Camera UICam = GameObject.Find("UICamera").GetComponent<Camera>();
+        UIManager.Instance.SetCameraHUD(UICam);
+        
         Destroy(_player);
         newPlayer.GetComponent<PlayerDeathController>().SetRespawning(true);
         _player = newPlayer;
+        
     }
 
     public float GetTimeToSpawn()

@@ -90,9 +90,10 @@ public class WeaponController : MonoBehaviour
     private void OnEnable()
     {
         isReloading = false;
-        UIManager.Instance.UpdateCurrentAmmo(currentAmmo);
-        UIManager.Instance.UpdateHeldAmmoText(equippedAmmo);
         
+        UIManager.Instance.SetAmmo(currentAmmo, equippedAmmo, magazineSize);
+        UIManager.Instance.UpdateAmmo(currentAmmo, equippedAmmo);
+
         CheckHeldAmmo();
         CheckCurrentAmmo();
     }
@@ -100,6 +101,7 @@ public class WeaponController : MonoBehaviour
     private void OnDisable()
     {
         UIManager.Instance.ammoDisplay.FadeOut();
+        UIManager.Instance.weaponPanel.ClearAmmo();
         //fade out the current ammo stuff if it is visible?
 
         // check the visibility in the UI manager for whether its visile or not? 
@@ -197,8 +199,7 @@ public class WeaponController : MonoBehaviour
         CheckHeldAmmo();
         CheckCurrentAmmo();
         
-        UIManager.Instance.UpdateCurrentAmmo(currentAmmo);
-        UIManager.Instance.UpdateHeldAmmoText(equippedAmmo);
+        UIManager.Instance.UpdateAmmo(currentAmmo, equippedAmmo);
     }
 
     private void CheckHeldAmmo()
@@ -234,7 +235,7 @@ public class WeaponController : MonoBehaviour
     public void AddAmmo(int ammo)
     {
         equippedAmmo += ammo;
-        UIManager.Instance.UpdateHeldAmmoText(equippedAmmo);
+        UIManager.Instance.UpdateAmmo(currentAmmo, equippedAmmo);
         CheckHeldAmmo();
     }
 
@@ -255,7 +256,7 @@ public class WeaponController : MonoBehaviour
             nextTimeToFire = Time.time + 1f / fireRate;
 
             currentAmmo--;
-            UIManager.Instance.UpdateCurrentAmmo(currentAmmo);
+            UIManager.Instance.UpdateAmmo(currentAmmo, equippedAmmo);
             UIManager.Instance.crosshair.SetCrosshairRecoil(0.1f);
             recoil += 0.1f;
             muzzleParticle.Play();
