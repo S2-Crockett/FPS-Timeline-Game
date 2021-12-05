@@ -12,7 +12,10 @@ public class Zone : ScriptableObject
     public GameObject Player;
 
     [Header("Enemy")]
-    public GameObject material;
+    public GameObject enemy;
+
+    [Header("Environment")]
+    public GameObject environment;
 
     [Header("Weapons")]
     public GameObject[] weapons;

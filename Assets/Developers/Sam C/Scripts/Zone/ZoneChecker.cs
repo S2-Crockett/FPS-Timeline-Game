@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ZoneChecker : MonoBehaviour
 {
@@ -11,9 +13,12 @@ public class ZoneChecker : MonoBehaviour
     private GameObject player;
 
     [Header("Enemies")]
-    public GameObject[] enemy;
+    public GameObject[] enemies;
 
     [Header("Environment")]
+    public GameObject[] environment;
+
+    [Header("Floor")]
     public GameObject floor;
 
     [Header("Materials")]
@@ -27,35 +32,61 @@ public class ZoneChecker : MonoBehaviour
     private int prevIndex = 0;
     private float random = 0;
 
-
-
     private bool change = false;
 
-
-    GameObject[] newGameObject;
-    Material[] oldMaterial;
+    GameObject[] newEnvironmentObject;
+    public EnemyInfo[] enemyObjectZone1;
+    public EnemyInfo[] enemyObjectZone2;
     GameObject newFloorObject;
+
+    bool[] changable;
+
+    Vector3[] newEnemyPos;
+    Quaternion[] newEnemyRot;
+
 
 
     RaycastHit hit;
 
     private int layerMask = 1;
-    // Start is called before the first frame update
+
     void Start()
     {
-        newGameObject = new GameObject[enemy.Length];
+        newEnvironmentObject = new GameObject[environment.Length];
+        newEnemyPos = new Vector3[enemies.Length];
+        newEnemyRot = new Quaternion[enemies.Length];
+
+        changable = new bool[enemies.Length];
+
         prevIndex = index;
+
         player = GameObject.Find("Player");
         weaponHandler = player.GetComponent<WeaponHandler>();
+
         newFloorObject = Instantiate(zone[index].timezone1, floor.transform.position, floor.transform.rotation);
 
         for(int i = 0; i < zone.Length; i++)
         {
             zone[i].timezone1.tag = zone[0].name;
         }
-        for (int i = 0; i < enemy.Length; i++)
+        for (int i = 0; i < environment.Length; i++)
         {
-            newGameObject[i] = Instantiate(zone[index].material, enemy[i].transform.position, enemy[i].transform.rotation);
+            newEnvironmentObject[i] = Instantiate(zone[index].environment, environment[i].transform.position, environment[i].transform.rotation);
+        }
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            enemyObjectZone1[i].enemyObj = zone[0].enemy;
+            enemyObjectZone2[i].enemyObj = zone[1].enemy;
+            enemyObjectZone1[i].enemyObj = Instantiate(zone[0].enemy, enemies[i].transform.position, enemies[i].transform.rotation);
+            enemyObjectZone2[i].enemyObj = Instantiate(zone[1].enemy, enemies[i].transform.position, enemies[i].transform.rotation);
+            enemyObjectZone2[i].enemyObj.SetActive(false);
+            newEnemyPos[i] = enemyObjectZone1[i].enemyObj.transform.position;
+            newEnemyRot[i] = enemyObjectZone1[i].enemyObj.transform.rotation;
+        }
+
+        for (int i = 0; i < changable.Length; i++)
+        {
+            changable[i] = false;
         }
 
         weaponHandler.WeaponIndex = zone[index].weaponIndex;
@@ -82,22 +113,51 @@ public class ZoneChecker : MonoBehaviour
     {
         CheckZone();
         CreateNewObjects();
+        CheckEnemy();
     }
 
     IEnumerator ChangeEnvironmentObj(int index_)
     {
-        ChangeMat(enemy, newGameObject, newFloorObject, index_);
+        ChangeMat(environment, newEnvironmentObject, index_);
 
         yield return new WaitForSeconds(random);
 
-         Destroy(newGameObject[index_]);
-         newGameObject[index_] = Instantiate(zone[index].material, enemy[index_].transform.position, enemy[index_].transform.rotation);
+         Destroy(newEnvironmentObject[index_]);
+         newEnvironmentObject[index_] = Instantiate(zone[index].environment, environment[index_].transform.position, environment[index_].transform.rotation);
+    }
+
+    IEnumerator ChangeEnemyObj(int index_)
+    {
+        if (!enemyObjectZone1[index_].enemyObj.activeSelf)
+        {
+            newEnemyPos[index_] = enemyObjectZone2[index_].enemyObj.transform.position;
+            if (!enemyObjectZone2[index_].dead)
+            {
+                newEnemyRot[index_] = enemyObjectZone2[index_].enemyObj.transform.rotation;
+            }
+            enemyObjectZone1[index_].enemyObj.SetActive(true);
+            enemyObjectZone2[index_].enemyObj.SetActive(false);
+            enemyObjectZone1[index_].enemyObj.transform.position = newEnemyPos[index_];
+            enemyObjectZone1[index_].enemyObj.transform.rotation = newEnemyRot[index_];
+        }
+        else if (!enemyObjectZone2[index_].enemyObj.activeSelf)
+        {
+            newEnemyPos[index_] = enemyObjectZone1[index_].enemyObj.transform.position;
+            if (!enemyObjectZone1[index_].dead)
+            {
+                newEnemyRot[index_] = enemyObjectZone1[index_].enemyObj.transform.rotation;
+            }
+            enemyObjectZone2[index_].enemyObj.SetActive(true);
+            enemyObjectZone1[index_].enemyObj.SetActive(false);
+            enemyObjectZone2[index_].enemyObj.transform.position = newEnemyPos[index_];
+            enemyObjectZone2[index_].enemyObj.transform.rotation = newEnemyRot[index_];
+        }
+        yield return new WaitForSeconds(0.1f);
     }
 
     IEnumerator ChangeFloor()
     {
         random = Random.Range(0.3f, 1f);
-
         newFloorObject.GetComponent<MeshRenderer>().material = Glitch;
 
         yield return new WaitForSeconds(random);
@@ -105,9 +165,7 @@ public class ZoneChecker : MonoBehaviour
         Destroy(newFloorObject);
         newFloorObject = Instantiate(zone[index].timezone1, floor.transform.position, floor.transform.rotation);
     }
-
-
-    private void ChangeMat(GameObject[] enemy_, GameObject[] newObj, GameObject newFloorObj, int index)
+    private void ChangeMat(GameObject[] enemy_, GameObject[] newObj, int index)
     {
         for (int c = 0; c < newObj[index].transform.childCount; c++)
         {
@@ -115,14 +173,17 @@ public class ZoneChecker : MonoBehaviour
             random = Random.Range(0.3f, 1f);
         }
     }
-
     private void CreateNewObjects()
     {
         if (change)
         {
-            for (int i = 0; i < enemy.Length; i++)
+            for (int i = 0; i < environment.Length; i++)
             {
                 StartCoroutine(ChangeEnvironmentObj(i));
+            }
+            for(int i = 0; i < enemies.Length; i++)
+            {
+                StartCoroutine(ChangeEnemyObj(i));
             }
             StartCoroutine(ChangeFloor());
 
@@ -133,7 +194,6 @@ public class ZoneChecker : MonoBehaviour
             change = false;
         }
     }
-
     private void CheckZone()
     {
         for (int i = 0; i < zone.Length; i++)
@@ -144,4 +204,31 @@ public class ZoneChecker : MonoBehaviour
             }
         }
     }
+
+    private void CheckEnemy()
+    {
+        for(int i = 0; i < enemies.Length; i++)
+        {
+            if (enemyObjectZone1[i].enemyObj.GetComponent<ShootingTarget>().dead)
+            {
+                enemyObjectZone1[i].enemyObj.GetComponent<LineOfSight>().enabled = false;
+                enemyObjectZone1[i].enemyObj.GetComponent<Movement>().enabled = false;
+                Quaternion dead = new Quaternion();
+                dead.Set( 0, 90, 90, 0);
+                enemyObjectZone1[i].enemyObj.transform.rotation = dead;
+                enemyObjectZone1[i].dead = true;
+            }
+            if (enemyObjectZone2[i].enemyObj.GetComponent<ShootingTarget>().dead)
+            {
+                enemyObjectZone2[i].dead = true;
+            }
+        }
+    }
+}
+
+[Serializable]
+public class EnemyInfo
+{
+    public bool dead;
+    public GameObject enemyObj;
 }

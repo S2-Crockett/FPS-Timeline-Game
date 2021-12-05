@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: 3000
   m_EditorClassIdentifier: 
   timezone1: {fileID: 8786721618504453535, guid: 6b9c162b5c0e89f4eaf7fa17947a591d, type: 3}
-  floor1:
-  - {fileID: 8786721618504453535, guid: 6b9c162b5c0e89f4eaf7fa17947a591d, type: 3}
   Player: {fileID: 4963024755645646197, guid: fb0314374a87dd2468847150afa5c603, type: 3}
-  material: {fileID: 8233533116895318991, guid: 65c4fc6e4cc335f48be3b0489a28af6f, type: 3}
+  enemy: {fileID: 5805923888380855202, guid: fa72dfe204f684f43b0c89b5326543bf, type: 3}
+  environment: {fileID: 8233533116895318991, guid: 65c4fc6e4cc335f48be3b0489a28af6f, type: 3}
   weapons:
   - {fileID: 8249656883338130075, guid: 56f721acdcf33ab42bf12f019185e057, type: 3}
   - {fileID: 8249656883338130075, guid: 6d2801df75dd3cb4e8366134c92aaec6, type: 3}
