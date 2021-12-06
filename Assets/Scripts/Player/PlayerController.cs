@@ -11,6 +11,11 @@ public class PlayerController : MonoBehaviour
     private CharacterController characterController;
     private DefaultInput defaultInput;
 
+    public DoubleJump double_jump;
+
+    public int jumpCount = 0;
+    public int space_pressed = 0;
+
     [HideInInspector]
     public Vector2 inputMovement;
     public Vector2 inputView;
@@ -131,6 +136,7 @@ public class PlayerController : MonoBehaviour
         CalculateJump();
         CalculateCameraHeight();
         SetLookAtTargetCrosshair();
+        DoubleJumping();
     }
     
     #endregion
@@ -331,7 +337,7 @@ public class PlayerController : MonoBehaviour
     private void Jump()
     {
 
-        if (!characterController.isGrounded)
+        if (!characterController.isGrounded && jumpCount <= 1 || space_pressed >= 2)
         {
             return;
         }
@@ -348,6 +354,29 @@ public class PlayerController : MonoBehaviour
         jumpingForce = Vector3.up * playerSettings.jumpHeight;
         playerGravity = 0;
 
+        if(double_jump.doubleJump)
+        {
+            space_pressed += 1;
+        }
+      
+
+    }
+
+    private void DoubleJumping()
+    {
+        if(double_jump.doubleJump)
+        {
+            jumpCount = 2;
+        }
+        if(!double_jump.doubleJump)
+        {
+            jumpCount = 1;
+        }
+
+        if (characterController.isGrounded)
+        {
+            space_pressed = 0;
+        }
     }
     private void CheckAirTime()
     {
