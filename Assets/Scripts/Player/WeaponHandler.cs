@@ -15,7 +15,7 @@ public class WeaponHandler : MonoBehaviour
     public WeaponController currentWeapon;
     private int currentActiveIndex;
     [HideInInspector]
-    public GameObject[] weaponRefs = new GameObject[5];
+    public GameObject[] weaponRefs;
     public WeaponSlot[] weaponSlots;
 
     [Header("References")] 
@@ -30,6 +30,10 @@ public class WeaponHandler : MonoBehaviour
 
     private void Awake()
     {
+        if (weaponRefs != null)
+        {
+            weaponRefs = new GameObject[5];
+        }
         defaultInput = new DefaultInput();
         
         defaultInput.Weapon.Shoot.started += e => Shoot();

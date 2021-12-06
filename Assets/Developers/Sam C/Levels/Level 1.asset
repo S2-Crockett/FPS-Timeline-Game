@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelNumber: Level 1
   levelDifficulty: Easy
-  levelDescription: 
+  levelDescription: Descrtption
   level: 1
   scene:
     m_Handle: 0

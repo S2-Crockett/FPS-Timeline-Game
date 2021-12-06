@@ -165,25 +165,27 @@ public class LineOfSight : MonoBehaviour
     private void CheckBullets(List<GameObject> bullets)
     {
         float distance = bulletInfo.range;
-
-        for(int i = 0; i < bullets.Count; i++)
+        if (bullets.Count > 0)
         {
-            float tempDistance = Vector3.Distance(transform.position, bullets[i].gameObject.transform.position);
-            if(tempDistance > distance)
+            for (int i = 0; i < bullets.Count; i++)
             {
-                Destroy(bullets[i].gameObject);
-                bullets.Remove(bullets[i]);
-            }
-            if(bullets[i].GetComponent<Bullets>().hit)
-            {
-                Destroy(bullets[i].gameObject);
-                bullets.Remove(bullets[i]);
-                player.GetComponent<HealthComponent>().Damage(bulletInfo.damage);
-            }
-            if (bullets[i].GetComponent<Bullets>().hitWall)
-            {
-                Destroy(bullets[i].gameObject);
-                bullets.Remove(bullets[i]);
+                float tempDistance = Vector3.Distance(transform.position, bullets[i].gameObject.transform.position);
+                if (tempDistance > distance)
+                {
+                    Destroy(bullets[i].gameObject);
+                    bullets.Remove(bullets[i]);
+                }
+                if (bullets[i].GetComponent<Bullets>().hit)
+                {
+                    Destroy(bullets[i].gameObject);
+                    bullets.Remove(bullets[i]);
+                    player.GetComponent<HealthComponent>().Damage(bulletInfo.damage);
+                }
+                if (bullets[i].GetComponent<Bullets>().hitWall)
+                {
+                    Destroy(bullets[i].gameObject);
+                    bullets.Remove(bullets[i]);
+                }
             }
         }
     }
