@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
 
     private PlayerStance previousPlayerStance;
     private CharacterController characterController;
+    private consoledefence consoledefencescript;
     private DefaultInput defaultInput;
     
     [HideInInspector]
@@ -70,6 +71,7 @@ public class PlayerController : MonoBehaviour
     public bool onDirt = false;
     public bool onWater = false;
     public bool onConcrete = false;
+    public bool InteractKeyPressed = false;
     
     private bool shouldShoot;
     
@@ -88,7 +90,8 @@ public class PlayerController : MonoBehaviour
             defaultInput.Player.View.performed += e => inputView = e.ReadValue<Vector2>();
             defaultInput.Player.Jump.performed += e => Jump();
             defaultInput.Player.Crouch.performed += e => Crouch();
-    
+            defaultInput.Player.Interact.performed += e => Interact();
+
             defaultInput.Player.Sprint.started += e => StartSprint();
             defaultInput.Player.Sprint.canceled += e => StopSprint();
             defaultInput.Weapon.Aim.started += e => StartAiming();
@@ -120,9 +123,10 @@ public class PlayerController : MonoBehaviour
         CalculateJump();
         CalculateCameraHeight();
     }
-    
+
     #endregion
-    
+
+
     private void CalculateView()
     {
         newPlayerRotation.y += playerSettings.viewXSensitivity * (playerSettings.viewXInverted ? inputView.x : -inputView.x) * Time.deltaTime;
@@ -213,6 +217,17 @@ public class PlayerController : MonoBehaviour
         {
             other.GetComponent<Enemy>().OnAware();
         }
+
+
+        if(other.gameObject.tag == "ConsoleTrigger")
+        {
+
+            if (InteractKeyPressed == true)
+            {
+                //StartCoroutine(EnableNotification());
+                Debug.Log("Activating Terminal!");
+            }
+        }       
     }
     
     private void CalculateJump()
@@ -275,6 +290,12 @@ public class PlayerController : MonoBehaviour
         
         jumpingForce = Vector3.up * playerSettings.jumpHeight;
         playerGravity = 0;
+    }
+
+    public void Interact()
+    {
+        InteractKeyPressed = true;
+        Debug.Log("Interacting is working!");
     }
 
     private void Crouch()

@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -37,7 +37,7 @@ public class Objective : MonoBehaviour
     {       
         if (other.gameObject.tag == "Objective1")
         {
-            objective.text = "> Escape to the end of the road";
+            objective.text = "> ESCAPE TO THE END OF THE ROAD";
             objectivebackground.SetActive(true);         
         }
         if (other.gameObject.tag == "Objective1complete")
@@ -47,25 +47,24 @@ public class Objective : MonoBehaviour
         }
         if (other.gameObject.tag == "Objective2")
         {
-            objective.text = "> Reach the zone ahead";
+            objective.text = "> REACH THE ZONE";
             objectivebackground.SetActive(true);
         }
         if (other.gameObject.tag == "Objective3")
         {
-            objective.text = "> Eliminate the enemies";
+            objective.text = "> ELIMINATE THE ENEMIES";
             objectivebackground.SetActive(true);
         }
         if (other.gameObject.tag == "Objective4")
         {
-            objective.text = "> Enter the portal";
+            objective.text = "> ENTER THE PORTAL";
             objectivebackground.SetActive(true);
         }
-        /* else)
+        *//* else)
          {
              objective.text = " ";
              objectivebackground.SetActive(false);
-         }*/
-
-
+         }*//*
     }
 }
+*/

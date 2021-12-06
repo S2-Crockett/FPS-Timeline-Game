@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,12 +14,12 @@ public class EnemyKillingObjective : MonoBehaviour
     }
 
     // Update is called once per frame
-    /*void Update()
+    *//*void Update()
     {
         if (enemydead.zone1enemiescount == 0)
         {
             Debug.Log("enemies are all dead");
             objectivescript.iscompleted = true;
         }
-    }*/
-}
+    }*//*
+}*/

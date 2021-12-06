@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,10 +24,10 @@ public class AmmoBoxInteract : MonoBehaviour
 
             weaponcontroller.equippedAmmo += 100;
 
-            /*if (guiObject.activeInHierarchy == true && Input.GetKeyDown("E"))
+            *//*if (guiObject.activeInHierarchy == true && Input.GetKeyDown("E"))
             {
                 Debug.Log("Ammo Replenished");
-            }*/
+            }*//*
         }
     }
     void OnTriggerExit()
@@ -35,3 +35,4 @@ public class AmmoBoxInteract : MonoBehaviour
         guiObject.SetActive(false);
     }
 }
+*/
