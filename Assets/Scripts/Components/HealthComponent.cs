@@ -33,7 +33,7 @@ public class HealthComponent : MonoBehaviour
         if (shield <= 0)
         {
             health -= damageAmount;
-            if (health < 0)
+            if (health <= 0)
             {
                 health = 0;
                 _deathController.SetIsDead(true);
