@@ -723,22 +723,34 @@ MonoBehaviour:
   - dead: 0
     deathPos: {x: 0, y: 0, z: 0}
     enemyObj: {fileID: 0}
+    defaultEnemyMat: {fileID: 0}
+    defaultWeaponMat: {fileID: 0}
   - dead: 0
     deathPos: {x: 0, y: 0, z: 0}
     enemyObj: {fileID: 0}
+    defaultEnemyMat: {fileID: 0}
+    defaultWeaponMat: {fileID: 0}
   - dead: 0
     deathPos: {x: 0, y: 0, z: 0}
     enemyObj: {fileID: 0}
+    defaultEnemyMat: {fileID: 0}
+    defaultWeaponMat: {fileID: 0}
   enemyObjectZone2:
   - dead: 0
     deathPos: {x: 0, y: 0, z: 0}
     enemyObj: {fileID: 0}
+    defaultEnemyMat: {fileID: 0}
+    defaultWeaponMat: {fileID: 0}
   - dead: 0
     deathPos: {x: 0, y: 0, z: 0}
     enemyObj: {fileID: 0}
+    defaultEnemyMat: {fileID: 0}
+    defaultWeaponMat: {fileID: 0}
   - dead: 0
     deathPos: {x: 0, y: 0, z: 0}
     enemyObj: {fileID: 0}
+    defaultEnemyMat: {fileID: 0}
+    defaultWeaponMat: {fileID: 0}
 --- !u!4 &1040728857
 Transform:
   m_ObjectHideFlags: 0
