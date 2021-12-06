@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4145731966850570004
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7173513949894973777}
+  m_Layer: 6
+  m_Name: RayPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7173513949894973777
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4145731966850570004}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.12, y: 0.1, z: 0.576}
+  m_LocalScale: {x: 13.333332, y: 10, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8249656883735612359}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4441495144018307130
 GameObject:
   m_ObjectHideFlags: 0
@@ -4846,6 +4876,8 @@ MonoBehaviour:
   muzzleParticle: {fileID: 4548563306457368050}
   hitParticle: {fileID: 1000010355441670, guid: 02a509a7fa70ed740ba4197e20c5d32d, type: 3}
   hitmarkerClip: {fileID: 8300000, guid: 5783dbc0187545a43858428e3a983cbc, type: 3}
+  tracerEffect: {fileID: 5222315208960528297, guid: d84575d9e67da364783f80da51324f85, type: 3}
+  bulletOriginTransform: {fileID: 7173513949894973777}
 --- !u!82 &2755018913690595573
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4972,6 +5004,7 @@ Transform:
   m_LocalScale: {x: 0.075, y: 0.1, z: 1}
   m_Children:
   - {fileID: 6407780540367815825}
+  - {fileID: 7173513949894973777}
   m_Father: {fileID: 8249656883338130077}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

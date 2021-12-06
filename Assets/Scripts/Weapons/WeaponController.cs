@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using System.Collections;
 using Managers;
+using TreeEditor;
 using Random = UnityEngine.Random;
 // ReSharper disable All
 
@@ -63,6 +64,8 @@ public class WeaponController : MonoBehaviour
     [Header("Effects")] public ParticleSystem muzzleParticle;
     public GameObject hitParticle;
     public AudioClip hitmarkerClip;
+    public TrailRenderer tracerEffect;
+    public Transform bulletOriginTransform;
 
     [Header("Animations")] 
     
@@ -265,8 +268,12 @@ public class WeaponController : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))
             {
+                TrailRenderer tracer = Instantiate(tracerEffect, bulletOriginTransform.position, Quaternion.identity);
+                StartCoroutine(SpawnTrail(tracer, hit));
+                
                 ShootingTarget target = hit.transform.GetComponent<ShootingTarget>();
                 EnemyDead enemy = hit.transform.GetComponent<EnemyDead>();
+                
                 if (target != null)
                 {
                     audioSource.PlayOneShot(hitmarkerClip);
@@ -278,7 +285,7 @@ public class WeaponController : MonoBehaviour
                 {
                     enemy.TakeDamage(damage);
                 }
-
+                
                 //GameObject ImpactObject = Instantiate(hitParticle, hit.point, Quaternion.LookRotation(hit.normal));
                 //Destroy(ImpactObject, 0.4f);
             }
@@ -287,6 +294,21 @@ public class WeaponController : MonoBehaviour
         
         //UIManager.Instance.crosshair.SetIsShooting(false);
         
+    }
+
+    IEnumerator SpawnTrail(TrailRenderer tracer, RaycastHit hit)
+    {
+        float time = 0;
+        Vector3 startPosition = tracer.transform.position;
+        while (time < 1)
+        {
+            tracer.transform.position = Vector3.Lerp(startPosition, hit.point, time);
+            time += Time.deltaTime / tracer.time;
+            yield return null;
+        }
+
+        tracer.transform.position = hit.point;
+        Destroy(tracer.gameObject, tracer.time);
     }
 
     private void CalculateBreathing()

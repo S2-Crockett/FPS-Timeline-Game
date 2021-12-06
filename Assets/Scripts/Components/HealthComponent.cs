@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Managers;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class HealthComponent : MonoBehaviour
 {
@@ -14,12 +16,14 @@ public class HealthComponent : MonoBehaviour
     public int maxShield = 50;
 
     private PlayerDeathController _deathController;
+    private Volume postProcessing;
     
     // Start is called before the first frame update
     void Start()
     {
         health = maxHealth;
         _deathController = GetComponent<PlayerDeathController>();
+        postProcessing = _deathController.postProcessing;
         UIManager.Instance.SetHealthShield(maxHealth, maxShield);
     }
 
@@ -64,6 +68,29 @@ public class HealthComponent : MonoBehaviour
                 }
                 UIManager.Instance.UpdateHealth(health, shield);
             }
+        }
+        
+        if (postProcessing.profile.TryGet<Vignette>(out var vignette))
+        {
+            vignette.intensity.value = 0.2f;
+            LeanTween.value(gameObject, vignette.intensity.value, 0.35f, 0.05f)
+                .setOnUpdate((value) =>
+                {
+                    vignette.intensity.value = value;
+                })
+                .setOnComplete(ResetDamageIndicator);
+        }
+    }
+
+    private void ResetDamageIndicator()
+    {
+        if (postProcessing.profile.TryGet<Vignette>(out var vignette))
+        {
+            LeanTween.value(gameObject, vignette.intensity.value, 0.2f, 0.25f)
+                .setOnUpdate((value) =>
+                {
+                    vignette.intensity.value = value;
+                });
         }
     }
 

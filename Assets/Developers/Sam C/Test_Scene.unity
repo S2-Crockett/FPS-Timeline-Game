@@ -245,7 +245,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh37286
+  m_Name: pb_Mesh166258
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -409,7 +409,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-38980
+  m_Name: pb_Mesh-861392
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9836,7 +9836,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh37270
+  m_Name: pb_Mesh166240
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -10144,7 +10144,7 @@ MonoBehaviour:
   inScreen: 0
   overlapping: 0
   mainCamera: {fileID: 7136492}
-  playerCamera: {fileID: 1951750385}
+  playerCamera: {fileID: 0}
   player: {fileID: 1553325759}
   Particles: {fileID: 728795939}
   Screen: {fileID: 1680888240}
@@ -10211,11 +10211,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!20 &1951750385 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 4963024755585250738, guid: fb0314374a87dd2468847150afa5c603, type: 3}
-  m_PrefabInstance: {fileID: 1397360539}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2027908291
 GameObject:
   m_ObjectHideFlags: 0
@@ -10275,7 +10270,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2993020167882981342, guid: 04b76b7477cdc1445b946aa39425b386, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.75
+      value: 2.9
       objectReference: {fileID: 0}
     - target: {fileID: 2993020167882981342, guid: 04b76b7477cdc1445b946aa39425b386, type: 3}
       propertyPath: m_LocalPosition.z
@@ -10315,7 +10310,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2993020168198867738, guid: 04b76b7477cdc1445b946aa39425b386, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2993020168198867742, guid: 04b76b7477cdc1445b946aa39425b386, type: 3}
       propertyPath: m_LocalScale.y
