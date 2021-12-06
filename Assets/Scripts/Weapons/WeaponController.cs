@@ -1,15 +1,21 @@
 using System;
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using Managers;
-using TreeEditor;
 using Random = UnityEngine.Random;
 // ReSharper disable All
 
 public class WeaponController : MonoBehaviour
 {
-    private PlayerController playerController;
+    public class Bullet
+    {
+        public float time;
+        public Vector3 initialPosition;
+        public Vector3 initialVelocity;
+    }
     
+    private PlayerController playerController;
     [HideInInspector] public bool isAiming;
 
     [Header("Settings")] 
@@ -22,8 +28,12 @@ public class WeaponController : MonoBehaviour
     [Header("Weapon")] public float fireRate;
     public float damage;
     public float range;
-    public float sprayRadius;
+    public float bulletOffet = 0.05f;
+    public float bulletSpeed = 1000.0f;
+    public float bulletDrop = 0.0f;
 
+    private List<Bullet> spawnedBullets = new List<Bullet>();
+    
     [Header("Reload")] 
     public int magazineSize = 30;
     public int equippedAmmo = 120;
@@ -124,6 +134,19 @@ public class WeaponController : MonoBehaviour
         isInitialised = true;
         
         // update the currently equipped weapon image.
+    }
+
+    Vector3 GetBulletPosition(Bullet bullet)
+    {
+        Vector3 gravity = Vector3.down * bulletDrop;
+        return (bullet.initialPosition) + (bullet.initialVelocity * bullet.time) +
+               (0.5f * gravity * bullet.time * bullet.time);
+    }
+
+    Bullet CreateBullet(Vector3 position, Vector3 velocity)
+    {
+        Bullet bullet = new Bullet();
+        return bullet;
     }
     
     private void Update()

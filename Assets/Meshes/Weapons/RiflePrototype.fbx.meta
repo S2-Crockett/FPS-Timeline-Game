@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a7133b47ca6a07547ad7698d040d13cf
+guid: a84f16c7bb1618940b76000e58e3f580
 ModelImporter:
   serializedVersion: 21100
   internalIDToNameTable: []
@@ -7,12 +7,12 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Base_Mat
+      name: Base_Mat.001
     second: {fileID: 2100000, guid: 7dfdb9c556083f54b96c187a89bb9efc, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Emissive_Mat
+      name: Emissive_Mat.001
     second: {fileID: 2100000, guid: cd26922c16d18a24b916f57b83026316, type: 2}
   materials:
     materialImportMode: 2

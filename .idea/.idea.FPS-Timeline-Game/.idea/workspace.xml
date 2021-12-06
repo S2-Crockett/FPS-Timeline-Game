@@ -21,18 +21,17 @@
   <component name="ChangeListManager">
     <list default="true" id="b7d5abbc-e8eb-400a-a78c-2d13f0ee5620" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Developers/Sam C/Materials/New Material.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Developers/Sam C/Materials/New Material.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Developers/Sam C/Prefabs/Table.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Developers/Sam C/Prefabs/Table.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Developers/Sam C/Test_Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Developers/Sam C/Test_Scene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Developers/Sam C/VFX/Table.vfx" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Developers/Sam C/VFX/Table.vfx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Developers/Sam S/Test_Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Developers/Sam S/Test_Scene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Developers/Sam S/Test_Scene/Camera Profile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Developers/Sam S/Test_Scene/Camera Profile.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Meshes/Texture_Mat.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Meshes/Texture_Mat.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Meshes/Weapons/BulletTracer_Mat.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Meshes/Weapons/BulletTracer_Mat.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Meshes/Weapons/PistolPrototype.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Meshes/Weapons/PistolPrototype.fbx.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Meshes/Weapons/Pistol_Mat_Emissive.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Meshes/Weapons/Pistol_Mat_Emissive.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Particles/WeaponEffects/LaserBulletTrail.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Particles/WeaponEffects/LaserBulletTrail.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Weapons/BasePrimary.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Weapons/BasePrimary.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Weapons/BaseSecondary.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Weapons/BaseSecondary.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Components/HealthComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Components/HealthComponent.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,7 +148,7 @@
       <workItem from="1638464955043" duration="40953000" />
       <workItem from="1638620481130" duration="8699000" />
       <workItem from="1638637399664" duration="184000" />
-      <workItem from="1638637609485" duration="34041000" />
+      <workItem from="1638637609485" duration="35213000" />
     </task>
     <servers />
   </component>
