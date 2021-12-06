@@ -2,37 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpeedBooster : MonoBehaviour
+public class ShieldSystem : MonoBehaviour
 {
-    public bool speedBooster = false;
+    public bool shieldSystem = false;
     public float power_up_duration = 10.0f;
     public float time = 0.0f;
-
     // Start is called before the first frame update
     void Start()
     {
-        speedBooster = false;
+        shieldSystem = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
         {
-            speedBooster = true;
+            shieldSystem = true;
         }
     }
 
+    // Update is called once per frame
 
     private void Update()
     {
-        if (speedBooster)
+        if (shieldSystem)
         {
             time += Time.deltaTime;
         }
 
         if (time >= power_up_duration)
         {
-            speedBooster = false;
+            shieldSystem = false;
         }
     }
 }

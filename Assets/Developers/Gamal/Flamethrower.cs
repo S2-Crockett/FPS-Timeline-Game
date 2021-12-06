@@ -2,37 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpeedBooster : MonoBehaviour
+public class Flamethrower : MonoBehaviour
 {
-    public bool speedBooster = false;
+    public bool flameThrower= false;
     public float power_up_duration = 10.0f;
     public float time = 0.0f;
-
     // Start is called before the first frame update
     void Start()
     {
-        speedBooster = false;
+        flameThrower = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if (other.tag == "Player")
         {
-            speedBooster = true;
+            flameThrower = true;
         }
     }
 
+    // Update is called once per frame
 
     private void Update()
     {
-        if (speedBooster)
+        if (flameThrower)
         {
             time += Time.deltaTime;
         }
 
         if (time >= power_up_duration)
         {
-            speedBooster = false;
+            flameThrower = false;
         }
     }
 }

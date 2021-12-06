@@ -209,6 +209,7 @@ public class PlayerController : MonoBehaviour
         movementSpeed += jumpingForce * Time.smoothDeltaTime;
 
         movementSpeed *= speed;
+
         characterController.Move(movementSpeed);
 
         CheckLand();
