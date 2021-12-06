@@ -713,8 +713,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7f7ceb4c429e88648a273ecea4218ac8, type: 2}
   enemies:
   - {fileID: 1830084133}
-  - {fileID: 10110148}
-  - {fileID: 2140359077}
   environment: []
   floor: {fileID: 557524706}
   Glitch: {fileID: 2100000, guid: 5b9a60cb63fd4c449a64c2752645a3c9, type: 2}
@@ -1622,6 +1620,10 @@ PrefabInstance:
     - target: {fileID: 667247835415029978, guid: f77b1ccaf86e83f4883a68c4e614bc06, type: 3}
       propertyPath: weaponSlots.Array.data[3].weaponIndex
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1317018507386660713, guid: f77b1ccaf86e83f4883a68c4e614bc06, type: 3}
+      propertyPath: shield
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7190606879087677350, guid: f77b1ccaf86e83f4883a68c4e614bc06, type: 3}
       propertyPath: m_Name

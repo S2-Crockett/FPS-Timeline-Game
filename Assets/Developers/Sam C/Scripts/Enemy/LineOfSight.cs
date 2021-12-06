@@ -35,12 +35,23 @@ public class LineOfSight : MonoBehaviour
     public float timer = 1.0f;
     public float offset = 5.0f;
 
+
+    public List<GameObject> bullets;
+
+    private Bullets bulletInfo;
+
+    int clipSize;
+    float reloadSpeed;
+
     void Start()
     {
         LevelManager = GameObject.Find("LevelManager").GetComponent<ZoneChecker>();
         player = GameObject.Find("Player");
         stages = Stages.SEARCHING;
         enemy = GetComponent<Enemies>();
+        bulletInfo = enemy.bullet.GetComponent<Bullets>();
+        clipSize = bulletInfo.clipSize;
+        reloadSpeed = bulletInfo.reloadSpeed;
     }
 
     private void Awake()
@@ -55,7 +66,7 @@ public class LineOfSight : MonoBehaviour
         {
             case Stages.SEARCHING:
                 {
-
+                    weaponHolder.transform.rotation = transform.rotation;
                     GetComponent<Move>().enabled = true;
                     if (Searching())
                     {
@@ -70,14 +81,18 @@ public class LineOfSight : MonoBehaviour
                 }
             case Stages.FOUND:
                 {
-                    Found();
-
                     GetComponent<Move>().enabled = false;
                     transform.position = pos;
+                    Vector3 rot = Quaternion.LookRotation(player.transform.position - transform.position).eulerAngles;
+                    rot.x = rot.z = 0;
+                    transform.rotation = Quaternion.Euler(rot);
+                    Found();
 
                     break;
                 }
         }
+
+        CheckBullets(bullets);
     }
     private bool Searching()
     {
@@ -87,6 +102,10 @@ public class LineOfSight : MonoBehaviour
         distance = Vector3.Distance(player.transform.position, transform.position);
 
         if (rotation < 45 && distance < 15)
+        {
+            return true;
+        }
+        else if (distance < 5)
         {
             return true;
         }
@@ -118,13 +137,54 @@ public class LineOfSight : MonoBehaviour
     private void Shoot()
     {
         timer -= Time.deltaTime;
-        if (timer <= 0)
+        if (clipSize > 0)
         {
-            Quaternion rotation = Quaternion.Euler(Random.Range(-offset, offset), Random.Range(-offset, offset), 0);
-            GameObject bullet = Instantiate(enemy.bullet, weaponHolder.position, weaponHolder.rotation);
-            float speed = enemy.bulletInfo.speed;
-            bullet.GetComponent<Rigidbody>().AddForce(rotation * weaponHolder.transform.forward * speed);
-            timer = 0.5f;
+            if (timer <= 0)
+            {
+                Quaternion rotation = Quaternion.Euler(Random.Range(-bulletInfo.offset, bulletInfo.offset), Random.Range(-bulletInfo.offset, bulletInfo.offset), 0);
+                GameObject bullet = Instantiate(enemy.bullet, weaponHolder.position, weaponHolder.rotation);
+                bullets.Add(bullet);
+                clipSize -= 1;
+                float speed = bulletInfo.speed;
+                bullet.GetComponent<Rigidbody>().AddForce(rotation * weaponHolder.transform.forward * speed);
+                timer = bulletInfo.fireRate;
+            }
+            reloadSpeed = bulletInfo.reloadSpeed;
+        }
+        else
+        {
+            reloadSpeed -= Time.deltaTime;
+            if(reloadSpeed <= 0)
+            {
+                timer = bulletInfo.fireRate;
+                clipSize = bulletInfo.clipSize;
+            }
+        }
+    }
+
+    private void CheckBullets(List<GameObject> bullets)
+    {
+        float distance = bulletInfo.range;
+
+        for(int i = 0; i < bullets.Count; i++)
+        {
+            float tempDistance = Vector3.Distance(transform.position, bullets[i].gameObject.transform.position);
+            if(tempDistance > distance)
+            {
+                Destroy(bullets[i].gameObject);
+                bullets.Remove(bullets[i]);
+            }
+            if(bullets[i].GetComponent<Bullets>().hit)
+            {
+                Destroy(bullets[i].gameObject);
+                bullets.Remove(bullets[i]);
+                player.GetComponent<HealthComponent>().Damage(bulletInfo.damage);
+            }
+            if (bullets[i].GetComponent<Bullets>().hitWall)
+            {
+                Destroy(bullets[i].gameObject);
+                bullets.Remove(bullets[i]);
+            }
         }
     }
     private void Found()
@@ -134,21 +194,9 @@ public class LineOfSight : MonoBehaviour
         weaponHolder.transform.rotation = rotation;
         transform.position = pos;
 
-        RaycastHit hit;
-        if (Physics.Raycast(weaponHolder.transform.position, weaponHolder.transform.forward, out hit, Mathf.Infinity, 1))
-        {
-            if (hit.collider.gameObject.tag == "Player")
-            {
-                stages = Stages.FOUND;
-            }
-            else
-            {
-                stages = Stages.SEARCHING;
-            }
-        }
 
         inRange();
-        //Shoot();
+        Shoot();
     }
 
 

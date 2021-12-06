@@ -148,7 +148,7 @@ MonoBehaviour:
   weaponObject: {fileID: 6431138718741029509, guid: b8ddd1bbdcc3c124bbc936fc0df1f751, type: 3}
   weaponHolder: {fileID: 5805923887880843295}
   stages: 0
-  timer: 1
+  bulletSpeed: 1
   offset: 5
 --- !u!114 &-4195939951764876891
 MonoBehaviour:

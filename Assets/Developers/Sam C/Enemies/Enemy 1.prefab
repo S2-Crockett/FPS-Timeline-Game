@@ -150,6 +150,7 @@ MonoBehaviour:
   stages: 0
   timer: 1
   offset: 5
+  bullets: []
 --- !u!114 &6875361293437366070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,7 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 5805923888380855202}
-  bullet: {fileID: 685222212935467944, guid: 99759b75e0b0fd34ba9082f74d6895a7, type: 3}
+  bullet: {fileID: 685222212935467944, guid: bb1a530df94403640b885bbaa39d4b47, type: 3}
   bulletInfo: {fileID: 0}
   dead: 0
 --- !u!114 &-2245871990212071468

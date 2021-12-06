@@ -155,7 +155,7 @@ public class ZoneChecker : MonoBehaviour
                 newEnemyPos[index_] = enemyObjectZone1[index_].deathPos;
             }
             enemyObjectZone2[index_].enemyObj.GetComponent<MeshRenderer>().material = Glitch;
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.2f);
             enemyObjectZone1[index_].enemyObj.SetActive(true);
             enemyObjectZone2[index_].enemyObj.SetActive(false);
             enemyObjectZone2[index_].enemyObj.GetComponent<MeshRenderer>().material = enemyObjectZone2[index_].defaultEnemyMat;
@@ -174,14 +174,13 @@ public class ZoneChecker : MonoBehaviour
                 newEnemyPos[index_] = enemyObjectZone2[index_].deathPos;
             }
             enemyObjectZone1[index_].enemyObj.GetComponent<MeshRenderer>().material = Glitch;
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.2f);
             enemyObjectZone2[index_].enemyObj.SetActive(true);
             enemyObjectZone1[index_].enemyObj.SetActive(false);
             enemyObjectZone1[index_].enemyObj.GetComponent<MeshRenderer>().material = enemyObjectZone1[index_].defaultEnemyMat;
             enemyObjectZone2[index_].enemyObj.transform.position = newEnemyPos[index_];
             enemyObjectZone2[index_].enemyObj.transform.rotation = newEnemyRot[index_];
         }
-        yield return new WaitForSeconds(0.1f);
     }
 
     IEnumerator ChangeFloor()

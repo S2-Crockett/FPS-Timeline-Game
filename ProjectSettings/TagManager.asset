@@ -26,6 +26,7 @@ TagManager:
   - Objective2
   - Objective3
   - Objective4
+  - Weapon
   layers:
   - Default
   - TransparentFX
