@@ -2,12 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 public class LineOfSight : MonoBehaviour
 {
 
-    enum Stages
+    public enum Stages
     {
         SEARCHING,
         IN_RANGE,
@@ -25,8 +26,9 @@ public class LineOfSight : MonoBehaviour
     private Enemies enemy;
 
 
-    private Stages stages;
+    public Stages stages;
     private Vector3 targetDir;
+    private Vector3 pos;
     private float rotation;
     private float distance;
 
@@ -53,6 +55,8 @@ public class LineOfSight : MonoBehaviour
         {
             case Stages.SEARCHING:
                 {
+
+                    GetComponent<Move>().enabled = true;
                     if (Searching())
                     {
                         stages = Stages.IN_RANGE;
@@ -67,6 +71,10 @@ public class LineOfSight : MonoBehaviour
             case Stages.FOUND:
                 {
                     Found();
+
+                    GetComponent<Move>().enabled = false;
+                    transform.position = pos;
+
                     break;
                 }
         }
@@ -98,6 +106,7 @@ public class LineOfSight : MonoBehaviour
         {
             if (hit.collider.gameObject.tag == "Player")
             {
+                pos = transform.position;
                 stages = Stages.FOUND;
             }
         }
@@ -123,6 +132,7 @@ public class LineOfSight : MonoBehaviour
         Vector3 target = player.transform.position - weaponHolder.transform.position;
         Quaternion rotation = Quaternion.LookRotation(target, Vector3.forward);
         weaponHolder.transform.rotation = rotation;
+        transform.position = pos;
 
         RaycastHit hit;
         if (Physics.Raycast(weaponHolder.transform.position, weaponHolder.transform.forward, out hit, Mathf.Infinity, 1))
@@ -136,7 +146,9 @@ public class LineOfSight : MonoBehaviour
                 stages = Stages.SEARCHING;
             }
         }
-        Shoot();
+
+        inRange();
+        //Shoot();
     }
 
 

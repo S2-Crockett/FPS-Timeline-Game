@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 public class ZoneChecker : MonoBehaviour
@@ -39,10 +40,10 @@ public class ZoneChecker : MonoBehaviour
     public EnemyInfo[] enemyObjectZone2;
     GameObject newFloorObject;
 
-    bool[] changable;
 
     Vector3[] newEnemyPos;
     Quaternion[] newEnemyRot;
+    Quaternion dead = new Quaternion(0, 90, 90, 0);
 
 
 
@@ -55,8 +56,6 @@ public class ZoneChecker : MonoBehaviour
         newEnvironmentObject = new GameObject[environment.Length];
         newEnemyPos = new Vector3[enemies.Length];
         newEnemyRot = new Quaternion[enemies.Length];
-
-        changable = new bool[enemies.Length];
 
         prevIndex = index;
 
@@ -80,14 +79,12 @@ public class ZoneChecker : MonoBehaviour
             enemyObjectZone1[i].enemyObj = Instantiate(zone[0].enemy, enemies[i].transform.position, enemies[i].transform.rotation);
             enemyObjectZone2[i].enemyObj = Instantiate(zone[1].enemy, enemies[i].transform.position, enemies[i].transform.rotation);
             enemyObjectZone2[i].enemyObj.SetActive(false);
+            enemyObjectZone1[i].defaultEnemyMat = enemyObjectZone1[i].enemyObj.GetComponent<MeshRenderer>().material;
+            enemyObjectZone2[i].defaultEnemyMat = enemyObjectZone2[i].enemyObj.GetComponent<MeshRenderer>().material;
             newEnemyPos[i] = enemyObjectZone1[i].enemyObj.transform.position;
             newEnemyRot[i] = enemyObjectZone1[i].enemyObj.transform.rotation;
         }
 
-        for (int i = 0; i < changable.Length; i++)
-        {
-            changable[i] = false;
-        }
 
         weaponHandler.WeaponIndex = zone[index].weaponIndex;
         weaponHandler.change = true;
@@ -98,14 +95,32 @@ public class ZoneChecker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(prevIndex != index)
+        if (prevIndex != index)
         {
             prevIndex = index;
             change = true;
         }
-        if(Physics.Raycast(player.transform.position, player.transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity, layerMask))
+        if (Physics.Raycast(player.transform.position, player.transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity, layerMask))
         {
             ChangeObjects();
+        }
+
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            if (enemyObjectZone1[i].dead)
+            {
+                enemyObjectZone1[i].enemyObj.transform.position = enemyObjectZone1[i].deathPos;
+                enemyObjectZone1[i].enemyObj.GetComponent<LineOfSight>().enabled = false;
+                enemyObjectZone1[i].enemyObj.GetComponent<Move>().enabled = false;
+                enemyObjectZone1[i].enemyObj.transform.rotation = dead;
+            }
+            if (enemyObjectZone2[i].dead)
+            {
+                enemyObjectZone2[i].enemyObj.transform.position = enemyObjectZone2[i].deathPos;
+                enemyObjectZone2[i].enemyObj.GetComponent<LineOfSight>().enabled = false;
+                enemyObjectZone2[i].enemyObj.GetComponent<Move>().enabled = false;
+                enemyObjectZone2[i].enemyObj.transform.rotation = dead;
+            }
         }
     }
 
@@ -135,8 +150,15 @@ public class ZoneChecker : MonoBehaviour
             {
                 newEnemyRot[index_] = enemyObjectZone2[index_].enemyObj.transform.rotation;
             }
+            if (enemyObjectZone1[index_].dead)
+            {
+                newEnemyPos[index_] = enemyObjectZone1[index_].deathPos;
+            }
+            enemyObjectZone2[index_].enemyObj.GetComponent<MeshRenderer>().material = Glitch;
+            yield return new WaitForSeconds(0.5f);
             enemyObjectZone1[index_].enemyObj.SetActive(true);
             enemyObjectZone2[index_].enemyObj.SetActive(false);
+            enemyObjectZone2[index_].enemyObj.GetComponent<MeshRenderer>().material = enemyObjectZone2[index_].defaultEnemyMat;
             enemyObjectZone1[index_].enemyObj.transform.position = newEnemyPos[index_];
             enemyObjectZone1[index_].enemyObj.transform.rotation = newEnemyRot[index_];
         }
@@ -147,8 +169,15 @@ public class ZoneChecker : MonoBehaviour
             {
                 newEnemyRot[index_] = enemyObjectZone1[index_].enemyObj.transform.rotation;
             }
+            if (enemyObjectZone2[index_].dead)
+            {
+                newEnemyPos[index_] = enemyObjectZone2[index_].deathPos;
+            }
+            enemyObjectZone1[index_].enemyObj.GetComponent<MeshRenderer>().material = Glitch;
+            yield return new WaitForSeconds(0.5f);
             enemyObjectZone2[index_].enemyObj.SetActive(true);
             enemyObjectZone1[index_].enemyObj.SetActive(false);
+            enemyObjectZone1[index_].enemyObj.GetComponent<MeshRenderer>().material = enemyObjectZone1[index_].defaultEnemyMat;
             enemyObjectZone2[index_].enemyObj.transform.position = newEnemyPos[index_];
             enemyObjectZone2[index_].enemyObj.transform.rotation = newEnemyRot[index_];
         }
@@ -211,15 +240,20 @@ public class ZoneChecker : MonoBehaviour
         {
             if (enemyObjectZone1[i].enemyObj.GetComponent<ShootingTarget>().dead)
             {
-                enemyObjectZone1[i].enemyObj.GetComponent<LineOfSight>().enabled = false;
-                enemyObjectZone1[i].enemyObj.GetComponent<Movement>().enabled = false;
-                Quaternion dead = new Quaternion();
-                dead.Set( 0, 90, 90, 0);
-                enemyObjectZone1[i].enemyObj.transform.rotation = dead;
+                if (!enemyObjectZone1[i].dead)
+                {
+                    enemyObjectZone1[i].deathPos = enemyObjectZone1[i].enemyObj.transform.position;
+                    enemyObjectZone1[i].deathPos.y -= 0.3f;
+                }
                 enemyObjectZone1[i].dead = true;
             }
             if (enemyObjectZone2[i].enemyObj.GetComponent<ShootingTarget>().dead)
             {
+                if (!enemyObjectZone2[i].dead)
+                {
+                    enemyObjectZone2[i].deathPos = enemyObjectZone2[i].enemyObj.transform.position;
+                    enemyObjectZone2[i].deathPos.y -= 0.3f;
+                }
                 enemyObjectZone2[i].dead = true;
             }
         }
@@ -230,5 +264,8 @@ public class ZoneChecker : MonoBehaviour
 public class EnemyInfo
 {
     public bool dead;
+    public Vector3 deathPos;
     public GameObject enemyObj;
+    public Material defaultEnemyMat;
+    public Material defaultWeaponMat;
 }
