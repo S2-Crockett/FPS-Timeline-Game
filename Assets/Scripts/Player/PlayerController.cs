@@ -12,9 +12,13 @@ public class PlayerController : MonoBehaviour
     private DefaultInput defaultInput;
 
     public DoubleJump double_jump;
+    public SpeedBooster double_speed;
+
 
     public int jumpCount = 0;
     public int space_pressed = 0;
+
+    public int speed = 0;
 
     [HideInInspector]
     public Vector2 inputMovement;
@@ -137,6 +141,7 @@ public class PlayerController : MonoBehaviour
         CalculateCameraHeight();
         SetLookAtTargetCrosshair();
         DoubleJumping();
+        DoubleSpeed();
     }
     
     #endregion
@@ -203,6 +208,7 @@ public class PlayerController : MonoBehaviour
         movementSpeed.y += playerGravity;
         movementSpeed += jumpingForce * Time.smoothDeltaTime;
 
+        movementSpeed *= speed;
         characterController.Move(movementSpeed);
 
         CheckLand();
@@ -359,7 +365,6 @@ public class PlayerController : MonoBehaviour
             space_pressed += 1;
         }
       
-
     }
 
     private void DoubleJumping()
@@ -376,6 +381,19 @@ public class PlayerController : MonoBehaviour
         if (characterController.isGrounded)
         {
             space_pressed = 0;
+        }
+    }
+
+    private void DoubleSpeed()
+    {
+        if(double_speed.speedBooster)
+        {
+            speed = 2;
+        }
+
+        if(!double_speed.speedBooster)
+        {
+            speed = 1;
         }
     }
     private void CheckAirTime()
