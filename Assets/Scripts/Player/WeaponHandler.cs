@@ -11,12 +11,9 @@ public class WeaponHandler : MonoBehaviour
     private bool shouldShoot;
     private bool isAiming;
 
-    [Header("Weapon")] 
-    [HideInInspector]
-    public WeaponController currentWeapon;
+    [Header("Weapon")] [HideInInspector] public WeaponController currentWeapon;
     private int currentActiveIndex;
-    [HideInInspector] 
-    public GameObject[] weaponRefs = new GameObject[5];
+    [HideInInspector] public GameObject[] weaponRefs = new GameObject[5];
     public WeaponSlot[] weaponSlots;
 
     [Header("References")] private PlayerController player;
@@ -98,6 +95,11 @@ public class WeaponHandler : MonoBehaviour
                     currentWeapon.Shoot(player.camera);
                 }
             }
+
+            if (currentWeapon)
+            {
+                currentWeapon.UpdateBullets(Time.deltaTime);
+            }
         }
     }
 
@@ -114,7 +116,7 @@ public class WeaponHandler : MonoBehaviour
         {
             if (currentWeapon)
             {
-                 StartCoroutine(currentWeapon.Reload()); 
+                StartCoroutine(currentWeapon.Reload());
             }
         }
     }

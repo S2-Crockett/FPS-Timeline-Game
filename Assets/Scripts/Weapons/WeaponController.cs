@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Managers;
 using Random = UnityEngine.Random;
+
 // ReSharper disable All
 
 public class WeaponController : MonoBehaviour
@@ -13,29 +14,29 @@ public class WeaponController : MonoBehaviour
         public float time;
         public Vector3 initialPosition;
         public Vector3 initialVelocity;
+        public TrailRenderer tracer;
     }
-    
+
     private PlayerController playerController;
     [HideInInspector] public bool isAiming;
 
-    [Header("Settings")] 
-    public WeaponSettings settings;
+    [Header("Settings")] public WeaponSettings settings;
 
-    [Header("HUD")] 
-    public int minHeldAmmoDisplay = 10;
+    [Header("HUD")] public int minHeldAmmoDisplay = 10;
     public int minCurrentAmmoDisplay = 5;
 
     [Header("Weapon")] public float fireRate;
     public float damage;
     public float range;
-    public float bulletOffet = 0.05f;
+    public float bulletSpreadIdle = 0f;
+    public float bulletSpreadAim = 0f;
     public float bulletSpeed = 1000.0f;
     public float bulletDrop = 0.0f;
 
     private List<Bullet> spawnedBullets = new List<Bullet>();
-    
-    [Header("Reload")] 
-    public int magazineSize = 30;
+    private List<TrailRenderer> traiList = new List<TrailRenderer>();
+
+    [Header("Reload")] public int magazineSize = 30;
     public int equippedAmmo = 120;
     public float reloadTime = 1f;
     private int currentAmmo;
@@ -50,14 +51,13 @@ public class WeaponController : MonoBehaviour
     public float recoilSpeed = 10.0f;
     public float cameraRecoil = 1.0f;
     private float recoil = 0.0f;
-    
+
     private Vector3 newRecoilCameraPosition;
     private Vector3 newRecoilCameraVelocity;
     private Vector3 newRecoilTargetCameraRotation;
-    private Vector3 newRecoilTargetCameraVelocity; 
+    private Vector3 newRecoilTargetCameraVelocity;
 
-    [Header("Idle Sway")] 
-    public Transform swayObject;
+    [Header("Idle Sway")] public Transform swayObject;
     public float swayAmountA = 1f;
     public float swayAmountB = 2f;
     public float swayScale = 600f;
@@ -77,9 +77,7 @@ public class WeaponController : MonoBehaviour
     public TrailRenderer tracerEffect;
     public Transform bulletOriginTransform;
 
-    [Header("Animations")] 
-    
-    private bool isInitialised;
+    [Header("Animations")] private bool isInitialised;
     private Vector3 newWeaponRotation;
     private Vector3 newWeaponRotationVelocity;
     private Vector3 targetWeaponRotation;
@@ -103,14 +101,14 @@ public class WeaponController : MonoBehaviour
     private void OnEnable()
     {
         isReloading = false;
-        
+
         UIManager.Instance.SetAmmo(currentAmmo, equippedAmmo, magazineSize);
         UIManager.Instance.UpdateAmmo(currentAmmo, equippedAmmo);
 
         CheckHeldAmmo();
         CheckCurrentAmmo();
     }
-    
+
     private void OnDisable()
     {
         UIManager.Instance.ammoDisplay.FadeOut();
@@ -119,7 +117,7 @@ public class WeaponController : MonoBehaviour
 
         // check the visibility in the UI manager for whether its visile or not? 
     }
-    
+
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -132,7 +130,7 @@ public class WeaponController : MonoBehaviour
         playerController = controller;
         lookAtTarget = playerController.LookAtTarget;
         isInitialised = true;
-        
+
         // update the currently equipped weapon image.
     }
 
@@ -146,9 +144,15 @@ public class WeaponController : MonoBehaviour
     Bullet CreateBullet(Vector3 position, Vector3 velocity)
     {
         Bullet bullet = new Bullet();
+        bullet.initialPosition = position;
+        bullet.initialVelocity = velocity;
+        bullet.time = 0.0f;
+        bullet.tracer = Instantiate(tracerEffect, position, Quaternion.identity);
+        bullet.tracer.AddPosition(position);
+        Destroy(bullet.tracer.gameObject, bullet.tracer.time);
         return bullet;
     }
-    
+
     private void Update()
     {
         swayObject = transform.parent.transform;
@@ -191,7 +195,7 @@ public class WeaponController : MonoBehaviour
             settings.movementSwaySmoothing);
 
         transform.localRotation = Quaternion.Euler(newWeaponRotation + newWeaponMovementRotation);
-       
+
         CalculateBreathing();
         CalculateAiming();
         CalculateRecoil();
@@ -200,13 +204,14 @@ public class WeaponController : MonoBehaviour
     public IEnumerator Reload()
     {
         isReloading = true;
-        
+
         if (currentAmmo == magazineSize)
         {
             // no need to reload instantly return
             yield return new WaitForSeconds(0.01f);
             isReloading = false;
         }
+
         if (equippedAmmo >= magazineSize - currentAmmo)
         {
             yield return new WaitForSeconds(reloadTime);
@@ -221,10 +226,10 @@ public class WeaponController : MonoBehaviour
             equippedAmmo = 0;
             isReloading = false;
         }
-        
+
         CheckHeldAmmo();
         CheckCurrentAmmo();
-        
+
         UIManager.Instance.UpdateAmmo(currentAmmo, equippedAmmo);
     }
 
@@ -271,54 +276,111 @@ public class WeaponController : MonoBehaviour
         {
             return;
         }
-        
+
         if (currentAmmo <= 0)
         {
             StartCoroutine(Reload());
             return;
         }
+
         if (Time.time >= nextTimeToFire)
         {
             nextTimeToFire = Time.time + 1f / fireRate;
-
             currentAmmo--;
+
             UIManager.Instance.UpdateAmmo(currentAmmo, equippedAmmo);
             UIManager.Instance.crosshair.SetCrosshairRecoil(0.1f);
+
             recoil += 0.1f;
+
             muzzleParticle.Play();
             CheckCurrentAmmo();
-            
-            RaycastHit hit;
-            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))
-            {
-                TrailRenderer tracer = Instantiate(tracerEffect, bulletOriginTransform.position, Quaternion.identity);
-                StartCoroutine(SpawnTrail(tracer, hit));
-                
-                ShootingTarget target = hit.transform.GetComponent<ShootingTarget>();
-                EnemyDead enemy = hit.transform.GetComponent<EnemyDead>();
-                
-                if (target != null)
-                {
-                    audioSource.PlayOneShot(hitmarkerClip);
-                    UIManager.Instance.crosshair.SetHitmarker();
-                    target.TakeDamage(damage);
-                }
 
-                if (enemy != null)
-                {
-                    enemy.TakeDamage(damage);
-                }
-                
-                //GameObject ImpactObject = Instantiate(hitParticle, hit.point, Quaternion.LookRotation(hit.normal));
-                //Destroy(ImpactObject, 0.4f);
-            }
-            
+            RaycastHit hit;
+            Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, Mathf.Infinity);
+
+            Vector3 direction = GetShotDirection();
+            Vector3 hitpoint = cam.transform.TransformPoint(direction * range);
+            Vector3 velocity = (hitpoint - bulletOriginTransform.position).normalized * bulletSpeed;
+            var bullet = CreateBullet(bulletOriginTransform.position, velocity);
+            spawnedBullets.Add(bullet);
         }
-        
-        //UIManager.Instance.crosshair.SetIsShooting(false);
-        
     }
 
+    private Vector3 GetShotDirection()
+    {
+        Vector3 direction = Vector3.forward;
+
+        if (!isAiming)
+        {
+            direction += new Vector3(
+                Random.Range(-bulletSpreadIdle, bulletSpreadIdle),
+                Random.Range(-bulletSpreadIdle, bulletSpreadIdle),
+                Random.Range(-bulletSpreadIdle, bulletSpreadIdle));
+            direction.Normalize();
+            return direction;
+        }
+
+        return direction;
+    }
+
+    public void UpdateBullets(float delta)
+    {
+        SimulateBullets(delta);
+        DestroyBullets();
+    }
+
+    private void SimulateBullets(float deltaTime)
+    {
+        spawnedBullets.ForEach(bullet =>
+        {
+            Vector3 p0 = GetBulletPosition(bullet);
+            bullet.time += deltaTime;
+            Vector3 p1 = GetBulletPosition(bullet);
+            RaycastSegment(p0, p1, bullet);
+        });
+    }
+
+    private void DestroyBullets()
+    {
+        spawnedBullets.RemoveAll(bullet => bullet.time >= 0.5f);
+    }
+
+    void RaycastSegment(Vector3 start, Vector3 end, Bullet bullet)
+    {
+        float distance = (end - start).magnitude;
+        RaycastHit hit;
+        if (Physics.Raycast(start, end - start, out hit, distance))
+        {
+            ShootingTarget target = hit.transform.GetComponent<ShootingTarget>();
+
+            if (bullet.tracer)
+            {
+               bullet.tracer.transform.position = hit.point; 
+            }
+            
+
+            if (target != null)
+            {
+                audioSource.PlayOneShot(hitmarkerClip);
+                UIManager.Instance.crosshair.SetHitmarker();
+                target.TakeDamage(damage);
+            }
+            
+            bullet.time = 0.5f;
+            //GameObject ImpactObject = Instantiate(hitParticle, hit.point, Quaternion.LookRotation(hit.normal));
+            //Destroy(ImpactObject, 0.4f);
+        }
+        else
+        {
+            if (bullet.tracer)
+            {
+               bullet.tracer.transform.position = end; 
+            }
+        }
+    }
+
+    /*
     IEnumerator SpawnTrail(TrailRenderer tracer, RaycastHit hit)
     {
         float time = 0;
@@ -333,6 +395,7 @@ public class WeaponController : MonoBehaviour
         tracer.transform.position = hit.point;
         Destroy(tracer.gameObject, tracer.time);
     }
+    */
 
     private void CalculateBreathing()
     {
@@ -355,7 +418,7 @@ public class WeaponController : MonoBehaviour
         return new Vector3(Mathf.Sin(time), a * Mathf.Sin(b * time + Mathf.PI));
     }
 
-   
+
     private void CalculateAiming()
     {
         var targetPosition = swayObject.position;
@@ -371,38 +434,51 @@ public class WeaponController : MonoBehaviour
             Vector3.SmoothDamp(weaponSwayPosition, targetPosition, ref weaponSwayPositionVelocity, aimingTime);
         transform.position = weaponSwayPosition;
     }
-    
+
     private void CalculateRecoil()
     {
         if (recoil > 0)
         {
             float currentTrans = lookAtTarget.transform.localPosition.y;
             var newRotation = currentTrans += cameraRecoil;
-            newRecoilCameraPosition = new Vector3(lookAtTarget.transform.localPosition.x, currentTrans, lookAtTarget.transform.localPosition.z);
-            lookAtTarget.transform.localPosition = Vector3.Slerp(lookAtTarget.transform.localPosition, newRecoilCameraPosition,  Time.deltaTime * recoilSpeed);
-            
-            var maxRecoil = Quaternion.Euler(Random.Range(transform.parent.localRotation.x, maxRecoilX), Random.Range(transform.parent.localRotation.y - maxRecoilY, maxRecoilY), transform.parent.localRotation.z);
-            
+            newRecoilCameraPosition = new Vector3(lookAtTarget.transform.localPosition.x, currentTrans,
+                lookAtTarget.transform.localPosition.z);
+            lookAtTarget.transform.localPosition = Vector3.Slerp(lookAtTarget.transform.localPosition,
+                newRecoilCameraPosition, Time.deltaTime * recoilSpeed);
+
+            var maxRecoil = Quaternion.Euler(Random.Range(transform.parent.localRotation.x, maxRecoilX),
+                Random.Range(transform.parent.localRotation.y - maxRecoilY, maxRecoilY),
+                transform.parent.localRotation.z);
+
             //playerController.camera.transform.localRotation = Quaternion.Slerp(transform.parent.localRotation, maxRecoil, Time.deltaTime * recoilSpeed);
-            transform.parent.localRotation = Quaternion.Slerp(transform.parent.localRotation, maxRecoil, Time.deltaTime * recoilSpeed);
- 
-            var maxTranslation = new Vector3(transform.parent.localPosition.x, Random.Range(transform.parent.localPosition.y, maxTransY), transform.parent.localPosition.z);
-            
-            transform.parent.localPosition = Vector3.Slerp(transform.parent.localPosition, maxTranslation, Time.deltaTime * recoilSpeed);
+            transform.parent.localRotation =
+                Quaternion.Slerp(transform.parent.localRotation, maxRecoil, Time.deltaTime * recoilSpeed);
+
+            var maxTranslation = new Vector3(transform.parent.localPosition.x,
+                Random.Range(transform.parent.localPosition.y, maxTransY), transform.parent.localPosition.z);
+
+            transform.parent.localPosition = Vector3.Slerp(transform.parent.localPosition, maxTranslation,
+                Time.deltaTime * recoilSpeed);
             recoil -= Time.deltaTime;
         }
         else
         {
             recoil = 0;
-            var minRecoil = Quaternion.Euler(Random.Range(0, transform.parent.localRotation.x), Random.Range(0, transform.parent.localRotation.y), transform.parent.localRotation.z);
-            transform.parent.localRotation = Quaternion.Slerp(transform.parent.localRotation, minRecoil, Time.deltaTime * recoilSpeed / 2);
+            var minRecoil = Quaternion.Euler(Random.Range(0, transform.parent.localRotation.x),
+                Random.Range(0, transform.parent.localRotation.y), transform.parent.localRotation.z);
+            transform.parent.localRotation = Quaternion.Slerp(transform.parent.localRotation, minRecoil,
+                Time.deltaTime * recoilSpeed / 2);
 
-            Vector3 minPosition = new Vector3(lookAtTarget.transform.localPosition.x, 0, lookAtTarget.transform.localPosition.z);
-            lookAtTarget.transform.localPosition = Vector3.Slerp(lookAtTarget.transform.localPosition, minPosition,  Time.deltaTime * recoilSpeed);
-            
+            Vector3 minPosition = new Vector3(lookAtTarget.transform.localPosition.x, 0,
+                lookAtTarget.transform.localPosition.z);
+            lookAtTarget.transform.localPosition = Vector3.Slerp(lookAtTarget.transform.localPosition, minPosition,
+                Time.deltaTime * recoilSpeed);
+
             var minTranslation = new Vector3(
-                transform.parent.localPosition.x, Random.Range(0, transform.parent.localPosition.y), transform.parent.localPosition.z);
-            transform.parent.localPosition = Vector3.Slerp(transform.parent.localPosition, minTranslation, Time.deltaTime * recoilSpeed);
+                transform.parent.localPosition.x, Random.Range(0, transform.parent.localPosition.y),
+                transform.parent.localPosition.z);
+            transform.parent.localPosition = Vector3.Slerp(transform.parent.localPosition, minTranslation,
+                Time.deltaTime * recoilSpeed);
         }
     }
 }
@@ -410,8 +486,7 @@ public class WeaponController : MonoBehaviour
 [Serializable]
 public class WeaponSettings
 {
-    [Header("Weapon Sway")]
-    public float swayAmount;
+    [Header("Weapon Sway")] public float swayAmount;
     public bool swayYInverted;
     public bool swayXInverted;
     public float swaySmoothing;

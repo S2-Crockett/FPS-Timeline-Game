@@ -4854,7 +4854,10 @@ MonoBehaviour:
   fireRate: 3
   damage: 25
   range: 100
-  sprayRadius: 0.88
+  bulletSpreadIdle: 0.01
+  bulletSpreadAim: 0
+  bulletSpeed: 500
+  bulletDrop: 1
   magazineSize: 6
   equippedAmmo: 24
   reloadTime: 1

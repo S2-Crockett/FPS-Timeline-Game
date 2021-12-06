@@ -21,16 +21,10 @@
   <component name="ChangeListManager">
     <list default="true" id="b7d5abbc-e8eb-400a-a78c-2d13f0ee5620" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Meshes/Texture_Mat.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Meshes/Texture_Mat.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Meshes/Weapons/BulletTracer_Mat.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Meshes/Weapons/BulletTracer_Mat.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Meshes/Weapons/PistolPrototype.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Meshes/Weapons/PistolPrototype.fbx.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Meshes/Weapons/Pistol_Mat_Emissive.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Meshes/Weapons/Pistol_Mat_Emissive.mat.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Particles/WeaponEffects/LaserBulletTrail.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Particles/WeaponEffects/LaserBulletTrail.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Weapons/BasePrimary.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Weapons/BasePrimary.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Weapons/BaseSecondary.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Weapons/BaseSecondary.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/WeaponHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/WeaponHandler.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -82,11 +76,11 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Respawn/RespawnManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Testing/AreaDamage.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/HealthPanel.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Player/WeaponHandler.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/AmmoPickup.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Managers/UIManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/WeaponPanel.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Components/HealthComponent.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Player/WeaponHandler.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponController.cs" />
       </list>
     </option>
@@ -148,7 +142,7 @@
       <workItem from="1638464955043" duration="40953000" />
       <workItem from="1638620481130" duration="8699000" />
       <workItem from="1638637399664" duration="184000" />
-      <workItem from="1638637609485" duration="35213000" />
+      <workItem from="1638637609485" duration="41356000" />
     </task>
     <servers />
   </component>
