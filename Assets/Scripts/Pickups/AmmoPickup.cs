@@ -43,6 +43,7 @@ public class AmmoPickup : MonoBehaviour
         {
             _weaponHandler = other.GetComponent<WeaponHandler>();
             _weaponHandler.currentWeapon.AddAmmo(AddAmmoAmountPrimary);
+            SoundManager.Instance.PlayPickupSound(pickupSound);
            // _weaponHandler.weaponRefs[1].GetComponent<WeaponController>().AddAmmo(AddAmmoAmountSecondary);
             // this will need to be changed with the weapon switching stuff from the time mechanic
       

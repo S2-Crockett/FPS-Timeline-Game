@@ -90,6 +90,7 @@ public class WeaponController : MonoBehaviour
 
     private AudioSource audioSource;
     private GameObject lookAtTarget;
+    public AudioClip weaponSound;
 
     private void Awake()
     {
@@ -302,7 +303,7 @@ public class WeaponController : MonoBehaviour
 
             muzzleParticle.Play();
             CheckCurrentAmmo();
-
+            SoundManager.Instance.PlayWeaponSound(weaponSound);
             RaycastHit hit;
             Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, Mathf.Infinity);
 
