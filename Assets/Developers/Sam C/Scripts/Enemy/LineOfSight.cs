@@ -15,8 +15,7 @@ public class LineOfSight : MonoBehaviour
         FOUND
     }
 
-    private ZoneChecker LevelManager;
-    private GameObject player;
+    public GameObject player;
 
     [Header("Weapon")]
     public GameObject weaponObject;
@@ -47,20 +46,19 @@ public class LineOfSight : MonoBehaviour
 
     void Start()
     {
-        LevelManager = GameObject.Find("LevelManager").GetComponent<ZoneChecker>();
-        player = GameObject.Find("Player");
         stages = Stages.SEARCHING;
-        enemy = GetComponent<Enemies>();
-        bulletInfo = enemy.bullet.GetComponent<Bullets>();
-        clipSize = bulletInfo.clipSize;
-        reloadSpeed = bulletInfo.reloadSpeed;
         sound = GetComponent<AudioSource>();
+        player = GameObject.Find("Player");
     }
 
     private void Awake()
     {
         GameObject obj = Instantiate(weaponObject, weaponHolder.position, weaponHolder.rotation);
         obj.transform.parent = weaponHolder;
+        enemy = GetComponent<Enemies>();
+        bulletInfo = enemy.bullet.GetComponent<Bullets>();
+        clipSize = bulletInfo.clipSize;
+        reloadSpeed = bulletInfo.reloadSpeed;
     }
 
     void Update()
@@ -90,8 +88,6 @@ public class LineOfSight : MonoBehaviour
                     rot.x = rot.z = 0;
                     transform.rotation = Quaternion.Euler(rot);
                     Found();
-                    print("Found");
-
                     break;
                 }
         }
@@ -105,11 +101,11 @@ public class LineOfSight : MonoBehaviour
         rotation = Vector3.Angle(targetDir, transform.forward);
         distance = Vector3.Distance(player.transform.position, transform.position);
 
-        if (rotation < 45 && distance < 15)
+        if (rotation < 45 && distance < 50)
         {
             return true;
         }
-        else if (distance < 5)
+        else if (distance < 25)
         {
             return true;
         }

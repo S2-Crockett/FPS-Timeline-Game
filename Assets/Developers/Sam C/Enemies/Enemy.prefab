@@ -146,6 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f3109688d522e24ea7a096413a7abdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 4963024754864949923, guid: f77b1ccaf86e83f4883a68c4e614bc06, type: 3}
   weaponObject: {fileID: 6431138718741029509, guid: b8ddd1bbdcc3c124bbc936fc0df1f751, type: 3}
   weaponHolder: {fileID: 5805923887880843295}
   stages: 0
