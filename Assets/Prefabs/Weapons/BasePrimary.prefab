@@ -4880,6 +4880,7 @@ MonoBehaviour:
   hitmarkerClip: {fileID: 8300000, guid: 5783dbc0187545a43858428e3a983cbc, type: 3}
   tracerEffect: {fileID: 5222315208960528297, guid: d84575d9e67da364783f80da51324f85, type: 3}
   bulletOriginTransform: {fileID: 7173513949894973777}
+  weaponSound: {fileID: 8300000, guid: 92d35fe1c59bbd14eaee9e3d3b54cea7, type: 3}
 --- !u!82 &2755018913690595573
 AudioSource:
   m_ObjectHideFlags: 0

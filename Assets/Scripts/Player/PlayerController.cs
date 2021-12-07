@@ -120,6 +120,7 @@ public class PlayerController : MonoBehaviour
         camera.fieldOfView = defaultFOV;
         weaponHandler = GetComponent<WeaponHandler>();
         weaponHandler.Initialise(this);
+        SoundManager.Instance.pController = this;
     }
 
     #endregion

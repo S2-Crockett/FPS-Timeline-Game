@@ -303,7 +303,9 @@ public class WeaponController : MonoBehaviour
 
             muzzleParticle.Play();
             CheckCurrentAmmo();
+
             SoundManager.Instance.PlayWeaponSound(weaponSound);
+
             RaycastHit hit;
             Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, Mathf.Infinity);
 
@@ -370,6 +372,7 @@ public class WeaponController : MonoBehaviour
 
             if (target != null && hit.transform.tag == "Enemy")
             {
+                print("Hit Enemy");
                 audioSource.PlayOneShot(hitmarkerClip);
                 UIManager.Instance.crosshair.SetHitmarker();
                 hit.transform.gameObject.GetComponent<ShootingTarget>().TakeDamage(damage);
