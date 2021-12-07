@@ -15,6 +15,7 @@ public class ZoneChecker : MonoBehaviour
 
     [Header("Enemies")]
     public GameObject[] enemies;
+    public EnemyWave enemyWave;
 
     [Header("Environment")]
     public GameObject[] environment;
@@ -33,7 +34,7 @@ public class ZoneChecker : MonoBehaviour
     private int prevIndex = 0;
     private float random = 0;
 
-    private bool change = false;
+    public bool change = false;
 
     GameObject[] newEnvironmentObject;
     public EnemyInfo[] enemyObjectZone1;
@@ -122,6 +123,8 @@ public class ZoneChecker : MonoBehaviour
                 enemyObjectZone2[i].enemyObj.transform.rotation = dead;
             }
         }
+
+        enemyWave.ResetEnemy(index);
     }
 
     private void ChangeObjects()
@@ -215,8 +218,13 @@ public class ZoneChecker : MonoBehaviour
             for(int i = 0; i < enemies.Length; i++)
             {
                 StartCoroutine(ChangeEnemyObj(i));
-            }
+            } 
             StartCoroutine(ChangeFloor());
+
+            for(int i = 0; i < enemyWave.enemies.Length; i++)
+            {
+                StartCoroutine(enemyWave.ChangeEnemyObj(i));
+            }
 
             weaponHandler.WeaponIndex = zone[index].weaponIndex;
             weaponHandler.change = true;
