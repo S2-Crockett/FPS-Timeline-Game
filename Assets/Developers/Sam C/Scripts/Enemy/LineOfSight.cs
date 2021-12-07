@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -58,7 +59,7 @@ public class LineOfSight : MonoBehaviour
     public List<GameObject> bullets;
 
     private Bullets bulletInfo;
-    
+    private bool isNotified = false;
     void Start()
     {
         LevelManager = GameObject.Find("LevelManager").GetComponent<ZoneChecker>();
@@ -69,6 +70,7 @@ public class LineOfSight : MonoBehaviour
 
     private void Awake()
     {
+        //spawn at the idle location rotation
         GameObject obj = Instantiate(weaponObject, weaponHolder.position, weaponHolder.rotation);
         obj.transform.parent = weaponHolder;
     }
@@ -98,6 +100,11 @@ public class LineOfSight : MonoBehaviour
         {
             case Stages.SEARCHING:
                 {
+                    if (isNotified)
+                    {
+                        stages = Stages.FOUND;
+                    }
+                    
                     weaponHolder.transform.rotation = transform.rotation;
                     GetComponent<Move>().enabled = true;
                     if (Searching())
@@ -108,6 +115,11 @@ public class LineOfSight : MonoBehaviour
                 }
             case Stages.IN_RANGE:
                 {
+                    if (isNotified)
+                    {
+                        stages = Stages.FOUND;
+                    }
+                    
                     inRange();
                     break;
                 }
@@ -115,15 +127,15 @@ public class LineOfSight : MonoBehaviour
                 {
                     // stage needs to be set if we shoot and enemy..
                     // sphere trace in a radius around itself it trigger other enemies into being found.
+
+                    //weaponHolder.transform.localRotation = weaponHolder.transform.rotation;
+                    //GetComponent<Move>().enabled = false;
+                    //transform.position = pos;
                     
-                    GetComponent<Move>().enabled = false;
-                    transform.position = pos;
                     Vector3 rot = Quaternion.LookRotation(player.transform.position - transform.position).eulerAngles;
                     rot.x = rot.z = 0;
                     transform.rotation = Quaternion.Euler(rot);
                     Found();
-                    print("Found");
-
                     break;
                 }
         }
@@ -166,9 +178,9 @@ public class LineOfSight : MonoBehaviour
                 stages = Stages.FOUND;
             }
         }
-        if (!Searching())
+        else
         {
-            stages = Stages.SEARCHING;
+            stages = Stages.FOUND;
         }
     }
     private void Shoot()
@@ -234,16 +246,46 @@ public class LineOfSight : MonoBehaviour
             }
         }
     }
-    private void Found()
+    public void Found()
     {
         Vector3 target = player.transform.position - weaponHolder.transform.position;
         Quaternion rotation = Quaternion.LookRotation(target, Vector3.forward);
-        weaponHolder.transform.rotation = rotation;
-        transform.position = pos;
+        //weaponHolder.transform.rotation
+        transform.rotation = new Quaternion(transform.rotation.x, rotation.y, transform.rotation.z, 0);
+        //transform.position = pos;
+        
+        // spawn a sphere here to alert other enemies... in a vinicity
 
-
+        
         inRange();
         Shoot();
+    }
+
+    public void SendFoundAlert()
+    {
+        isNotified = true;
+
+        Collider[] objectsAroundPlayer = Physics.OverlapSphere(transform.position, 10.0f);
+        foreach (Collider obj in objectsAroundPlayer)
+        {
+            if (obj.CompareTag("Enemy")) //checks list for zombies
+            {
+                Debug.Log("found?");
+                LineOfSight los = obj.gameObject.GetComponent<LineOfSight>();
+                los.ReceiveFoundDirection();
+            }
+        }
+    }
+    public void ReceiveFoundDirection()
+    {
+        isNotified = true;
+        StartCoroutine(DelayFound());
+    }
+
+    IEnumerator DelayFound()
+    {
+        yield return new WaitForSeconds(1.0f);
+        stages = Stages.FOUND;
     }
     
      private Vector3 GetShotDirection()

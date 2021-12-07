@@ -44,7 +44,6 @@ GameObject:
   - component: {fileID: 5805923888380855200}
   - component: {fileID: 5805923888380855201}
   - component: {fileID: -4195939951764876891}
-  - component: {fileID: -5430392196774923747}
   - component: {fileID: 1158753330151377249}
   - component: {fileID: 9089747014867867607}
   - component: {fileID: 1825879302768521632}
@@ -147,12 +146,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponObject: {fileID: 6431138718741029509, guid: b8ddd1bbdcc3c124bbc936fc0df1f751, type: 3}
   weaponHolder: {fileID: 5805923887880843295}
-  speed: 200
+  speed: 50
   offset: 0.05
   bulletDrop: 0
   tracer: {fileID: 5222315208960528297, guid: d84575d9e67da364783f80da51324f85, type: 3}
   HitParticle: {fileID: 1000010355441670, guid: 02a509a7fa70ed740ba4197e20c5d32d, type: 3}
-  fireRate: 0.25
+  fireRate: 0.5
   range: 100
   damage: 10
   clipSize: 20
@@ -175,22 +174,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 5805923888380855202}
-  bullet: {fileID: 685222212935467944, guid: 99759b75e0b0fd34ba9082f74d6895a7, type: 3}
   dead: 0
---- !u!114 &-5430392196774923747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5805923888380855202}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef5988161862ec0418f56c5c674a06ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 50
-  dead: 0
+  health: 120
 --- !u!114 &1158753330151377249
 MonoBehaviour:
   m_ObjectHideFlags: 0

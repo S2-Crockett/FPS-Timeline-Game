@@ -237,7 +237,7 @@ public class ZoneChecker : MonoBehaviour
     {
         for(int i = 0; i < enemies.Length; i++)
         {
-            if (enemyObjectZone1[i].enemyObj.GetComponent<ShootingTarget>().dead)
+            if (enemyObjectZone1[i].enemyObj.GetComponent<Enemies>().dead)
             {
                 if (!enemyObjectZone1[i].dead)
                 {
@@ -246,7 +246,7 @@ public class ZoneChecker : MonoBehaviour
                 }
                 enemyObjectZone1[i].dead = true;
             }
-            if (enemyObjectZone2[i].enemyObj.GetComponent<ShootingTarget>().dead)
+            if (enemyObjectZone2[i].enemyObj.GetComponent<Enemies>().dead)
             {
                 if (!enemyObjectZone2[i].dead)
                 {

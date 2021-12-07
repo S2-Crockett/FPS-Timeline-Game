@@ -362,7 +362,7 @@ public class WeaponController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(start, end - start, out hit, distance))
         {
-            var target = hit.transform.gameObject.GetComponent<ShootingTarget>();
+            var target = hit.transform.gameObject.GetComponent<Enemies>();
 
             if (bullet.tracer)
             {
@@ -371,10 +371,9 @@ public class WeaponController : MonoBehaviour
             
             if (target != null && hit.transform.tag == "Enemy")
             {
-                print("Hit Enemy");
                 audioSource.PlayOneShot(hitmarkerClip);
                 UIManager.Instance.crosshair.SetHitmarker();
-                hit.transform.gameObject.GetComponent<ShootingTarget>().TakeDamage(damage);
+                hit.transform.gameObject.GetComponent<Enemies>().TakeDamage(damage);
             }
             
             bullet.time = 0.5f;

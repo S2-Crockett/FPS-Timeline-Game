@@ -712,6 +712,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7f7ceb4c429e88648a273ecea4218ac8, type: 2}
   enemies:
   - {fileID: 1830084133}
+  - {fileID: 1830084133}
+  - {fileID: 1830084133}
   environment: []
   floor: {fileID: 557524706}
   Glitch: {fileID: 2100000, guid: 5b9a60cb63fd4c449a64c2752645a3c9, type: 2}
