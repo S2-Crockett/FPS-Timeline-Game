@@ -57,6 +57,30 @@ public class @DefaultInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""SpeedBooster"",
+                    ""type"": ""Button"",
+                    ""id"": ""9ddca493-7629-4fa9-a4e1-0207cecde94e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""DoubleJump"",
+                    ""type"": ""Button"",
+                    ""id"": ""e21ab1ab-1598-47c6-9f0f-310b906b20cf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Rocket"",
+                    ""type"": ""Button"",
+                    ""id"": ""f4ff595d-312c-422b-a051-0c63e2dfd64e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -167,6 +191,39 @@ public class @DefaultInput : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2ce27d63-49ab-46d8-a170-ae345dcc7d9e"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SpeedBooster"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""19f11705-1d26-4da5-9ee5-fb31bd3b56c9"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DoubleJump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e7341ff6-a59a-4c19-8801-826cdb2bd54e"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rocket"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -323,6 +380,9 @@ public class @DefaultInput : IInputActionCollection, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
+        m_Player_SpeedBooster = m_Player.FindAction("SpeedBooster", throwIfNotFound: true);
+        m_Player_DoubleJump = m_Player.FindAction("DoubleJump", throwIfNotFound: true);
+        m_Player_Rocket = m_Player.FindAction("Rocket", throwIfNotFound: true);
         // Weapon
         m_Weapon = asset.FindActionMap("Weapon", throwIfNotFound: true);
         m_Weapon_Shoot = m_Weapon.FindAction("Shoot", throwIfNotFound: true);
@@ -386,6 +446,9 @@ public class @DefaultInput : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Crouch;
     private readonly InputAction m_Player_Sprint;
+    private readonly InputAction m_Player_SpeedBooster;
+    private readonly InputAction m_Player_DoubleJump;
+    private readonly InputAction m_Player_Rocket;
     public struct PlayerActions
     {
         private @DefaultInput m_Wrapper;
@@ -395,6 +458,9 @@ public class @DefaultInput : IInputActionCollection, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
+        public InputAction @SpeedBooster => m_Wrapper.m_Player_SpeedBooster;
+        public InputAction @DoubleJump => m_Wrapper.m_Player_DoubleJump;
+        public InputAction @Rocket => m_Wrapper.m_Player_Rocket;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -419,6 +485,15 @@ public class @DefaultInput : IInputActionCollection, IDisposable
                 @Sprint.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprint;
                 @Sprint.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprint;
                 @Sprint.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprint;
+                @SpeedBooster.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpeedBooster;
+                @SpeedBooster.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpeedBooster;
+                @SpeedBooster.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpeedBooster;
+                @DoubleJump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDoubleJump;
+                @DoubleJump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDoubleJump;
+                @DoubleJump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDoubleJump;
+                @Rocket.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRocket;
+                @Rocket.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRocket;
+                @Rocket.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRocket;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -438,6 +513,15 @@ public class @DefaultInput : IInputActionCollection, IDisposable
                 @Sprint.started += instance.OnSprint;
                 @Sprint.performed += instance.OnSprint;
                 @Sprint.canceled += instance.OnSprint;
+                @SpeedBooster.started += instance.OnSpeedBooster;
+                @SpeedBooster.performed += instance.OnSpeedBooster;
+                @SpeedBooster.canceled += instance.OnSpeedBooster;
+                @DoubleJump.started += instance.OnDoubleJump;
+                @DoubleJump.performed += instance.OnDoubleJump;
+                @DoubleJump.canceled += instance.OnDoubleJump;
+                @Rocket.started += instance.OnRocket;
+                @Rocket.performed += instance.OnRocket;
+                @Rocket.canceled += instance.OnRocket;
             }
         }
     }
@@ -530,6 +614,9 @@ public class @DefaultInput : IInputActionCollection, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
+        void OnSpeedBooster(InputAction.CallbackContext context);
+        void OnDoubleJump(InputAction.CallbackContext context);
+        void OnRocket(InputAction.CallbackContext context);
     }
     public interface IWeaponActions
     {

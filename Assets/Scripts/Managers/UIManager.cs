@@ -18,6 +18,7 @@ namespace Managers
         [Header("Crosshair")] 
         public Crosshair crosshair;
 
+
         void Awake()
         {
             if (Instance == null)
