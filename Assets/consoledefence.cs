@@ -6,6 +6,10 @@ using UnityEngine.UI;
 public class consoledefence : MonoBehaviour
 {
     public GameObject ConsoleText;
+    public GameObject ConsoleNotActiveText;
+    public GameObject ConsoleActiveText;
+    public GameObject ConsoleLight;
+    public GameObject[] ButtonsPressed = new GameObject[3];
     private MiniObjective miniobjectivescript;
     [SerializeField] public Text ObjectiveNotificationUIText;
     [SerializeField] [TextArea] private string notificationmessage;
@@ -21,14 +25,11 @@ public class consoledefence : MonoBehaviour
     public bool InteractKeyPressed = false;
     bool inZone = false;
 
-
     void Awake()
     {
         miniobjectivescript = GetComponent<MiniObjective>();
 
-
         playerscript = GameObject.Find("Player").GetComponent<PlayerController>();
-
 
         defaultInput = new DefaultInput();
 
@@ -36,13 +37,14 @@ public class consoledefence : MonoBehaviour
 
         defaultInput.Enable();
 
+        ConsoleNotActiveText.SetActive(true);
+        ConsoleActiveText.SetActive(false);
+        ConsoleLight.SetActive(false);
+
         if (ConsoleText != null)
         {
             ConsoleText.SetActive(false);
         }
-
-        //defaultInput = new DefaultInput();
-
     }
 
     void Update()
@@ -62,7 +64,6 @@ public class consoledefence : MonoBehaviour
         }
     }
 
-
     void OnTriggerStay(Collider other)
     {
         if (this.gameObject.tag == "ConsoleTrigger")
@@ -72,11 +73,17 @@ public class consoledefence : MonoBehaviour
             {
                 ConsoleText.SetActive(true);
             }
+
             if (objectivereached == 0 && InteractKeyPressed)
             {
+                ConsoleNotActiveText.SetActive(false);
+                ConsoleActiveText.SetActive(true);
                 StartCoroutine(EnableNotification());
+                ConsoleText.SetActive(false);
                 objectivereached = 1;
                 inZone = false;
+                ConsoleLight.SetActive(true);
+                ButtonsPressed[1].transform.position += new Vector3(0, 0, 0);
             }
         }
         else
