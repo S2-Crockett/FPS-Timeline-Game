@@ -1656,12 +1656,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47e56de165a67f44f9aa307bb75933aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ConsoleText: {fileID: 1807810102}
   ObjectiveNotificationUIText: {fileID: 2015237890}
   notificationmessage: DEFEND THE CONSOLE OR ELSE TIME WILL BE DESTORYED FOR EVER!
   removeAfterExit: 0
   disableAfterTimer: 1
   disabletimer: 4
   notificationAnim: {fileID: 9349711}
+  InteractKeyPressed: 0
 --- !u!65 &389841422
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3126,7 +3128,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 532834623}
   m_LocalRotation: {x: -0, y: 0.083985575, z: -0, w: 0.996467}
-  m_LocalPosition: {x: 1.8009014, y: -15.890583, z: 6.417532}
+  m_LocalPosition: {x: -1.53, y: -15.890583, z: -13.21}
   m_LocalScale: {x: 0.55925226, y: 1, z: 6.810689}
   m_Children:
   - {fileID: 625347591}
@@ -3240,8 +3242,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -334, y: 287.07}
-  m_SizeDelta: {x: -667.9918, y: -581.73}
+  m_AnchoredPosition: {x: -553.16125, y: 338.04}
+  m_SizeDelta: {x: -1106.3142, y: -683.66}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &552673940
 GameObject:
@@ -5619,7 +5621,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.2239, y: -0.00009226799}
+  m_AnchoredPosition: {x: 3.2239, y: -0.000091552734}
   m_SizeDelta: {x: 339.56, y: 52.27}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &871193812
@@ -8364,12 +8366,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47e56de165a67f44f9aa307bb75933aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ConsoleText: {fileID: 0}
   ObjectiveNotificationUIText: {fileID: 2015237890}
   notificationmessage: 'TRAVERSE TO THE BOTTOM OF THE PLATFORMS '
   removeAfterExit: 0
   disableAfterTimer: 1
   disabletimer: 4
   notificationAnim: {fileID: 9349711}
+  InteractKeyPressed: 0
 --- !u!23 &1459408346
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11998,12 +12002,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47e56de165a67f44f9aa307bb75933aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ConsoleText: {fileID: 0}
   ObjectiveNotificationUIText: {fileID: 2015237890}
   notificationmessage: REACH THE END OF THE STREET AND KILL ANYONE YOU SEE MOVE.
   removeAfterExit: 0
   disableAfterTimer: 1
   disabletimer: 4
   notificationAnim: {fileID: 9349711}
+  InteractKeyPressed: 0
 --- !u!23 &2131189792
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -19867,7 +19873,6 @@ MonoBehaviour:
   onDirt: 0
   onWater: 0
   onConcrete: 0
-  InteractKeyPressed: 0
   camera: {fileID: 0}
 --- !u!4 &4963024755453754673
 Transform:

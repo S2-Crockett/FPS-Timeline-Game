@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class consoledefence : MonoBehaviour
 {
-    //public GameObject ConsoleText;
+    public GameObject ConsoleText;
     private MiniObjective miniobjectivescript;
     [SerializeField] public Text ObjectiveNotificationUIText;
     [SerializeField] [TextArea] private string notificationmessage;
@@ -18,42 +18,87 @@ public class consoledefence : MonoBehaviour
     public Select input;
     private int objectivereached = 0;
 
+    public bool InteractKeyPressed = false;
+    bool inZone = false;
+
+
     void Awake()
     {
         miniobjectivescript = GetComponent<MiniObjective>();
 
-        //ConsoleText.SetActive(false);
+
+        playerscript = GameObject.Find("Player").GetComponent<PlayerController>();
+
+
+        defaultInput = new DefaultInput();
+
+        defaultInput.Player.Interact.performed += e => Interact();
+
+        defaultInput.Enable();
+
+        if (ConsoleText != null)
+        {
+            ConsoleText.SetActive(false);
+        }
 
         //defaultInput = new DefaultInput();
 
     }
 
-    void OnTriggerEnter(Collider other)
-    {      
-        if (other.gameObject.tag == "Player")
-        {
-            //ConsoleText.SetActive(true);
+    void Update()
+    {
 
+    }
+
+    void Interact()
+    {
+        if (inZone)
+        {
+            InteractKeyPressed = true;
+            if (ConsoleText != null)
+            {
+                ConsoleText.SetActive(false);
+            }
+        }
+    }
+
+
+    void OnTriggerStay(Collider other)
+    {
+        if (this.gameObject.tag == "ConsoleTrigger")
+        {
+            inZone = true;
+            if (ConsoleText != null && inZone)
+            {
+                ConsoleText.SetActive(true);
+            }
+            if (objectivereached == 0 && InteractKeyPressed)
+            {
+                StartCoroutine(EnableNotification());
+                objectivereached = 1;
+                inZone = false;
+            }
+        }
+        else
+        {
             if (objectivereached == 0)
             {
                 StartCoroutine(EnableNotification());
                 objectivereached = 1;
+                inZone = false;
             }
-
-            /*if (playerscript.InteractKeyPressed == true)
-            {
-                Debug.Log("Activating Terminal!");
-            }*/
         }
     }
-        
     void OnTriggerExit(Collider other)
     {
-        //ConsoleText.SetActive(false);
-
+        if (ConsoleText != null)
+        {
+            ConsoleText.SetActive(false);
+        }
         if (other.gameObject.tag == "Player" && removeAfterExit)
         {
-            RemoveNotification();            
+            RemoveNotification();
+            inZone = false;
         }
     }
 

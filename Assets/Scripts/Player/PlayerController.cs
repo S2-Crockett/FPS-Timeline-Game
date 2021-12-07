@@ -71,7 +71,6 @@ public class PlayerController : MonoBehaviour
     public bool onDirt = false;
     public bool onWater = false;
     public bool onConcrete = false;
-    public bool InteractKeyPressed = false;
     
     private bool shouldShoot;
     
@@ -90,7 +89,6 @@ public class PlayerController : MonoBehaviour
             defaultInput.Player.View.performed += e => inputView = e.ReadValue<Vector2>();
             defaultInput.Player.Jump.performed += e => Jump();
             defaultInput.Player.Crouch.performed += e => Crouch();
-            defaultInput.Player.Interact.performed += e => Interact();
 
             defaultInput.Player.Sprint.started += e => StartSprint();
             defaultInput.Player.Sprint.canceled += e => StopSprint();
@@ -217,17 +215,7 @@ public class PlayerController : MonoBehaviour
         {
             other.GetComponent<Enemy>().OnAware();
         }
-
-
-        if(other.gameObject.tag == "ConsoleTrigger")
-        {
-
-            if (InteractKeyPressed == true)
-            {
-                //StartCoroutine(EnableNotification());
-                Debug.Log("Activating Terminal!");
-            }
-        }       
+     
     }
     
     private void CalculateJump()
@@ -292,11 +280,6 @@ public class PlayerController : MonoBehaviour
         playerGravity = 0;
     }
 
-    public void Interact()
-    {
-        InteractKeyPressed = true;
-        Debug.Log("Interacting is working!");
-    }
 
     private void Crouch()
     {
