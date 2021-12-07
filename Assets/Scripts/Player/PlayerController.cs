@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 {
     private PlayerStance previousPlayerStance;
     private CharacterController characterController;
+    private consoledefence consoledefencescript;
     private DefaultInput defaultInput;
 
     [HideInInspector]
@@ -446,6 +447,7 @@ public class PlayerController : MonoBehaviour
             onMetalLand = false;
         }
     }
+
 
     private void Crouch()
     {

@@ -21,12 +21,16 @@ TagManager:
   - Zone
   - Zone2
   - Nextlevel
-  - Objective1
   - Objective1complete
   - Objective2
   - Objective3
   - Objective4
   - Weapon
+  - ConsoleTrigger
+  - EliminateEnemiesObjective
+  - ReachZoneObjective
+  - EnterAreaObjective
+  - ReachZoneObjective2
   layers:
   - Default
   - TransparentFX

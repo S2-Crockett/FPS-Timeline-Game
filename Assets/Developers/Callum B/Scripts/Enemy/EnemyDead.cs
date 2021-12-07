@@ -10,14 +10,14 @@ public class EnemyDead : MonoBehaviour
     
    // private bool isDead = false;
     public GameObject ragdoll;
-    private EnemyKillingObjective enemykillingobjective;
-    private Objective objectivescript;
+   // private EnemyKillingObjective enemykillingobjective;
+   // private Objective objectivescript;
 
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
-        enemykillingobjective = GetComponent<EnemyKillingObjective>();
-        objectivescript = GetComponent<Objective>();
+       // enemykillingobjective = GetComponent<EnemyKillingObjective>();
+       // objectivescript = GetComponent<Objective>();
     }
 
     public void Update()
@@ -59,7 +59,7 @@ public class EnemyDead : MonoBehaviour
         if (zone1enemiescount <= 0)
         {
             Debug.Log("enemies are all dead");
-            objectivescript.iscompleted = true;
+           // objectivescript.iscompleted = true;
         }
     }
 }
