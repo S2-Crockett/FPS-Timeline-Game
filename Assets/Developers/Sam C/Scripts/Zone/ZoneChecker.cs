@@ -100,7 +100,7 @@ public class ZoneChecker : MonoBehaviour
             prevIndex = index;
             change = true;
         }
-        if (Physics.Raycast(player.transform.position, player.transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity, layerMask))
+        if (Physics.Raycast(player.transform.position, player.transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity))
         {
             ChangeObjects();
         }
@@ -186,7 +186,10 @@ public class ZoneChecker : MonoBehaviour
     IEnumerator ChangeFloor()
     {
         random = Random.Range(0.3f, 1f);
-        newFloorObject.GetComponent<MeshRenderer>().material = Glitch;
+        for (int c = 0; c < zone[index].timezone1.transform.childCount; c++)
+        {
+                newFloorObject.transform.GetChild(c).GetComponent<MeshRenderer>().material = Glitch;
+        }
 
         yield return new WaitForSeconds(random);
 
@@ -218,6 +221,7 @@ public class ZoneChecker : MonoBehaviour
             weaponHandler.WeaponIndex = zone[index].weaponIndex;
             weaponHandler.change = true;
             weaponHandler.SwapWeapon(zone[index].weaponIndex);
+            print(weaponHandler.WeaponIndex);
 
             change = false;
         }

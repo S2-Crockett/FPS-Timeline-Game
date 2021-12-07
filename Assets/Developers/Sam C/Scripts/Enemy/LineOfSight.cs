@@ -35,6 +35,8 @@ public class LineOfSight : MonoBehaviour
     public float timer = 1.0f;
     public float offset = 5.0f;
 
+    public AudioClip hitSound;
+    private AudioSource sound;
 
     public List<GameObject> bullets;
 
@@ -52,6 +54,7 @@ public class LineOfSight : MonoBehaviour
         bulletInfo = enemy.bullet.GetComponent<Bullets>();
         clipSize = bulletInfo.clipSize;
         reloadSpeed = bulletInfo.reloadSpeed;
+        sound = GetComponent<AudioSource>();
     }
 
     private void Awake()
@@ -149,6 +152,7 @@ public class LineOfSight : MonoBehaviour
                 float speed = bulletInfo.speed;
                 bullet.GetComponent<Rigidbody>().AddForce(rotation * weaponHolder.transform.forward * speed);
                 timer = bulletInfo.fireRate;
+                sound.PlayOneShot(hitSound);
             }
             reloadSpeed = bulletInfo.reloadSpeed;
         }
