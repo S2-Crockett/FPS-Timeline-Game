@@ -87,6 +87,7 @@ public class LineOfSight : MonoBehaviour
                     rot.x = rot.z = 0;
                     transform.rotation = Quaternion.Euler(rot);
                     Found();
+                    print("Found");
 
                     break;
                 }
@@ -121,7 +122,7 @@ public class LineOfSight : MonoBehaviour
         weaponHolder.transform.rotation = rotation;
 
         RaycastHit hit;
-        if (Physics.Raycast(weaponHolder.transform.position, weaponHolder.transform.forward, out hit, Mathf.Infinity, 1))
+        if (Physics.Raycast(weaponHolder.transform.position, weaponHolder.transform.forward, out hit, Mathf.Infinity))
         {
             if (hit.collider.gameObject.tag == "Player")
             {

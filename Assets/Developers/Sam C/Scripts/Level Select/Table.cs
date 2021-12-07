@@ -1,24 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class Table : MonoBehaviour
 {
 
     public Select input;
 
-    public Transform tableGoal;
-    public Transform portalGoal;
-
     public bool inScreen = false;
     public bool overlapping = false;
 
-    public Camera mainCamera;
-    public Camera playerCamera;
+    public CinemachineVirtualCamera mainCamera;
+    public CinemachineVirtualCamera playerCamera;
+        public CinemachineVirtualCamera portalCamera;
 
     public GameObject player;
     public GameObject Particles;
     public GameObject Screen;
+
+    public Transform reset;
+    public GameObject Weapons;
 
     public TextDisplay text;
 
@@ -42,8 +44,13 @@ public class Table : MonoBehaviour
         input.Move.Select.performed += e => activateTable();
         input.Move.Leave.performed += e => LeaveTable();
         input.Enable();
+        Particles.SetActive(false);
 
         stage = STAGES.OUTSIDE;
+
+        CameraManager.Register(mainCamera);
+        CameraManager.Register(playerCamera);
+        CameraManager.Register(portalCamera);
     }
 
     // Update is called once per frame
@@ -55,26 +62,23 @@ public class Table : MonoBehaviour
         {
             case STAGES.OUTSIDE:
             {
-
+                //Weapons.SetActive(true);
+                Screen.SetActive(false);
+                    CameraManager.SwitchCamera(playerCamera);
                     break;
             }
             case STAGES.ENTERED:
             {
-                    mainCamera.gameObject.SetActive(true);
-                    player.SetActive(false);
-
-                    mainCamera.transform.position = tableGoal.position;
-                    mainCamera.transform.rotation = tableGoal.rotation;
-                    if(Vector3.Distance(mainCamera.transform.position, tableGoal.position) < 1.0f)
-                    {
-                        text.level = 1;
-                        text.show = true;
-                        stage = STAGES.INSCREEN;
-                    }
+                //Weapons.SetActive(false);
+                Screen.SetActive(true);
+                text.show = true;
+                    CameraManager.SwitchCamera(mainCamera);
+                    stage = STAGES.INSCREEN;
                     break;
             }
             case STAGES.INSCREEN:
             {
+
                     Screen.SetActive(true);
                     Particles.SetActive(false);
                     text.selectable = true;
@@ -83,15 +87,7 @@ public class Table : MonoBehaviour
             }
             case STAGES.ACTIVATEPORTAL:
             {
-                    mainCamera.transform.rotation = Quaternion.Slerp(mainCamera.transform.rotation, portalGoal.rotation, step * 3.0f);
-                    mainCamera.transform.position = Vector3.Slerp(mainCamera.transform.position, portalGoal.position, step);
-                    if (mainCamera.transform.rotation.y == portalGoal.rotation.y)
-                    {
-                        Particles.SetActive(true);
-                        text.selectable = false;
-                        stage = STAGES.LEAVEPORTAL;
-                        Screen.SetActive(false);
-                    }
+                    StartCoroutine(StartPortal());
                     break;
             }
             case STAGES.LEAVEPORTAL:
@@ -99,18 +95,14 @@ public class Table : MonoBehaviour
                     timer -= Time.deltaTime;
                     if(timer <= 0)
                     {
-                        mainCamera.gameObject.SetActive(false);
-                        player.SetActive(true);
                         text.selectable = false;
+                        player.transform.position = reset.position;
                         stage = STAGES.OUTSIDE;
                     }
                     break;
             }
             case STAGES.LEAVESCREEN:
                 {
-
-                        mainCamera.gameObject.SetActive(false);
-                        player.SetActive(true);
                     text.selectable = false;
                     stage = STAGES.OUTSIDE;
       
@@ -119,7 +111,15 @@ public class Table : MonoBehaviour
         }
     }
 
-
+    IEnumerator StartPortal()
+    {
+        CameraManager.SwitchCamera(portalCamera);
+        text.selectable = false;
+        yield return new WaitForSeconds(2.0f);
+        stage = STAGES.LEAVEPORTAL;
+        Screen.SetActive(false); 
+        Particles.SetActive(true);
+    }
 
     private void LeaveTable()
     {

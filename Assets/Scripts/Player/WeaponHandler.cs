@@ -114,31 +114,31 @@ public class WeaponHandler : MonoBehaviour
     {
         if (!player.isDead)
         {
-        if(change)
-        {
-            defaultInput.Weapon.WeaponSlot1.started += e => SwapWeapon(WeaponIndex);
-            defaultInput.Weapon.WeaponSlot2.started += e => SwapWeapon(WeaponIndex + 1);
-            change = false;
-        }
+            if (change)
+            {
+                defaultInput.Weapon.WeaponSlot1.started += e => SwapWeapon(WeaponIndex);
+                defaultInput.Weapon.WeaponSlot2.started += e => SwapWeapon(WeaponIndex + 1);
+                change = false;
+            }
 
-        CalculateAiming();
-        if (shouldShoot)
-        {
             CalculateAiming();
 
             if (shouldShoot)
             {
+               
+                if (shouldShoot)
+                {
+                    if (currentWeapon)
+                    {
+                        currentWeapon.Shoot(player.camera);
+                    }
+                }
+
                 if (currentWeapon)
                 {
-                    currentWeapon.Shoot(player.camera);
+                    currentWeapon.UpdateBullets(Time.deltaTime);
                 }
             }
-
-            if (currentWeapon)
-            {
-                currentWeapon.UpdateBullets(Time.deltaTime);
-            }
-        }
         }
     }
 

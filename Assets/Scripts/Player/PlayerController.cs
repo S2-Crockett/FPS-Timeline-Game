@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Managers;
 using Unity.VisualScripting;
+using Cinemachine;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -23,7 +24,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("Weapon")] private WeaponHandler weaponHandler;
 
-    [Header("Camera")] public float defaultFOV = 65.0f;
+    [Header("Camera")] 
+    public CinemachineVirtualCamera playerCam;
+    public float defaultFOV = 65.0f;
     public float sprintFOV = 75.0f;
     public float aimingFOV = 45.0f;
     public float fieldOfViewChangeTime = 4.0f;
@@ -86,6 +89,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        isDead = false;
         defaultInput = new DefaultInput();
 
         defaultInput.Player.Movement.performed += e => inputMovement = e.ReadValue<Vector2>();
@@ -106,6 +110,8 @@ public class PlayerController : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         cameraHeight = cameraHolder.localPosition.y;
         UIManager.Instance.SetCursor(false);
+
+        playerCam = GameObject.Find("CMPlayer").GetComponent<CinemachineVirtualCamera>();
     }
 
     private void Start()
@@ -326,7 +332,7 @@ public class PlayerController : MonoBehaviour
             capsuleHeight = GetStanceSettings().capsuleHeight;
         }
 
-        camera.fieldOfView = Mathf.Lerp(camera.GetGateFittedFieldOfView(), stanceFOV,
+        playerCam.m_Lens.FieldOfView = Mathf.Lerp(camera.GetGateFittedFieldOfView(), stanceFOV,
             Time.deltaTime * fieldOfViewChangeTime);
         cameraHeight = Mathf.SmoothDamp(cameraHolder.localPosition.y, stanceHeight,
             ref cameraHeightVelocity, playerStanceSmoothing);

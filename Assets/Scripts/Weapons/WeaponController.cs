@@ -18,7 +18,7 @@ public class WeaponController : MonoBehaviour
     }
 
     private PlayerController playerController;
-    [HideInInspector] public bool isAiming;
+    public bool isAiming;
 
     [Header("Settings")] public WeaponSettings settings;
 
@@ -120,10 +120,7 @@ public class WeaponController : MonoBehaviour
 
     private void Start()
     {
-        if (playerController != null)
-        {
-            cam = playerController.camera;
-        }
+     
         audioSource = GetComponent<AudioSource>();
         newWeaponRotation = transform.localRotation.eulerAngles;
         swayPosition = transform.parent.position;
@@ -170,8 +167,7 @@ public class WeaponController : MonoBehaviour
         {
             return;
         }
-        if (this.tag == "Player")
-        {
+
             targetWeaponRotation.y += settings.swayAmount *
                                       (settings.swayXInverted
                                           ? -playerController.inputView.x
@@ -209,8 +205,7 @@ public class WeaponController : MonoBehaviour
             CalculateBreathing();
             CalculateAiming();
             CalculateRecoil();
-        }
-      
+     
     }
 
     public IEnumerator Reload()
@@ -282,7 +277,7 @@ public class WeaponController : MonoBehaviour
         CheckHeldAmmo();
     }
 
-    public void Shoot(Transform cam)
+    public void Shoot(Camera cam)
     {
         if (isReloading)
         {
@@ -364,6 +359,7 @@ public class WeaponController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(start, end - start, out hit, distance))
         {
+            var target = hit.transform.gameObject.GetComponent<ShootingTarget>();
 
             if (bullet.tracer)
             {
@@ -433,8 +429,10 @@ public class WeaponController : MonoBehaviour
     private void CalculateAiming()
     {
         var targetPosition = swayObject.position;
+
         if (isAiming)
         {
+            Debug.Log("Aiming True");
             targetPosition = playerController.cameraHolder.position +
                              (transform.position - sightTarget.position) +
                              (playerController.cameraHolder.transform.forward * sightOffset);

@@ -90,6 +90,7 @@ public class RespawnManager : MonoBehaviour
     {
         var newPlayer = Instantiate(player,GetLastRepsawn() );
         newPlayer.transform.SetParent(null);
+        newPlayer.GetComponent<PlayerController>().isDead = false;
         Camera UICam = GameObject.Find("UICamera").GetComponent<Camera>();
         UIManager.Instance.SetCameraHUD(UICam);
         
