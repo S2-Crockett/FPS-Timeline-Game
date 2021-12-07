@@ -29,11 +29,8 @@ public class Movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
         agent = GetComponent<NavMeshAgent>();
         roamPosition = GetRoamingPosition();
-
- 
     }
 
 
@@ -66,12 +63,12 @@ public class Movement : MonoBehaviour
 
         if(distance <= lookRadius)
         {
-            agent.SetDestination(target.position);
+            agent.SetDestination(transform.position);
 
             if(distance <= agent.stoppingDistance)
             {
                 FaceTarget();
-                GetComponent<Rigidbody>().AddForce(transform.forward * moveSpeed);
+                //GetComponent<Rigidbody>().AddForce(transform.forward * moveSpeed);
             }
             
         }

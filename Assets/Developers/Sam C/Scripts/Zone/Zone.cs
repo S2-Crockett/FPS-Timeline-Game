@@ -7,13 +7,15 @@ public class Zone : ScriptableObject
 {
     [Header("Environment Details")]
     public GameObject timezone1;
-    public GameObject[] floor1;
 
     [Header("Player")]
     public GameObject Player;
 
     [Header("Enemy")]
-    public GameObject material;
+    public GameObject enemy;
+
+    [Header("Environment")]
+    public GameObject environment;
 
     [Header("Weapons")]
     public GameObject[] weapons;

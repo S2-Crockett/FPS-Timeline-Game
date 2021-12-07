@@ -20,7 +20,6 @@ public class Exit : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            UnityEditor.EditorApplication.isPlaying = false;
             Application.Quit();
         }
     }

@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Managers;
 using Unity.VisualScripting;
+using Cinemachine;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     private PlayerStance previousPlayerStance;
     private CharacterController characterController;
+    private consoledefence consoledefencescript;
     private DefaultInput defaultInput;
 
     [HideInInspector]
@@ -21,13 +23,10 @@ public class PlayerController : MonoBehaviour
     private Vector3 newCameraRotation;
     private Vector3 newPlayerRotation;
 
-    [Header("Weapon")] 
-    private WeaponHandler weaponHandler;
-
-    [Header("Aiming")] 
-    public bool isAiming;
+    [Header("Weapon")] private WeaponHandler weaponHandler;
 
     [Header("Camera")] 
+    public CinemachineVirtualCamera playerCam;
     public float defaultFOV = 65.0f;
     public float sprintFOV = 75.0f;
     public float aimingFOV = 45.0f;
@@ -36,22 +35,20 @@ public class PlayerController : MonoBehaviour
     [Header("References")] 
     public Transform cameraHolder;
     public Transform feetTransform;
+    public GameObject LookAtTarget;
 
-
-    [Header("Gravity")] 
-    public float gravityAmount;
+    [Header("Gravity")] public float gravityAmount;
     public float gravityMin;
     private float playerGravity;
 
     [Header("Settings")]
     public PlayerSettings playerSettings;
     public LayerMask playerMask;
-    
+
     private Vector3 newMovementSpeed;
     private Vector3 newMovementSpeedVelocity;
 
-    [Header("Stance")]
-    public PlayerStance playerStance;
+    [Header("Stance")] public PlayerStance playerStance;
     public float playerStanceSmoothing;
     public float movementSmoothing;
     public StanceSettings standingSettings;
@@ -84,55 +81,65 @@ public class PlayerController : MonoBehaviour
     public float airTime;
 
     private bool shouldShoot;
-    
-    [HideInInspector]
+
     public Camera camera;
-    
+
+    [HideInInspector] public bool isDead = true;
+
     #region - Awake -
+
     private void Awake()
-        {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-            
-            defaultInput = new DefaultInput();
-            
-            defaultInput.Player.Movement.performed += e => inputMovement = e.ReadValue<Vector2>();
-            defaultInput.Player.View.performed += e => inputView = e.ReadValue<Vector2>();
-            defaultInput.Player.Jump.performed += e => Jump();
-            defaultInput.Player.Crouch.performed += e => Crouch();
-    
-            defaultInput.Player.Sprint.started += e => StartSprint();
-            defaultInput.Player.Sprint.canceled += e => StopSprint();
-            defaultInput.Weapon.Aim.started += e => StartAiming();
-            defaultInput.Weapon.Aim.canceled += e => StopAiming();
-            
-            defaultInput.Enable();
-    
-            newCameraRotation = cameraHolder.localRotation.eulerAngles;
-            newPlayerRotation = transform.localRotation.eulerAngles;
-    
-            characterController = GetComponent<CharacterController>();
-            cameraHeight = cameraHolder.localPosition.y;
-            
-            camera = Camera.main;
-            camera.fieldOfView = defaultFOV;
-    
-            weaponHandler = GetComponent<WeaponHandler>();
-            weaponHandler.Initialise(this);
-        }
-    
+    {
+        isDead = false;
+        defaultInput = new DefaultInput();
+
+        defaultInput.Player.Movement.performed += e => inputMovement = e.ReadValue<Vector2>();
+        defaultInput.Player.View.performed += e => inputView = e.ReadValue<Vector2>();
+        defaultInput.Player.Jump.performed += e => Jump();
+        defaultInput.Player.Crouch.performed += e => Crouch();
+
+        defaultInput.Player.Sprint.started += e => StartSprint();
+        defaultInput.Player.Sprint.canceled += e => StopSprint();
+        defaultInput.Weapon.Aim.started += e => StartAiming();
+        defaultInput.Weapon.Aim.canceled += e => StopAiming();
+
+        defaultInput.Enable();
+        
+        newCameraRotation = cameraHolder.localRotation.eulerAngles;
+        newPlayerRotation = transform.localRotation.eulerAngles;
+
+        characterController = GetComponent<CharacterController>();
+        cameraHeight = cameraHolder.localPosition.y;
+        UIManager.Instance.SetCursor(false);
+
+        playerCam = GameObject.Find("CMPlayer").GetComponent<CinemachineVirtualCamera>();
+    }
+
+    private void Start()
+    {
+        camera.fieldOfView = defaultFOV;
+        weaponHandler = GetComponent<WeaponHandler>();
+        weaponHandler.Initialise(this);
+        SoundManager.Instance.pController = this;
+    }
+
     #endregion
-    
-    #region - Update - 
+
+    #region - Update -
+
     private void Update()
     {
-        CalculateView();
         CalculateMovement();
-        CalculateJump();
-        CalculateCameraHeight();
-        SetLookAtTargetCrosshair();
+
+        if (!isDead)
+        {
+            CalculateView();
+            CalculateJump();
+            CalculateCameraHeight();
+            SetLookAtTargetCrosshair();
+        }
     }
-    
+
     #endregion
 
     private void SetLookAtTargetCrosshair()
@@ -156,10 +163,11 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    
+
     private void CalculateView()
     {
-        newPlayerRotation.y += playerSettings.viewXSensitivity * (playerSettings.viewXInverted ? inputView.x : -inputView.x) * Time.deltaTime;
+        newPlayerRotation.y += playerSettings.viewXSensitivity *
+                               (playerSettings.viewXInverted ? inputView.x : -inputView.x) * Time.deltaTime;
         transform.localRotation = Quaternion.Euler(newPlayerRotation);
 
         newCameraRotation.x += playerSettings.viewYSensitivity * (playerSettings.viewYInverted ? inputView.y : -inputView.y) * Time.deltaTime;
@@ -169,20 +177,26 @@ public class PlayerController : MonoBehaviour
 
     private void CalculateMovement()
     {
-        if (inputMovement.y <= 0.2f)
+        Vector3 movementSpeed = new Vector3();
+
+        if (!isDead)
         {
-            isSprinting = false;
+            if (inputMovement.y <= 0.2f)
+            {
+                isSprinting = false;
+            }
+
+            var verticalSpeed = GetStanceSettings().stanceForwardMovementSpeed;
+            var horizontalSpeed = GetStanceSettings().stanceStrafeMovementSpeed;
+
+            var vertSpeed = verticalSpeed * inputMovement.y * Time.smoothDeltaTime;
+            var horSpeed = horizontalSpeed * inputMovement.x * Time.smoothDeltaTime;
+
+            newMovementSpeed = Vector3.SmoothDamp(newMovementSpeed, new Vector3(horSpeed, 0, vertSpeed),
+                ref newMovementSpeedVelocity,
+                characterController.isGrounded ? movementSmoothing : playerSettings.fallingSmoothing);
+            movementSpeed = transform.TransformDirection(newMovementSpeed);
         }
-
-        var verticalSpeed = GetStanceSettings().stanceForwardMovementSpeed;
-        var horizontalSpeed = GetStanceSettings().stanceStrafeMovementSpeed;
-
-        var vertSpeed = verticalSpeed * inputMovement.y * Time.smoothDeltaTime;
-        var horSpeed = horizontalSpeed * inputMovement.x * Time.smoothDeltaTime;
-
-        newMovementSpeed = Vector3.SmoothDamp(newMovementSpeed, new Vector3(horSpeed, 0, vertSpeed),
-            ref newMovementSpeedVelocity, characterController.isGrounded ? movementSmoothing : playerSettings.fallingSmoothing);
-        var movementSpeed = transform.TransformDirection(newMovementSpeed);
 
         if (playerGravity > gravityMin)
         {
@@ -193,7 +207,7 @@ public class PlayerController : MonoBehaviour
         {
             playerGravity = -0.1f;
         }
-
+        
         movementSpeed.y += playerGravity;
         movementSpeed += jumpingForce * Time.smoothDeltaTime;
 
@@ -211,10 +225,10 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(cameraHolder.transform.position, cameraHolder.transform.up * -1, out tag, 2))
         {
-            if (movementSpeed.x > 0.01f ||
-            movementSpeed.x < -0.01f ||
-            movementSpeed.z > 0.01f ||
-            movementSpeed.z < -0.01f)
+            if (movementSpeed.x > 0.001f ||
+            movementSpeed.x < -0.001f ||
+            movementSpeed.z > 0.001f ||
+            movementSpeed.z < -0.001f)
             {
                 if (tag.transform.gameObject.layer == 7)
                 {
@@ -320,7 +334,8 @@ public class PlayerController : MonoBehaviour
             capsuleHeight = GetStanceSettings().capsuleHeight;
         }
 
-        camera.fieldOfView = Mathf.Lerp(camera.GetGateFittedFieldOfView(), stanceFOV, Time.deltaTime * fieldOfViewChangeTime);
+        playerCam.m_Lens.FieldOfView = Mathf.Lerp(camera.GetGateFittedFieldOfView(), stanceFOV,
+            Time.deltaTime * fieldOfViewChangeTime);
         cameraHeight = Mathf.SmoothDamp(cameraHolder.localPosition.y, stanceHeight,
             ref cameraHeightVelocity, playerStanceSmoothing);
 
@@ -330,24 +345,25 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-
-        if (!characterController.isGrounded)
+        if (!isDead)
         {
-            return;
-        }
-
-        if (playerStance != PlayerStance.PSStanding)
-        {
-            if (!StanceCheck(standingSettings.capsuleHeight))
+            if (!characterController.isGrounded)
             {
-                playerStance = PlayerStance.PSStanding;
                 return;
             }
+
+            if (playerStance != PlayerStance.PSStanding)
+            {
+                if (!StanceCheck(standingSettings.capsuleHeight))
+                {
+                    playerStance = PlayerStance.PSStanding;
+                    return;
+                }
+            }
+
+            jumpingForce = Vector3.up * playerSettings.jumpHeight;
+            playerGravity = 0;
         }
-
-        jumpingForce = Vector3.up * playerSettings.jumpHeight;
-        playerGravity = 0;
-
     }
     private void CheckAirTime()
     {
@@ -433,72 +449,90 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
     private void Crouch()
     {
-        switch (playerStance)
+        if (!isDead)
         {
-            case PlayerStance.PSCrouching:
-                if (StanceCheck(standingSettings.capsuleHeight))
-                {
-                    return;
-                }
-                playerStance = PlayerStance.PSStanding;
-                break;
-            case PlayerStance.PSStanding:
-                playerStance = PlayerStance.PSCrouching;
-                characterController.center = new Vector3(0, 0, 0);
-                break;
-            case PlayerStance.PSSprinting:
+            switch (playerStance)
+            {
+                case PlayerStance.PSCrouching:
+                    if (StanceCheck(standingSettings.capsuleHeight))
+                    {
+                        return;
+                    }
 
-                // could go into a slide here?
-                playerStance = PlayerStance.PSCrouching;
-                break;
+                    playerStance = PlayerStance.PSStanding;
+                    break;
+                case PlayerStance.PSStanding:
+                    playerStance = PlayerStance.PSCrouching;
+                    characterController.center = new Vector3(0, 0, 0);
+                    break;
+                case PlayerStance.PSSprinting:
+
+                    // could go into a slide here?
+                    playerStance = PlayerStance.PSCrouching;
+                    break;
+            }
         }
     }
 
     private void StartSprint()
     {
-        // checks the player is actually moving before sprinting
-        if (inputMovement.y <= 0.2f)
+        if (!isDead)
         {
-            isSprinting = false;
-            return;
-        }
+            // checks the player is actually moving before sprinting
+            if (inputMovement.y <= 0.2f)
+            {
+                isSprinting = false;
+                return;
+            }
 
-        isSprinting = true;
-        playerStance = PlayerStance.PSSprinting;
+            isSprinting = true;
+            playerStance = PlayerStance.PSSprinting;
+        }
     }
-    
+
     private void StopSprint()
     {
-        //stops players sprinting again after sprint crouching.. (sliding)
-        if (playerStance != PlayerStance.PSCrouching)
+        if (!isDead)
         {
-            isSprinting = false;
-            playerStance = PlayerStance.PSStanding;
+            //stops players sprinting again after sprint crouching.. (sliding)
+            if (playerStance != PlayerStance.PSCrouching)
+            {
+                isSprinting = false;
+                playerStance = PlayerStance.PSStanding;
+            }
         }
     }
 
     private void StartAiming()
     {
-        previousPlayerStance = playerStance;
-        
-        // if we are crouching and aiming we need to update our capsule
-        // and height to match just crouching
-        if (previousPlayerStance == PlayerStance.PSCrouching)
+        if (!isDead)
         {
-            aimingSettings.cameraHeight = crouchingSettings.cameraHeight;
-            aimingSettings.capsuleHeight = crouchingSettings.capsuleHeight;
+            previousPlayerStance = playerStance;
+
+            // if we are crouching and aiming we need to update our capsule
+            // and height to match just crouching
+            if (previousPlayerStance == PlayerStance.PSCrouching)
+            {
+                aimingSettings.cameraHeight = crouchingSettings.cameraHeight;
+                aimingSettings.capsuleHeight = crouchingSettings.capsuleHeight;
+            }
+
+            playerStance = PlayerStance.PSAiming;
         }
-        playerStance = PlayerStance.PSAiming;
     }
 
     private void StopAiming()
     {
-        playerStance = previousPlayerStance;
-        // reset our aim settings back to default
-        aimingSettings.cameraHeight = standingSettings.cameraHeight;
-        aimingSettings.capsuleHeight = standingSettings.capsuleHeight;
+        if (!isDead)
+        {
+            playerStance = previousPlayerStance;
+            // reset our aim settings back to default
+            aimingSettings.cameraHeight = standingSettings.cameraHeight;
+            aimingSettings.capsuleHeight = standingSettings.capsuleHeight;
+        }
     }
 
     private bool StanceCheck(float stanceCheckHeight)
@@ -522,6 +556,7 @@ public class PlayerController : MonoBehaviour
             case PlayerStance.PSAiming:
                 return aimingSettings;
         }
+
         return null;
     }
 }

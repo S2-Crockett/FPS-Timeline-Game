@@ -3,14 +3,15 @@ guid: 45f05aea03637614eb72fead7768b732
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
-  fontSize: 16
+  fontSize: 90
   forceTextureCase: -2
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
   fontNames:
   - Torque-Master
-  fallbackFontReferences: []
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 0c98239e3dd6fe54bb327e6a12515e48, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1

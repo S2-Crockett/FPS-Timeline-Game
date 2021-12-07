@@ -20,6 +20,8 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField] private AudioSource _FootstepSource;
     [SerializeField] private AudioSource _LandingSource;
+    [SerializeField] private AudioSource _PickupSource;
+    [SerializeField] private AudioSource _WeaponSource;
 
     public PlayerController pController;
 
@@ -50,6 +52,14 @@ public class SoundManager : MonoBehaviour
             _LandingSource.PlayOneShot(clip);
 
         }
+    }
+    public void PlayPickupSound(AudioClip clip)
+    {
+            _PickupSource.PlayOneShot(clip);
+    }
+    public void PlayWeaponSound(AudioClip clip)
+    {
+        _WeaponSource.PlayOneShot(clip);
     }
     private void Update()
     {

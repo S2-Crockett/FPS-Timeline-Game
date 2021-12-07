@@ -6,19 +6,28 @@
     <e p="D:\University Files\3rd Year\CGD\FPS-Timeline-Game" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="consoledefence.cs" t="Include" />
         <e p="Developers" t="Include">
           <e p="Callum B" t="Include">
             <e p="Scripts" t="Include">
+              <e p="AmmoBoxInteract.cs" t="Include" />
               <e p="Enemy" t="Include">
                 <e p="Enemy.cs" t="Include" />
                 <e p="EnemyDead.cs" t="Include" />
               </e>
+              <e p="EnemyKillingObjective.cs" t="Include" />
+              <e p="MiniObjective.cs" t="Include" />
               <e p="NextLevel.cs" t="Include" />
+              <e p="Objective.cs" t="Include" />
+              <e p="SwitchWeapons.cs" t="Include" />
+              <e p="WeaponManager.cs" t="Include" />
             </e>
           </e>
           <e p="Lewis T" t="Include">
             <e p="Test Scripts" t="Include">
               <e p="SoundManager.cs" t="Include" />
+              <e p="Upgrade.cs" t="Include" />
+              <e p="UpgradeText.cs" t="Include" />
             </e>
           </e>
           <e p="Sam C" t="Include">
@@ -27,6 +36,10 @@
             </e>
             <e p="Scripts" t="Include">
               <e p="Enemy" t="Include">
+                <e p="Bullets.cs" t="Include" />
+                <e p="Enemies.cs" t="Include" />
+                <e p="LineOfSight.cs" t="Include" />
+                <e p="Move.cs" t="Include" />
                 <e p="Movement.cs" t="Include" />
               </e>
               <e p="Exit Door" t="Include">
@@ -43,17 +56,51 @@
               <e p="Text" t="Include">
                 <e p="TextDisplay.cs" t="Include" />
               </e>
+              <e p="Zone" t="Include">
+                <e p="Zone.cs" t="Include" />
+                <e p="ZoneChecker.cs" t="Include" />
+              </e>
             </e>
           </e>
         </e>
         <e p="Input" t="Include">
           <e p="DefaultInput.cs" t="Include" />
         </e>
+        <e p="Materials" t="Include">
+          <e p="Shaders" t="Include">
+            <e p="Shader.shader" t="Include" />
+          </e>
+        </e>
+        <e p="ObjectiveComplete.cs" t="Include" />
+        <e p="Packages" t="Include">
+          <e p="LeanTween" t="Include">
+            <e p="Framework" t="Include">
+              <e p="LeanAudio.cs" t="Include" />
+              <e p="LeanSmooth.cs" t="Include" />
+              <e p="LeanTest.cs" t="Include" />
+              <e p="LeanTween.cs" t="Include" />
+              <e p="LeanTweenExt.cs" t="Include" />
+              <e p="LTDescr.cs" t="Include" />
+              <e p="LTDescrOptional.cs" t="Include" />
+              <e p="LTSeq.cs" t="Include" />
+            </e>
+            <e p="License.txt" t="Include" />
+            <e p="ReadMe.txt" t="Include" />
+          </e>
+          <e p="Skybox" t="Include">
+            <e p="Skyboxes" t="Include">
+              <e p="Shaders" t="Include">
+                <e p="Stylized Sky.shader" t="Include" />
+              </e>
+            </e>
+          </e>
+        </e>
         <e p="Scripts" t="Include">
           <e p="Components" t="Include">
             <e p="HealthComponent.cs" t="Include" />
           </e>
           <e p="Managers" t="Include">
+            <e p="CameraManager.cs" t="Include" />
             <e p="UIManager.cs" t="Include" />
           </e>
           <e p="Pickups" t="Include">
@@ -63,7 +110,12 @@
           <e p="Player" t="Include">
             <e p="Cursorhide.cs" t="Include" />
             <e p="PlayerController.cs" t="Include" />
+            <e p="PlayerDeathController.cs" t="Include" />
             <e p="WeaponHandler.cs" t="Include" />
+          </e>
+          <e p="Respawn" t="Include">
+            <e p="RespawnManager.cs" t="Include" />
+            <e p="RespawnPoint.cs" t="Include" />
           </e>
           <e p="Sounds" t="Include">
             <e p="ReverbZone.cs" t="Include" />
@@ -75,8 +127,14 @@
             <e p="ShootingTarget.cs" t="Include" />
           </e>
           <e p="UI" t="Include">
+            <e p="AmmoDisplay.cs" t="Include" />
             <e p="Crosshair.cs" t="Include" />
+            <e p="DeathPanel.cs" t="Include" />
+            <e p="HealthPanel.cs" t="Include" />
             <e p="PlayerHealthBar.cs" t="Include" />
+            <e p="ReloadDisplay.cs" t="Include" />
+            <e p="UIUtilities.cs" t="Include" />
+            <e p="WeaponPanel.cs" t="Include" />
           </e>
           <e p="Weapons" t="Include">
             <e p="WeaponController.cs" t="Include" />

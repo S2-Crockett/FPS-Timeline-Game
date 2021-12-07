@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+
 // ReSharper disable All
 
 public class WeaponHandler : MonoBehaviour
@@ -15,11 +16,10 @@ public class WeaponHandler : MonoBehaviour
     public WeaponController currentWeapon;
     private int currentActiveIndex;
     [HideInInspector]
-    public GameObject[] weaponRefs = new GameObject[5];
+    public GameObject[] weaponRefs;
     public WeaponSlot[] weaponSlots;
 
-    [Header("References")] 
-    private PlayerController player;
+    [Header("References")] private PlayerController player;
     private GameObject cameraHolder;
     public Transform weaponHolder;
 
@@ -30,8 +30,12 @@ public class WeaponHandler : MonoBehaviour
 
     private void Awake()
     {
+        if (weaponRefs != null)
+        {
+            weaponRefs = new GameObject[5];
+        }
         defaultInput = new DefaultInput();
-        
+
         defaultInput.Weapon.Shoot.started += e => Shoot();
         defaultInput.Weapon.Shoot.canceled += e => Shoot();
 
@@ -41,7 +45,7 @@ public class WeaponHandler : MonoBehaviour
         defaultInput.Weapon.Aim.started += e => AimingPressed();
         defaultInput.Weapon.Aim.canceled += e => AimingReleased();
 
-        defaultInput.Weapon.Reload.performed += e => Reload();
+        defaultInput.Weapon.Reload.started += e => Reload();
 
         defaultInput.Enable();
 
@@ -72,11 +76,11 @@ public class WeaponHandler : MonoBehaviour
 
     private IEnumerator InitiateBaseWeapons()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
         int x = 0;
         foreach (var slot in weaponSlots)
         {
-            GameObject obj = Instantiate(slot.weaponObject,weaponHolder.position, weaponHolder.rotation);
+            GameObject obj = Instantiate(slot.weaponObject, weaponHolder.position, weaponHolder.rotation);
             obj.transform.parent = weaponHolder;
             obj.GetComponent<WeaponController>().Initialise(player);
             obj.SetActive(false);
@@ -98,30 +102,42 @@ public class WeaponHandler : MonoBehaviour
     {
         if (weaponRefs[newIndex] != null)
         {
-             weaponRefs[currentActiveIndex].SetActive(false);
-             weaponRefs[newIndex].SetActive(true);
-             
-             currentWeapon =  weaponRefs[newIndex].GetComponent<WeaponController>();
-             currentActiveIndex = newIndex;
+            weaponRefs[currentActiveIndex].SetActive(false);
+            weaponRefs[newIndex].SetActive(true);
+
+            currentWeapon = weaponRefs[newIndex].GetComponent<WeaponController>();
+            currentActiveIndex = newIndex;
         }
     }
 
     private void Update()
     {
-        if(change)
+        if (!player.isDead)
         {
-            defaultInput.Weapon.WeaponSlot1.started += e => SwapWeapon(WeaponIndex);
-            defaultInput.Weapon.WeaponSlot2.started += e => SwapWeapon(WeaponIndex + 1);
-            change = false;
-        }
-
-        CalculateAiming();
-        
-        if (shouldShoot)
-        {
-            if (currentWeapon)
+            if (change)
             {
-                currentWeapon.Shoot(player.camera);
+                defaultInput.Weapon.WeaponSlot1.started += e => SwapWeapon(WeaponIndex);
+                defaultInput.Weapon.WeaponSlot2.started += e => SwapWeapon(WeaponIndex + 1);
+                change = false;
+            }
+
+            CalculateAiming();
+
+            if (shouldShoot)
+            {
+               
+                if (shouldShoot)
+                {
+                    if (currentWeapon)
+                    {
+                        currentWeapon.Shoot(player.camera);
+                    }
+                }
+
+                if (currentWeapon)
+                {
+                    currentWeapon.UpdateBullets(Time.deltaTime);
+                }
             }
         }
     }
@@ -135,7 +151,13 @@ public class WeaponHandler : MonoBehaviour
 
     private void Reload()
     {
-        StartCoroutine(currentWeapon.Reload());
+        if (this)
+        {
+            if (currentWeapon)
+            {
+                StartCoroutine(currentWeapon.Reload());
+            }
+        }
     }
 
     private void CalculateAiming()
@@ -144,7 +166,7 @@ public class WeaponHandler : MonoBehaviour
         {
             return;
         }
-        
+
         currentWeapon.isAiming = this.isAiming;
     }
 

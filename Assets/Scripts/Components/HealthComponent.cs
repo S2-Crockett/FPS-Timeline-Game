@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Managers;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class HealthComponent : MonoBehaviour
 {
@@ -10,13 +12,19 @@ public class HealthComponent : MonoBehaviour
     public int maxHealth;
 
     [Header("Shield")] 
-    public int shield;
-    public int maxShield;
+    public int shield = 50;
+    public int maxShield = 50;
+
+    private PlayerDeathController _deathController;
+    private Volume postProcessing;
     
     // Start is called before the first frame update
     void Start()
     {
         health = maxHealth;
+        _deathController = GetComponent<PlayerDeathController>();
+        postProcessing = _deathController.postProcessing;
+        UIManager.Instance.SetHealthShield(maxHealth, maxShield);
     }
 
     public void Damage(int damageAmount)
@@ -25,11 +33,13 @@ public class HealthComponent : MonoBehaviour
         if (shield <= 0)
         {
             health -= damageAmount;
-            if (health < 0)
+            if (health <= 0)
             {
                 health = 0;
+                _deathController.SetIsDead(true);
+                UIManager.Instance.healthPanel.ClearPoints();
             }
-            UIManager.Instance.UpdateHealthDamage();
+            UIManager.Instance.UpdateHealth(health, shield);
         }
         else
         {
@@ -37,10 +47,16 @@ public class HealthComponent : MonoBehaviour
             // out the different and take that from our health
             if (damageAmount >= shield)
             {
-                int damageDif = shield - damageAmount;
+                int damageDif = damageAmount - shield;
                 shield = 0;
                 health -= damageDif;
-                UIManager.Instance.UpdateHealthDamage();
+                if (damageDif >= health)
+                {
+                    health = 0;
+                    _deathController.SetIsDead(true);
+                    UIManager.Instance.healthPanel.ClearPoints();
+                }
+                UIManager.Instance.UpdateHealth(health, shield);
             }
             else
             {
@@ -50,8 +66,31 @@ public class HealthComponent : MonoBehaviour
                 {
                     shield= 0;
                 }
-                UIManager.Instance.UpdateHealthDamage();
+                UIManager.Instance.UpdateHealth(health, shield);
             }
+        }
+        
+        if (postProcessing.profile.TryGet<Vignette>(out var vignette))
+        {
+            vignette.intensity.value = 0.2f;
+            LeanTween.value(gameObject, vignette.intensity.value, 0.35f, 0.05f)
+                .setOnUpdate((value) =>
+                {
+                    vignette.intensity.value = value;
+                })
+                .setOnComplete(ResetDamageIndicator);
+        }
+    }
+
+    private void ResetDamageIndicator()
+    {
+        if (postProcessing.profile.TryGet<Vignette>(out var vignette))
+        {
+            LeanTween.value(gameObject, vignette.intensity.value, 0.2f, 0.25f)
+                .setOnUpdate((value) =>
+                {
+                    vignette.intensity.value = value;
+                });
         }
     }
 
@@ -62,7 +101,7 @@ public class HealthComponent : MonoBehaviour
         {
             health = maxHealth;
         }
-        UIManager.Instance.UpdateHealthHeal();
+        UIManager.Instance.UpdateHealth(health, shield);
     }
 
     public void AddShield(int amount)
@@ -72,7 +111,7 @@ public class HealthComponent : MonoBehaviour
         {
             shield = maxShield;
         }
-        UIManager.Instance.UpdateHealthHeal();
+        UIManager.Instance.UpdateHealth(health, shield);
     }
 
     public float GetHealthNormalized()

@@ -14,14 +14,14 @@ public class TextDisplay : MonoBehaviour
 
     private string currentText = "";
 
-    public Text TextLevel;
-    public Text TextDifficulty;
-    public Text TextDescription;
+    public TextMesh TextLevel;
+    public TextMesh TextDifficulty;
+    public TextMesh TextDescription;
 
     public int level = 1;
     public int Section = 1;
 
-    public bool show = false;
+    public bool show = true;
     public bool finished = true;
     public bool selectable = false;
 

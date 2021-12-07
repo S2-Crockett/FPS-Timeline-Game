@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4164ef707c7232b488da72a162540c26, type: 3}
   m_Name: Level3
   m_EditorClassIdentifier: 
-  levelNumber: level 3
-  levelDifficulty: hard
-  levelDescription: description
+  levelNumber: 'LEVEL NAME : TEST SCENE'
+  levelDifficulty: 'DIFFICULTY : HARD'
+  levelDescription: 'DESCRIPTION : {dont select me}'
   level: 3
   scene:
     m_Handle: 0
