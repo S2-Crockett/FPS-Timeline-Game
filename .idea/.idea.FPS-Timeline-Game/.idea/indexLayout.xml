@@ -3,9 +3,11 @@
   <component name="ContentModelUserStore">
     <attachedFolders />
     <explicitIncludes>
+      <Path>Library/PackageCache/com.autodesk.fbx@4.0.1</Path>
       <Path>Library/PackageCache/com.unity.cinemachine@2.7.9</Path>
       <Path>Library/PackageCache/com.unity.collab-proxy@1.11.2</Path>
       <Path>Library/PackageCache/com.unity.ext.nunit@1.0.6</Path>
+      <Path>Library/PackageCache/com.unity.formats.fbx@4.0.1</Path>
       <Path>Library/PackageCache/com.unity.ide.rider@3.0.7</Path>
       <Path>Library/PackageCache/com.unity.ide.visualstudio@2.0.11</Path>
       <Path>Library/PackageCache/com.unity.ide.vscode@1.2.4</Path>
@@ -14,9 +16,12 @@
       <Path>Library/PackageCache/com.unity.probuilder@5.0.3</Path>
       <Path>Library/PackageCache/com.unity.searcher@4.3.2</Path>
       <Path>Library/PackageCache/com.unity.settings-manager@1.0.3</Path>
+      <Path>Library/PackageCache/com.unity.sysroot.linux-x86_64@0.1.14-preview</Path>
+      <Path>Library/PackageCache/com.unity.sysroot@0.1.19-preview</Path>
       <Path>Library/PackageCache/com.unity.test-framework@1.1.29</Path>
       <Path>Library/PackageCache/com.unity.textmeshpro@3.0.6</Path>
       <Path>Library/PackageCache/com.unity.timeline@1.5.6</Path>
+      <Path>Library/PackageCache/com.unity.toolchain.win-x86_64-linux-x86_64@0.1.21-preview</Path>
       <Path>Library/PackageCache/com.unity.visualscripting@1.6.1</Path>
       <Path>Packages</Path>
       <Path>ProjectSettings</Path>
@@ -24,6 +29,7 @@
     <explicitExcludes>
       <Path>.git</Path>
       <Path>.idea</Path>
+      <Path>.vscode</Path>
       <Path>Library</Path>
       <Path>Logs</Path>
       <Path>Temp</Path>

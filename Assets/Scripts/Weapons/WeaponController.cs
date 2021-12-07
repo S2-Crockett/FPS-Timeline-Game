@@ -369,7 +369,6 @@ public class WeaponController : MonoBehaviour
                bullet.tracer.transform.position = hit.point; 
             }
             
-
             if (target != null && hit.transform.tag == "Enemy")
             {
                 print("Hit Enemy");
@@ -379,8 +378,8 @@ public class WeaponController : MonoBehaviour
             }
             
             bullet.time = 0.5f;
-            //GameObject ImpactObject = Instantiate(hitParticle, hit.point, Quaternion.LookRotation(hit.normal));
-            //Destroy(ImpactObject, 0.4f);
+            GameObject ImpactObject = Instantiate(hitParticle, hit.point, Quaternion.LookRotation(hit.normal));
+            Destroy(ImpactObject, 0.4f);
         }
         else
         {

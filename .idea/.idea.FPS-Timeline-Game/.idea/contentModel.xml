@@ -6,19 +6,28 @@
     <e p="D:\University Files\3rd Year\CGD\FPS-Timeline-Game" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="consoledefence.cs" t="Include" />
         <e p="Developers" t="Include">
           <e p="Callum B" t="Include">
             <e p="Scripts" t="Include">
+              <e p="AmmoBoxInteract.cs" t="Include" />
               <e p="Enemy" t="Include">
                 <e p="Enemy.cs" t="Include" />
                 <e p="EnemyDead.cs" t="Include" />
               </e>
+              <e p="EnemyKillingObjective.cs" t="Include" />
+              <e p="MiniObjective.cs" t="Include" />
               <e p="NextLevel.cs" t="Include" />
+              <e p="Objective.cs" t="Include" />
+              <e p="SwitchWeapons.cs" t="Include" />
+              <e p="WeaponManager.cs" t="Include" />
             </e>
           </e>
           <e p="Lewis T" t="Include">
             <e p="Test Scripts" t="Include">
               <e p="SoundManager.cs" t="Include" />
+              <e p="Upgrade.cs" t="Include" />
+              <e p="UpgradeText.cs" t="Include" />
             </e>
           </e>
           <e p="Sam C" t="Include">
@@ -27,6 +36,10 @@
             </e>
             <e p="Scripts" t="Include">
               <e p="Enemy" t="Include">
+                <e p="Bullets.cs" t="Include" />
+                <e p="Enemies.cs" t="Include" />
+                <e p="LineOfSight.cs" t="Include" />
+                <e p="Move.cs" t="Include" />
                 <e p="Movement.cs" t="Include" />
               </e>
               <e p="Exit Door" t="Include">
@@ -43,6 +56,10 @@
               <e p="Text" t="Include">
                 <e p="TextDisplay.cs" t="Include" />
               </e>
+              <e p="Zone" t="Include">
+                <e p="Zone.cs" t="Include" />
+                <e p="ZoneChecker.cs" t="Include" />
+              </e>
             </e>
           </e>
         </e>
@@ -54,6 +71,7 @@
             <e p="Shader.shader" t="Include" />
           </e>
         </e>
+        <e p="ObjectiveComplete.cs" t="Include" />
         <e p="Packages" t="Include">
           <e p="LeanTween" t="Include">
             <e p="Framework" t="Include">

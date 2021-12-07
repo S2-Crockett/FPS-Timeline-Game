@@ -147,9 +147,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponObject: {fileID: 6431138718741029509, guid: b8ddd1bbdcc3c124bbc936fc0df1f751, type: 3}
   weaponHolder: {fileID: 5805923887880843295}
+  speed: 200
+  offset: 0.05
+  bulletDrop: 0
+  tracer: {fileID: 5222315208960528297, guid: d84575d9e67da364783f80da51324f85, type: 3}
+  HitParticle: {fileID: 1000010355441670, guid: 02a509a7fa70ed740ba4197e20c5d32d, type: 3}
+  fireRate: 0.25
+  range: 100
+  damage: 10
+  clipSize: 20
+  reloadSpeed: 1.5
+  hit: 0
+  hitWall: 0
   stages: 0
-  bulletSpeed: 1
-  offset: 5
+  timer: 1
+  bullets: []
 --- !u!114 &-4195939951764876891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,7 +176,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 5805923888380855202}
   bullet: {fileID: 685222212935467944, guid: 99759b75e0b0fd34ba9082f74d6895a7, type: 3}
-  bulletInfo: {fileID: 0}
   dead: 0
 --- !u!114 &-5430392196774923747
 MonoBehaviour:

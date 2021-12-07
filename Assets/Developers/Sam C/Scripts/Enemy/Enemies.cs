@@ -10,7 +10,6 @@ public class Enemies : MonoBehaviour
 
     [Header("Weapon")]
     public GameObject bullet;
-    public Bullets bulletInfo;
 
     [Header("Information")]
     public bool dead;
@@ -18,6 +17,6 @@ public class Enemies : MonoBehaviour
 
     private void Start()
     {
-        bulletInfo = bullet.GetComponent<Bullets>();
+        
     }
 }

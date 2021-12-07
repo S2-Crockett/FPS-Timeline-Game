@@ -20,8 +20,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b7d5abbc-e8eb-400a-a78c-2d13f0ee5620" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FPS-Timeline-Game/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Components/HealthComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Components/HealthComponent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Developers/Sam C/Enemies/Bullet 1.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Developers/Sam C/Enemies/Bullet 1.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Developers/Sam C/Enemies/Bullet.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Developers/Sam C/Enemies/Bullet.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Developers/Sam C/Enemies/Enemy 1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Developers/Sam C/Enemies/Enemy 1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Developers/Sam C/Enemies/Enemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Developers/Sam C/Enemies/Enemy.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Developers/Sam C/Prefabs/Level1Zone2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Developers/Sam C/Prefabs/Level1Zone2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Developers/Sam C/Prefabs/Level1Zone3 1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Developers/Sam C/Prefabs/Level1Zone3 1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Developers/Sam C/Scripts/Enemy/Bullets.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Developers/Sam C/Scripts/Enemy/Bullets.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Developers/Sam C/Scripts/Enemy/Enemies.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Developers/Sam C/Scripts/Enemy/Enemies.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Developers/Sam C/Scripts/Enemy/LineOfSight.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Developers/Sam C/Scripts/Enemy/LineOfSight.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Developers/Sam S/Start_Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Developers/Sam S/Start_Scene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Weapons/BaseSecondary.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Weapons/BaseSecondary.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,9 +93,12 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/AmmoPickup.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Managers/UIManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/WeaponPanel.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Components/HealthComponent.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/WeaponHandler.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Components/HealthComponent.cs" />
+        <option value="$PROJECT_DIR$/Assets/Developers/Sam C/Scripts/Enemy/Bullets.cs" />
+        <option value="$PROJECT_DIR$/Assets/Developers/Sam C/Scripts/Enemy/Enemies.cs" />
+        <option value="$PROJECT_DIR$/Assets/Developers/Sam C/Scripts/Enemy/LineOfSight.cs" />
       </list>
     </option>
   </component>
@@ -139,6 +160,8 @@
       <workItem from="1638620481130" duration="8699000" />
       <workItem from="1638637399664" duration="184000" />
       <workItem from="1638637609485" duration="41914000" />
+      <workItem from="1638891818650" duration="615000" />
+      <workItem from="1638892668684" duration="4594000" />
     </task>
     <servers />
   </component>
