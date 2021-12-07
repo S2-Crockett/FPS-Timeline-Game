@@ -35,7 +35,8 @@ public class SpeedBooster : MonoBehaviour
         {
             power_up_taken = true;
             speedBoosterText = true;
-           
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+
         }
     }
 

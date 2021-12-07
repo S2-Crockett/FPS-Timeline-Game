@@ -29,17 +29,6 @@ public class DoubleJump : MonoBehaviour
 
     }
 
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            power_up_taken = true;
-            doubleJumpText = true;
-        }
-
-    }
-
     void activateDoubleJump()
     {
         if (power_up_taken)
@@ -63,7 +52,24 @@ public class DoubleJump : MonoBehaviour
             doubleJump = false;
             doubleJumpActiveText = false;
 
+          
         }
     }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            power_up_taken = true;
+            doubleJumpText = true;
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+
+        }
+
+
+    }
+
+
 }
 
