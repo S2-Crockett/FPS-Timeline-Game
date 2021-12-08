@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 204667687222369351}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.4844503, y: 1.4623984, z: -15.882492}
+  m_LocalPosition: {x: 258.2, y: -0.00000023841858, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7814357727489899323}
@@ -58,11 +58,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.1
+  near clip plane: 0.01
   far clip plane: 5000
-  field of view: 60.000004
+  field of view: 60
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -324,6 +324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputMovement: {x: 0, y: 0}
   inputView: {x: 0, y: 0}
+  playerCam: {fileID: 0}
   defaultFOV: 65
   sprintFOV: 75
   aimingFOV: 45
@@ -426,9 +427,13 @@ MonoBehaviour:
   weaponRefs: []
   weaponSlots:
   - weaponIndex: 0
-    weaponObject: {fileID: 8249656883338130075, guid: d15ad2123ad5dd94d8c8bed43143f8c2, type: 3}
+    weaponObject: {fileID: 0}
   - weaponIndex: 1
-    weaponObject: {fileID: 8249656883338130075, guid: dc2c0b450e1b58640900a8accaeeb57b, type: 3}
+    weaponObject: {fileID: 0}
+  - weaponIndex: 2
+    weaponObject: {fileID: 0}
+  - weaponIndex: 3
+    weaponObject: {fileID: 0}
   weaponHolder: {fileID: 1201065768504149498}
   zoneCheck: {fileID: 0}
   change: 1
@@ -666,6 +671,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputMovement: {x: 0, y: 0}
   inputView: {x: 0, y: 0}
+  playerCam: {fileID: 0}
   defaultFOV: 65
   sprintFOV: 75
   aimingFOV: 50

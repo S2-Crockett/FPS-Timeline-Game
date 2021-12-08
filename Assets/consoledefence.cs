@@ -5,25 +5,44 @@ using UnityEngine.UI;
 
 public class consoledefence : MonoBehaviour
 {
+    //GameObjects//
     public GameObject ConsoleText;
     public GameObject ConsoleNotActiveText;
     public GameObject ConsoleActiveText;
     public GameObject ConsoleLight;
+    public GameObject[] SpotLights = new GameObject[5];
     public GameObject[] ButtonsPressed = new GameObject[3];
+    public GameObject[] EnemySpawnPoints = new GameObject[3];
+
+    //Vector//
+    
+
+    //Scripts//
     private MiniObjective miniobjectivescript;
-    [SerializeField] public Text ObjectiveNotificationUIText;
-    [SerializeField] [TextArea] private string notificationmessage;
-    [SerializeField] private bool removeAfterExit = false;
-    [SerializeField] private bool disableAfterTimer = false;
-    [SerializeField] float disabletimer = 1.0f;
-    [SerializeField] private Animator notificationAnim;
     private DefaultInput defaultInput;
     private PlayerController playerscript;
-    public Select input;
-    private int objectivereached = 0;
+    private EnemySpawner enemyspawner;
 
+    //Text//
+    [SerializeField] public Text ObjectiveNotificationUIText;
+    [SerializeField] [TextArea] private string notificationmessage;
+
+    //Bools//
+    [SerializeField] private bool removeAfterExit = false;
+    [SerializeField] private bool disableAfterTimer = false;
     public bool InteractKeyPressed = false;
     bool inZone = false;
+
+    //Int//
+    private int objectivereached = 0;
+
+    //Floats//
+    [SerializeField] float disabletimer = 1.0f;
+
+    //Animator//
+    [SerializeField] private Animator notificationAnim;
+
+    public Select input;
 
     void Awake()
     {
@@ -40,11 +59,17 @@ public class consoledefence : MonoBehaviour
         ConsoleNotActiveText.SetActive(true);
         ConsoleActiveText.SetActive(false);
         ConsoleLight.SetActive(false);
+        SpotLights[0].SetActive(false);
+        SpotLights[1].SetActive(false);
+        SpotLights[2].SetActive(false);
+        SpotLights[3].SetActive(false);
+        SpotLights[4].SetActive(false);
 
         if (ConsoleText != null)
         {
             ConsoleText.SetActive(false);
         }
+
     }
 
     void Update()
@@ -72,7 +97,7 @@ public class consoledefence : MonoBehaviour
             if (ConsoleText != null && inZone)
             {
                 ConsoleText.SetActive(true);
-            }
+            }            
 
             if (objectivereached == 0 && InteractKeyPressed)
             {
@@ -82,7 +107,19 @@ public class consoledefence : MonoBehaviour
                 ConsoleText.SetActive(false);
                 objectivereached = 1;
                 inZone = false;
+                //enemyspawner.SpawnEnemies();
+
+                if (inZone == false)
+                {
+                    ConsoleText.SetActive(false);
+                }
+
                 ConsoleLight.SetActive(true);
+                SpotLights[0].SetActive(true);
+                SpotLights[1].SetActive(true);
+                SpotLights[2].SetActive(true);
+                SpotLights[3].SetActive(true);
+                SpotLights[4].SetActive(true);
                 ButtonsPressed[1].transform.position += new Vector3(0, 0, 0);
             }
         }

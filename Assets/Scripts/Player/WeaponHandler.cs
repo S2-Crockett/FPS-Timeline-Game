@@ -50,8 +50,6 @@ public class WeaponHandler : MonoBehaviour
         defaultInput.Enable();
 
 
-        if (zoneCheck != null)
-        {
             for (int i = 0; i < weaponSlots.Length; i++)
             {
                 if (i <= 1)
@@ -63,8 +61,6 @@ public class WeaponHandler : MonoBehaviour
                     weaponSlots[i].weaponObject = zoneCheck.zone[1].weapons[i - 2];
                 }
             }
-        }
-
     }
 
     public void Initialise(PlayerController controller)
@@ -112,8 +108,7 @@ public class WeaponHandler : MonoBehaviour
 
     private void Update()
     {
-        if (!player.isDead)
-        {
+
             if (change)
             {
                 defaultInput.Weapon.WeaponSlot1.started += e => SwapWeapon(WeaponIndex);
@@ -121,6 +116,8 @@ public class WeaponHandler : MonoBehaviour
                 change = false;
             }
 
+        if (!player.isDead)
+        {
             CalculateAiming();
 
             if (shouldShoot)

@@ -23,8 +23,7 @@ public class LineOfSight : MonoBehaviour
         FOUND
     }
 
-    private ZoneChecker LevelManager;
-    private GameObject player;
+    public GameObject player;
 
     [Header("Weapon")]
     public GameObject weaponObject;
@@ -56,14 +55,15 @@ public class LineOfSight : MonoBehaviour
 
     public float timer = 1.0f;
 
+    public AudioClip hitSound;
+    private AudioSource sound;
+
     public List<GameObject> bullets;
 
     private Bullets bulletInfo;
     private bool isNotified = false;
     void Start()
     {
-        LevelManager = GameObject.Find("LevelManager").GetComponent<ZoneChecker>();
-        player = GameObject.Find("Player");
         stages = Stages.SEARCHING;
         enemy = GetComponent<Enemies>();
     }
@@ -73,6 +73,10 @@ public class LineOfSight : MonoBehaviour
         //spawn at the idle location rotation
         GameObject obj = Instantiate(weaponObject, weaponHolder.position, weaponHolder.rotation);
         obj.transform.parent = weaponHolder;
+        enemy = GetComponent<Enemies>();
+        bulletInfo = enemy.bullet.GetComponent<Bullets>();
+        clipSize = bulletInfo.clipSize;
+        reloadSpeed = bulletInfo.reloadSpeed;
     }
     
     Vector3 GetBulletPosition(Bullets bullet)
@@ -150,11 +154,11 @@ public class LineOfSight : MonoBehaviour
         rotation = Vector3.Angle(targetDir, transform.forward);
         distance = Vector3.Distance(player.transform.position, transform.position);
 
-        if (rotation < 45 && distance < 15)
+        if (rotation < 45 && distance < 50)
         {
             return true;
         }
-        else if (distance < 5)
+        else if (distance < 25)
         {
             return true;
         }
@@ -200,7 +204,10 @@ public class LineOfSight : MonoBehaviour
                 spawnedBullets.Add(bullets);
                 
                 clipSize -= 1;
-                timer = fireRate;
+                float speed = bulletInfo.speed;
+                bullet.GetComponent<Rigidbody>().AddForce(rotation * weaponHolder.transform.forward * speed);
+                timer = bulletInfo.fireRate;
+                sound.PlayOneShot(hitSound);
             }
 
             reloadSpeed = 1.5f;

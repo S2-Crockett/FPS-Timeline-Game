@@ -182,7 +182,7 @@ public class @DefaultInput : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""f6b14c6c-fda5-49c9-9d13-b6dc9309c419"",
                     ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
+                    ""interactions"": ""Tap"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Interact"",

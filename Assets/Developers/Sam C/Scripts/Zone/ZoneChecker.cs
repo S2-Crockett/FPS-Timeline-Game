@@ -15,6 +15,7 @@ public class ZoneChecker : MonoBehaviour
 
     [Header("Enemies")]
     public GameObject[] enemies;
+    public EnemyWave enemyWave;
 
     [Header("Environment")]
     public GameObject[] environment;
@@ -33,7 +34,7 @@ public class ZoneChecker : MonoBehaviour
     private int prevIndex = 0;
     private float random = 0;
 
-    private bool change = false;
+    public bool change = false;
 
     GameObject[] newEnvironmentObject;
     public EnemyInfo[] enemyObjectZone1;
@@ -100,7 +101,7 @@ public class ZoneChecker : MonoBehaviour
             prevIndex = index;
             change = true;
         }
-        if (Physics.Raycast(player.transform.position, player.transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity, layerMask))
+        if (Physics.Raycast(player.transform.position, player.transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity))
         {
             ChangeObjects();
         }
@@ -121,6 +122,10 @@ public class ZoneChecker : MonoBehaviour
                 enemyObjectZone2[i].enemyObj.GetComponent<Move>().enabled = false;
                 enemyObjectZone2[i].enemyObj.transform.rotation = dead;
             }
+        }
+        if (enemyWave != null)
+        {
+            enemyWave.ResetEnemy(index);
         }
     }
 
@@ -186,7 +191,10 @@ public class ZoneChecker : MonoBehaviour
     IEnumerator ChangeFloor()
     {
         random = Random.Range(0.3f, 1f);
-        newFloorObject.GetComponent<MeshRenderer>().material = Glitch;
+        for (int c = 0; c < zone[index].timezone1.transform.childCount; c++)
+        {
+                newFloorObject.transform.GetChild(c).GetComponent<MeshRenderer>().material = Glitch;
+        }
 
         yield return new WaitForSeconds(random);
 
@@ -212,12 +220,21 @@ public class ZoneChecker : MonoBehaviour
             for(int i = 0; i < enemies.Length; i++)
             {
                 StartCoroutine(ChangeEnemyObj(i));
-            }
+            } 
             StartCoroutine(ChangeFloor());
+
+            if (enemyWave != null)
+            {
+                for (int i = 0; i < enemyWave.enemies.Length; i++)
+                {
+                    StartCoroutine(enemyWave.ChangeEnemyObj(i, Glitch));
+                }
+            }
 
             weaponHandler.WeaponIndex = zone[index].weaponIndex;
             weaponHandler.change = true;
             weaponHandler.SwapWeapon(zone[index].weaponIndex);
+            print(weaponHandler.WeaponIndex);
 
             change = false;
         }
