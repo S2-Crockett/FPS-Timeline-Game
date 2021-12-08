@@ -2018,18 +2018,7 @@ MonoBehaviour:
   zone:
   - {fileID: 11400000, guid: b1f79208159479f478ca36256bf2e10c, type: 2}
   - {fileID: 11400000, guid: 7f7ceb4c429e88648a273ecea4218ac8, type: 2}
-  enemies:
-  - {fileID: 1368488740}
-  - {fileID: 52373017}
-  - {fileID: 309235864}
-  - {fileID: 1391330178}
-  - {fileID: 156928935}
-  - {fileID: 1462212540}
-  - {fileID: 1567145092}
-  - {fileID: 712039667}
-  - {fileID: 1054644292}
-  - {fileID: 282483756}
-  - {fileID: 1982693699}
+  enemies: []
   enemyWave: {fileID: 0}
   environment: []
   floor: {fileID: 40936386}

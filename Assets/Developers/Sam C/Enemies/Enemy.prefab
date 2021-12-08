@@ -149,7 +149,7 @@ MonoBehaviour:
   weaponObject: {fileID: 6431138718741029509, guid: b8ddd1bbdcc3c124bbc936fc0df1f751, type: 3}
   weaponHolder: {fileID: 5805923887880843295}
   speed: 50
-  offset: 0.05
+  offset: 0.02
   bulletDrop: 0
   tracer: {fileID: 5222315208960528297, guid: d84575d9e67da364783f80da51324f85, type: 3}
   HitParticle: {fileID: 1000010355441670, guid: 02a509a7fa70ed740ba4197e20c5d32d, type: 3}
@@ -162,7 +162,6 @@ MonoBehaviour:
   hitWall: 0
   stages: 0
   timer: 1
-  offset: 5
   hitSound: {fileID: 8300000, guid: 92d35fe1c59bbd14eaee9e3d3b54cea7, type: 3}
   bullets: []
 --- !u!114 &-4195939951764876891

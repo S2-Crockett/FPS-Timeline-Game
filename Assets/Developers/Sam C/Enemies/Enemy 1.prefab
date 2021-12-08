@@ -246,7 +246,7 @@ MonoBehaviour:
   weaponObject: {fileID: 6431138718741029509, guid: 3b5d41948eac0c448b7cc44c5a4c0804, type: 3}
   weaponHolder: {fileID: 5805923887880843295}
   speed: 50
-  offset: 0.05
+  offset: 0.02
   bulletDrop: 0
   tracer: {fileID: 5222315208960528297, guid: d84575d9e67da364783f80da51324f85, type: 3}
   HitParticle: {fileID: 1000010355441670, guid: 02a509a7fa70ed740ba4197e20c5d32d, type: 3}

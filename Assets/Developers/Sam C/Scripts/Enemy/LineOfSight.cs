@@ -253,6 +253,7 @@ public class LineOfSight : MonoBehaviour
         Quaternion rotation = Quaternion.LookRotation(target, Vector3.forward);
         //weaponHolder.transform.rotation
         transform.rotation = new Quaternion(transform.rotation.x, rotation.y, transform.rotation.z, 0);
+        weaponHolder.transform.rotation = new Quaternion(weaponHolder.transform.rotation.x, rotation.y, weaponHolder.transform.rotation.z, 0);
         //transform.position = pos;
         
         // spawn a sphere here to alert other enemies... in a vinicity

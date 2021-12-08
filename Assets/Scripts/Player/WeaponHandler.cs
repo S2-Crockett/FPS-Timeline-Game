@@ -51,6 +51,8 @@ public class WeaponHandler : MonoBehaviour
 
         zoneCheck = GameObject.Find("ZoneChecker").GetComponent<ZoneChecker>();
 
+        if (zoneCheck != null)
+        {
             for (int i = 0; i < weaponSlots.Length; i++)
             {
                 if (i <= 1)
@@ -62,6 +64,7 @@ public class WeaponHandler : MonoBehaviour
                     weaponSlots[i].weaponObject = zoneCheck.zone[1].weapons[i - 2];
                 }
             }
+        }
     }
 
     public void Initialise(PlayerController controller)
