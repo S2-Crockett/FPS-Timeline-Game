@@ -123,8 +123,10 @@ public class ZoneChecker : MonoBehaviour
                 enemyObjectZone2[i].enemyObj.transform.rotation = dead;
             }
         }
-
-        enemyWave.ResetEnemy(index);
+        if (enemyWave != null)
+        {
+            enemyWave.ResetEnemy(index);
+        }
     }
 
     private void ChangeObjects()
@@ -221,9 +223,12 @@ public class ZoneChecker : MonoBehaviour
             } 
             StartCoroutine(ChangeFloor());
 
-            for(int i = 0; i < enemyWave.enemies.Length; i++)
+            if (enemyWave != null)
             {
-                StartCoroutine(enemyWave.ChangeEnemyObj(i));
+                for (int i = 0; i < enemyWave.enemies.Length; i++)
+                {
+                    StartCoroutine(enemyWave.ChangeEnemyObj(i, Glitch));
+                }
             }
 
             weaponHandler.WeaponIndex = zone[index].weaponIndex;

@@ -4819,10 +4819,15 @@ MonoBehaviour:
     movementSwayZInverted: 0
     movementSwayYInverted: 0
     movementSwaySmoothing: 0.2
+  minHeldAmmoDisplay: 10
+  minCurrentAmmoDisplay: 5
   fireRate: 8
   damage: 25
   range: 100
-  sprayRadius: 0.88
+  bulletSpreadIdle: 0
+  bulletSpreadAim: 0
+  bulletSpeed: 1000
+  bulletDrop: 0
   magazineSize: 30
   equippedAmmo: 120
   reloadTime: 1
@@ -4831,7 +4836,8 @@ MonoBehaviour:
   maxRecoilY: 4
   maxTransY: 0.05
   maxTransZ: 0
-  recoilSpeed: 5
+  recoilSpeed: 0.1
+  cameraRecoil: 1
   swayObject: {fileID: 0}
   swayAmountA: 1
   swayAmountB: 2
@@ -4843,6 +4849,8 @@ MonoBehaviour:
   muzzleParticle: {fileID: 4548563306457368050}
   hitParticle: {fileID: 1000010355441670, guid: 02a509a7fa70ed740ba4197e20c5d32d, type: 3}
   hitmarkerClip: {fileID: 8300000, guid: 5783dbc0187545a43858428e3a983cbc, type: 3}
+  tracerEffect: {fileID: 0}
+  bulletOriginTransform: {fileID: 0}
   weaponSound: {fileID: 8300000, guid: 92d35fe1c59bbd14eaee9e3d3b54cea7, type: 3}
 --- !u!82 &2755018913690595573
 AudioSource:
