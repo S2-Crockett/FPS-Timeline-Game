@@ -74,9 +74,6 @@ public class LineOfSight : MonoBehaviour
         GameObject obj = Instantiate(weaponObject, weaponHolder.position, weaponHolder.rotation);
         obj.transform.parent = weaponHolder;
         enemy = GetComponent<Enemies>();
-        bulletInfo = enemy.bullet.GetComponent<Bullets>();
-        clipSize = bulletInfo.clipSize;
-        reloadSpeed = bulletInfo.reloadSpeed;
     }
     
     Vector3 GetBulletPosition(Bullets bullet)
@@ -204,10 +201,7 @@ public class LineOfSight : MonoBehaviour
                 spawnedBullets.Add(bullets);
                 
                 clipSize -= 1;
-                float speed = bulletInfo.speed;
-                bullet.GetComponent<Rigidbody>().AddForce(rotation * weaponHolder.transform.forward * speed);
-                timer = bulletInfo.fireRate;
-                sound.PlayOneShot(hitSound);
+                timer = fireRate;
             }
 
             reloadSpeed = 1.5f;

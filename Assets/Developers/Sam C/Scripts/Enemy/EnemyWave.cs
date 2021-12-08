@@ -133,7 +133,7 @@ public class EnemyWave : MonoBehaviour
     {
         for (int i = 0; i < enemies.Length; i++)
         {
-            if (enemyObjectZone1[i].enemyObj.GetComponent<ShootingTarget>().dead)
+            if (enemyObjectZone1[i].enemyObj.GetComponent<Enemies>().dead)
             {
                 if (!enemyObjectZone1[i].dead)
                 {
@@ -147,7 +147,7 @@ public class EnemyWave : MonoBehaviour
                 enemyObjectZone1[i].enemyObj.GetComponent<Move>().enabled = false;
                 enemyObjectZone1[i].enemyObj.transform.rotation = dead_;
             }
-            if (enemyObjectZone2[i].enemyObj.GetComponent<ShootingTarget>().dead)
+            if (enemyObjectZone2[i].enemyObj.GetComponent<Enemies>().dead)
             {
                 if (!enemyObjectZone2[i].dead)
                 {
