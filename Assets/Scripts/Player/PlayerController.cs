@@ -13,6 +13,15 @@ public class PlayerController : MonoBehaviour
     private consoledefence consoledefencescript;
     private DefaultInput defaultInput;
 
+    public DoubleJump double_jump;
+    public SpeedBooster double_speed;
+
+
+    public int jumpCount = 0;
+    public int space_pressed = 0;
+
+    public int speed = 0;
+
     [HideInInspector]
     public Vector2 inputMovement;
     public Vector2 inputView;
@@ -130,6 +139,8 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         CalculateMovement();
+        DoubleJumping();
+        DoubleSpeed();
 
         if (!isDead)
         {
@@ -210,6 +221,8 @@ public class PlayerController : MonoBehaviour
         
         movementSpeed.y += playerGravity;
         movementSpeed += jumpingForce * Time.smoothDeltaTime;
+
+        movementSpeed *= speed;
 
         characterController.Move(movementSpeed);
 
@@ -363,6 +376,36 @@ public class PlayerController : MonoBehaviour
 
             jumpingForce = Vector3.up * playerSettings.jumpHeight;
             playerGravity = 0;
+        }
+    }
+
+    private void DoubleJumping()
+    {
+        if(double_jump.doubleJump)
+        {
+            jumpCount = 2;
+        }
+        if(!double_jump.doubleJump)
+        {
+            jumpCount = 1;
+        }
+
+        if (characterController.isGrounded)
+        {
+            space_pressed = 0;
+        }
+    }
+
+    private void DoubleSpeed()
+    {
+        if(double_speed.speedBooster)
+        {
+            speed = 2;
+        }
+
+        if(!double_speed.speedBooster)
+        {
+            speed = 1;
         }
     }
     private void CheckAirTime()
