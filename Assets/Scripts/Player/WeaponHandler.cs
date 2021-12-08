@@ -49,6 +49,7 @@ public class WeaponHandler : MonoBehaviour
 
         defaultInput.Enable();
 
+        zoneCheck = GameObject.Find("ZoneChecker").GetComponent<ZoneChecker>();
 
             for (int i = 0; i < weaponSlots.Length; i++)
             {

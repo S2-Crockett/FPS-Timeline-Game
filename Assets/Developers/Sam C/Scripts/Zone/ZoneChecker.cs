@@ -60,7 +60,7 @@ public class ZoneChecker : MonoBehaviour
 
         prevIndex = index;
 
-        player = GameObject.Find("Player");
+        player = GameObject.Find("Player(Clone)");
         weaponHandler = player.GetComponent<WeaponHandler>();
 
         newFloorObject = Instantiate(zone[index].timezone1, floor.transform.position, floor.transform.rotation);

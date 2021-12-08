@@ -20,7 +20,7 @@ public class AreaDamage : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            other.GetComponent<HealthComponent>().Damage(40);
+            other.GetComponent<HealthComponent>().Damage(210);
         }
     }
 }
