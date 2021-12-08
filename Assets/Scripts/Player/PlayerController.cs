@@ -13,8 +13,8 @@ public class PlayerController : MonoBehaviour
     private consoledefence consoledefencescript;
     private DefaultInput defaultInput;
 
-    public DoubleJump double_jump;
-    public SpeedBooster double_speed;
+    private DoubleJump double_jump;
+    private SpeedBooster double_speed;
 
 
     public int jumpCount = 0;
@@ -122,6 +122,8 @@ public class PlayerController : MonoBehaviour
         UIManager.Instance.SetCursor(false);
 
         playerCam = GameObject.Find("CMPlayer").GetComponent<CinemachineVirtualCamera>();
+        double_jump = GameObject.Find("DoubleJumpPower").GetComponent<DoubleJump>();
+        double_speed = GameObject.Find("SpeedBoostPower").GetComponent<SpeedBooster>();
     }
 
     private void Start()
@@ -148,6 +150,7 @@ public class PlayerController : MonoBehaviour
             CalculateJump();
             CalculateCameraHeight();
             SetLookAtTargetCrosshair();
+            
         }
     }
 
@@ -360,7 +363,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!isDead)
         {
-            if (!characterController.isGrounded)
+            if (!characterController.isGrounded && jumpCount <= 1 || space_pressed >= 2)
             {
                 return;
             }
